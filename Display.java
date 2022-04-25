@@ -136,7 +136,11 @@ public class Display extends JFrame implements ActionListener {
                 
                 String[] data = new String[4];
                 for (int i = 0; i < 4; i++) {
-                    data[i] = model.getValueAt(0, i).toString();
+                    Object obj = model.getValueAt(0, i);
+                    if (obj == null) {
+                        obj = new String();
+                    }
+                    data[i] = obj.toString();
                 }
 
                 DefaultTableModel mainmodel = ((DefaultTableModel)klantTable.getModel());
@@ -146,6 +150,11 @@ public class Display extends JFrame implements ActionListener {
             }
             else if (srcBtn == klantVerwijderen) {
                 int index = klantTable.getSelectedRow();
+
+                if (index == -1) {
+                    Fout.toon(this, "Geen regel om weg te halen");
+                    return;
+                }
 
                 int confirmation = JOptionPane.showConfirmDialog(this, "Verwijder regel nr. " + index + "?", "Confirm dit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (confirmation == JOptionPane.YES_OPTION) {
@@ -177,11 +186,13 @@ public class Display extends JFrame implements ActionListener {
 
                 DefaultTableModel mainmodel = ((DefaultTableModel)klantTable.getModel());
 
-                String[] data = new String[4];
-                for (int i = 0; i < 4; i++) {
-                    data[i] = mainmodel.getValueAt(index, i).toString();
-                }
-                model.addRow(data);
+                {
+                    String[] data = new String[4];
+                    for (int i = 0; i < 4; i++) {
+                        data[i] = mainmodel.getValueAt(index, i).toString();
+                    }
+                    model.addRow(data);
+                }      
                 scrollPane.setViewportView(table);
 
                 klantDialogBewerkenConfirm = new JButton("Voeg toe");
@@ -192,10 +203,20 @@ public class Display extends JFrame implements ActionListener {
 
                 klantDialogBewerken.setVisible(true);
 
-                for (int i = 0; i < 4; i++) {
-                    String value = model.getValueAt(0, i).toString();
-                    mainmodel.setValueAt(value, index, i);
-                    System.out.println(value);
+                {
+                    String[] data = new String[4];
+
+                    for (int i = 0; i < 4; i++) {
+                        Object obj = model.getValueAt(0, i);
+                        if(obj == null) {
+                            obj = new String();
+                        }
+                        data[i] = obj.toString();
+                    }
+                    
+                    for (int i = 0; i < 4; i++) {
+                        mainmodel.setValueAt(data[i], index, i);
+                    }
                 }
 
                 // TODO: verander in database
