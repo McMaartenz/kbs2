@@ -17,6 +17,14 @@ public class Display extends JFrame implements ActionListener {
     JButton klantToevoegen;
     JButton klantBewerken;
     JButton klantVerwijderen;
+    
+    // toevoegen dialog
+    JDialog klantDialogToevoegen;
+    JButton klantDialogToevoegenConfirm;
+
+    // bewerken dialog
+    JDialog klantDialogBewerken;
+    JButton klantDialogBewerkenConfirm;
 
     public Display() {
         try { // Set system window appearance
@@ -103,21 +111,95 @@ public class Display extends JFrame implements ActionListener {
         if (src instanceof JButton) {
             JButton srcBtn = (JButton)src;
             if (srcBtn == klantToevoegen) {
-                // jdialogje
+                klantDialogToevoegen = new JDialog(this, "Voeg een klant toe", true);
+                klantDialogToevoegen.setSize(360, 120);
+                klantDialogToevoegen.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                klantDialogToevoegen.setLayout(new GridLayout(2, 1));
+
+                JScrollPane scrollPane = new JScrollPane();
+                JTable table = new JTable(new DefaultTableModel());
+                DefaultTableModel model = ((DefaultTableModel)table.getModel());
+                String[] headers = new String[] {"Klantnr", "Voornaam", "Achternaam", "Functie"};
+                for (String header : headers) {
+                    model.addColumn(header);
+                }
+                model.addRow(new Object[] {});
+                scrollPane.setViewportView(table);
+
+                klantDialogToevoegenConfirm = new JButton("Voeg toe");
+                klantDialogToevoegenConfirm.addActionListener(this);
+
+                klantDialogToevoegen.add(scrollPane);
+                klantDialogToevoegen.add(klantDialogToevoegenConfirm);
+
+                klantDialogToevoegen.setVisible(true);
+                
+                String[] data = new String[4];
+                for (int i = 0; i < 4; i++) {
+                    data[i] = model.getValueAt(0, i).toString();
+                }
+
+                DefaultTableModel mainmodel = ((DefaultTableModel)klantTable.getModel());
+                mainmodel.addRow(data);
+
+                // TODO: voeg toe naar database
             }
-            else if(srcBtn == klantBewerken) {
-                // jdialogje
-            }
-            else if(srcBtn == klantVerwijderen) {
+            else if (srcBtn == klantVerwijderen) {
                 int index = klantTable.getSelectedRow();
 
                 int confirmation = JOptionPane.showConfirmDialog(this, "Verwijder regel nr. " + index + "?", "Confirm dit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-               
                 if (confirmation == JOptionPane.YES_OPTION) {
                     ((DefaultTableModel)klantTable.getModel()).removeRow(index);
+                    // TODO: Verwijder uit database
                 }
             }
+            else if (srcBtn == klantDialogToevoegenConfirm) {
+                klantDialogToevoegen.dispose();
+            }
+            else if (srcBtn == klantDialogBewerkenConfirm) {
+                klantDialogBewerken.dispose();
+            }
+            else if (srcBtn == klantBewerken) {
+                int index = klantTable.getSelectedRow();
+
+                klantDialogBewerken = new JDialog(this, "Bewerk een klant", true);
+                klantDialogBewerken.setSize(360, 120);
+                klantDialogBewerken.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                klantDialogBewerken.setLayout(new GridLayout(2, 1));
+
+                JScrollPane scrollPane = new JScrollPane();
+                JTable table = new JTable(new DefaultTableModel());
+                DefaultTableModel model = ((DefaultTableModel)table.getModel());
+                String[] headers = new String[] {"Klantnr", "Voornaam", "Achternaam", "Functie"};
+                for (String header : headers) {
+                    model.addColumn(header);
+                }
+
+                DefaultTableModel mainmodel = ((DefaultTableModel)klantTable.getModel());
+
+                String[] data = new String[4];
+                for (int i = 0; i < 4; i++) {
+                    data[i] = mainmodel.getValueAt(index, i).toString();
+                }
+                model.addRow(data);
+                scrollPane.setViewportView(table);
+
+                klantDialogBewerkenConfirm = new JButton("Voeg toe");
+                klantDialogBewerkenConfirm.addActionListener(this);
+
+                klantDialogBewerken.add(scrollPane);
+                klantDialogBewerken.add(klantDialogBewerkenConfirm);
+
+                klantDialogBewerken.setVisible(true);
+
+                for (int i = 0; i < 4; i++) {
+                    String value = model.getValueAt(0, i).toString();
+                    mainmodel.setValueAt(value, index, i);
+                    System.out.println(value);
+                }
+
+                // TODO: verander in database
+            }
         }
-        System.out.println(ae);
     }
 }
