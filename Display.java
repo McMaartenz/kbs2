@@ -1,11 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
 
 public class Display extends JFrame implements ActionListener {
     
@@ -49,11 +45,13 @@ public class Display extends JFrame implements ActionListener {
         // Krijg model van tabel om wijzigingen door te voeren
         DefaultTableModel model = ((DefaultTableModel)klantTable.getModel());
         
+        // Headers
         String[] headers = new String[] {"Klantnr", "Voornaam", "Achternaam", "Functie"};
         for (String header : headers) {
             model.addColumn(header);
         }
         
+        /* VOEG HIER KLANTENTABEL IN */
         model.addRow(new Object[] {"1173066", "Maarten", "van Keulen", "Programmeur"});
         klantTableScroller.setViewportView(klantTable);
         
@@ -112,10 +110,12 @@ public class Display extends JFrame implements ActionListener {
             }
             else if(srcBtn == klantVerwijderen) {
                 int index = klantTable.getSelectedRow();
-                // jinfopan CONFIRMATION
-                //verwijderen zoja
-                ((DefaultTableModel)klantTable.getModel()).removeRow(index);
-                System.out.println(index);
+
+                int confirmation = JOptionPane.showConfirmDialog(this, "Verwijder regel nr. " + index + "?", "Confirm dit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+               
+                if (confirmation == JOptionPane.YES_OPTION) {
+                    ((DefaultTableModel)klantTable.getModel()).removeRow(index);
+                }
             }
         }
         System.out.println(ae);
