@@ -5,6 +5,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class Display extends JFrame implements ActionListener {
     
+    Database db;
+
     /* Main panel */
     JTabbedPane keuzeMenu;
     JPanel orderPanel;
@@ -26,13 +28,15 @@ public class Display extends JFrame implements ActionListener {
     JDialog klantDialogBewerken;
     JButton klantDialogBewerkenConfirm;
 
-    public Display() {
+    public Display(Database db) {
         try { // Set system window appearance
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+
+        this.db = db;
 
         setSize(480, 360);
         setLayout(new GridLayout(1, 1));
@@ -52,6 +56,7 @@ public class Display extends JFrame implements ActionListener {
         
         // Krijg model van tabel om wijzigingen door te voeren
         DefaultTableModel model = ((DefaultTableModel)klantTable.getModel());
+        klantTable.getTableHeader().setReorderingAllowed(false);
         
         // Headers
         String[] headers = new String[] {"Klantnr", "Voornaam", "Achternaam", "Functie"};
@@ -118,6 +123,7 @@ public class Display extends JFrame implements ActionListener {
 
                 JScrollPane scrollPane = new JScrollPane();
                 JTable table = new JTable(new DefaultTableModel());
+                table.getTableHeader().setReorderingAllowed(false);
                 DefaultTableModel model = ((DefaultTableModel)table.getModel());
                 String[] headers = new String[] {"Klantnr", "Voornaam", "Achternaam", "Functie"};
                 for (String header : headers) {
@@ -146,7 +152,7 @@ public class Display extends JFrame implements ActionListener {
                 DefaultTableModel mainmodel = ((DefaultTableModel)klantTable.getModel());
                 mainmodel.addRow(data);
 
-                // TODO: voeg toe naar database
+                db.addRecordToDatabase(data);
             }
             else if (srcBtn == klantVerwijderen) {
                 int index = klantTable.getSelectedRow();
@@ -158,8 +164,9 @@ public class Display extends JFrame implements ActionListener {
 
                 int confirmation = JOptionPane.showConfirmDialog(this, "Verwijder regel nr. " + index + "?", "Confirm dit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (confirmation == JOptionPane.YES_OPTION) {
-                    ((DefaultTableModel)klantTable.getModel()).removeRow(index);
-                    // TODO: Verwijder uit database
+                    DefaultTableModel model = (DefaultTableModel)klantTable.getModel();
+                    db.removeRecordFromDatabase(model.getValueAt(index, 0));
+                    model.removeRow(index);
                 }
             }
             else if (srcBtn == klantDialogToevoegenConfirm) {
@@ -217,9 +224,8 @@ public class Display extends JFrame implements ActionListener {
                     for (int i = 0; i < 4; i++) {
                         mainmodel.setValueAt(data[i], index, i);
                     }
+                    db.editRecordInDatabase(mainmodel.getValueAt(index, 0), data);
                 }
-
-                // TODO: verander in database
             }
         }
     }
