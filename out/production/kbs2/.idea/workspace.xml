@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b1a2b3a3-97ac-4a4d-8ad2-e7cf2bc19bcd" name="Changes" comment="papaya, inpak layout">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/Display.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InpakPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/InpakPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KlantPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/KlantPanel.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
+  <component name="ProjectId" id="28KaXLDgLeihREwQNwtkV1YiadB" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/out/production/kbs2/img" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.3586207" />
+    <property name="settings.editor.selected.configurable" value="advanced.settings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mcmaa\src\kbs2\out\production\kbs2\img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mcmaa\src\kbs2\out\production\kbs2" />
+      <recent name="C:\Users\mcmaa\src\kbs2\out" />
+      <recent name="C:\Users\mcmaa\src\kbs2\out\production" />
+      <recent name="C:\Users\mcmaa\src\kbs2\img" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="kbs2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b1a2b3a3-97ac-4a4d-8ad2-e7cf2bc19bcd" name="Changes" comment="" />
+      <created>1650967776387</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1650967776387</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Intellij conversion">
+      <created>1650968217663</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1650968217663</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Intellij conversion">
+      <created>1650968643861</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1650968643861</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Intellij conversion">
+      <created>1650968709140</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1650968709140</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Intellij conversion">
+      <created>1650968931035</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1650968931035</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Intellij conversion">
+      <created>1650969177524</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1650969177524</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Verdelen vanuit Display &gt; JPanel klassen">
+      <created>1650970779204</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1650970779204</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Order &amp; inpak paneel basis">
+      <created>1650971264570</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1650971264570</updated>
+    </task>
+    <task id="LOCAL-00008" summary="inpak paneel : algoritme selectie">
+      <created>1650976508044</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1650976508044</updated>
+    </task>
+    <task id="LOCAL-00009" summary="TODO">
+      <created>1650976799719</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1650976799719</updated>
+    </task>
+    <task id="LOCAL-00010" summary="papaya, inpak layout">
+      <created>1650978781362</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1650978781362</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Intellij conversion" />
+    <MESSAGE value="Verdelen vanuit Display &gt; JPanel klassen" />
+    <MESSAGE value="Order &amp; inpak paneel basis" />
+    <MESSAGE value="inpak paneel : algoritme selectie" />
+    <MESSAGE value="TODO" />
+    <MESSAGE value="papaya, inpak layout" />
+    <option name="LAST_COMMIT_MESSAGE" value="papaya, inpak layout" />
+  </component>
+</project>
