@@ -1,16 +1,21 @@
+import arduino.Arduino;
+
 import javax.swing.*;
 import java.awt.*;
+import java.net.ConnectException;
 
 class Display extends JFrame
 {
 
 	private Database db;
 
-	/* Main panel */
 	private JTabbedPane keuzeMenu;
 	private JPanel orderPanel;
 	private JPanel klantPanel;
 	private JPanel inpakPanel;
+
+	private Robot robot1;
+	private Robot robot2;
 
 	public Display(Database db)
 	{
@@ -25,7 +30,7 @@ class Display extends JFrame
 
 		this.db = db;
 
-		setSize(640, 480);
+		setSize(520, 480);
 		setLayout(new GridLayout(1, 1));
 
 		orderPanel = new OrderPanel(this);
@@ -38,6 +43,16 @@ class Display extends JFrame
 		keuzeMenu.addTab("Inpak", inpakPanel);
 
 		add(keuzeMenu);
+
+		try
+		{
+			robot1 = new Robot(Port.COM3);
+			robot2 = new Robot(Port.COM4);
+		}
+		catch (ConnectException ce)
+		{
+			JOptionPane.showMessageDialog(this, ce, "Port connectie fout", JOptionPane.ERROR_MESSAGE);
+		}
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);

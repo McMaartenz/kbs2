@@ -48,7 +48,7 @@ public class OrderPanel extends JPanel implements ActionListener
 			gbc.ipady = 0;
 			gbc.weightx = 1.0;
 			gbc.weighty = 1.0;
-			gbc.gridheight = 3;
+			gbc.gridheight = 1;
 			gbc.fill = GridBagConstraints.BOTH;
 		}
 
@@ -60,17 +60,27 @@ public class OrderPanel extends JPanel implements ActionListener
 				super.paintComponent(g);
 
 				// Grootte gedefinieerd per schermontwerp
-				final Dimension GRID_SIZE = new Dimension(5, 5);
-				final int CELL_WIDTH = GRID_SIZE.width / getWidth();
-				final int CELL_HEIGHT = GRID_SIZE.height / getHeight();
+				final Dimension GRID_SIZE = new Dimension(6, 6);
+				final int CELL_SIZE = Math.min(getWidth(), getHeight()) / Math.min(GRID_SIZE.width, GRID_SIZE.height);
 
+				g.drawLine(0, 0, CELL_SIZE, CELL_SIZE);
 				for (int i = 0; i < GRID_SIZE.width; i++)
 				{
-					g.drawLine(0, CELL_HEIGHT * i, getWidth(), CELL_HEIGHT * i);
-					g.drawLine(CELL_WIDTH * i, 0, CELL_WIDTH * i, getHeight());
-				}
+					g.drawLine(0, CELL_SIZE * i,GRID_SIZE.width * CELL_SIZE, CELL_SIZE * i);
+					g.drawLine(CELL_SIZE * i, 0, CELL_SIZE * i, GRID_SIZE.height * CELL_SIZE);
 
-				// TODO: teken veld met robot
+					if (i == 0)
+					{
+						continue;
+					}
+					g.drawString(Integer.toString(i), CELL_SIZE * (i + 1) - CELL_SIZE / 2 - 3, CELL_SIZE / 2 + 5);
+					g.drawString(Character.toString('A' + (i - 1)), CELL_SIZE / 2 - 3, CELL_SIZE * (i + 1) - CELL_SIZE / 2 + 5);
+				}
+				g.setColor(getBackground());
+				g.drawLine(CELL_SIZE, 1, CELL_SIZE, CELL_SIZE - 1);
+				g.drawLine(1, CELL_SIZE, CELL_SIZE - 1, CELL_SIZE);
+
+				// TODO: Teken robot plaatje
 			}
 		};
 
@@ -122,15 +132,16 @@ public class OrderPanel extends JPanel implements ActionListener
 
 		add(robotMap, gbc);
 
-		gbc.gridy += 3;
-		gbc.gridheight = 1;
+		gbc.gridy++;
 		add(orders, gbc);
 
 		gbc.gridy++;
+		gbc.gridheight = 3;
 		add(orderScroller, gbc);
 
 		gbc.gridx++;
 		gbc.gridy = 0;
+		gbc.gridheight = 1;
 		add(producten, gbc);
 
 		gbc.gridy++;
@@ -178,10 +189,11 @@ public class OrderPanel extends JPanel implements ActionListener
 				Selectie selectie = new Selectie(Selectie.Optie.DISPOSED);
 				new AlgoritmeSelectie(parent, "Selecteer een algoritme", true, selectie);
 				// TODO: Doe iets met selectie
-				((Display) parent).switchTab(Tab.INPAK_TAB);
+				if (selectie.optie != Selectie.Optie.DISPOSED)
+				{
+					((Display) parent).switchTab(Tab.INPAK_TAB);
+				}
 			}
-			// nieuwe algoritme selectie dialog
-			//new AlgoritmeSelectie(parent, "abc", false, new Selectie(Selectie.Optie.DISPOSED));
 		}
 	}
 }
