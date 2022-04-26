@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1a2b3a3-97ac-4a4d-8ad2-e7cf2bc19bcd" name="Changes" comment="Intellij conversion">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KlantPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/arduino.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jSerialComm-1.3.11.jar" afterDir="false" />
+    <list default="true" id="b1a2b3a3-97ac-4a4d-8ad2-e7cf2bc19bcd" name="Changes" comment="Verdelen vanuit Display &gt; JPanel klassen">
+      <change afterPath="$PROJECT_DIR$/InpakPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OrderPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/Display.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KlantPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/KlantPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650969177524</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Verdelen vanuit Display &gt; JPanel klassen">
+      <created>1650970779204</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1650970779204</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -128,6 +132,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Intellij conversion" />
-    <option name="LAST_COMMIT_MESSAGE" value="Intellij conversion" />
+    <MESSAGE value="Verdelen vanuit Display &gt; JPanel klassen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Verdelen vanuit Display &gt; JPanel klassen" />
   </component>
 </project>

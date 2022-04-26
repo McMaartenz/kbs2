@@ -33,7 +33,6 @@ class KlantPanel extends JPanel implements ActionListener {
 			public boolean isCellEditable(int r, int c) {
 				return false;
 			}
-
 		};
 
 		// Krijg model van tabel om wijzigingen door te voeren
@@ -130,11 +129,11 @@ class KlantPanel extends JPanel implements ActionListener {
 				int index = klantTable.getSelectedRow();
 
 				if (index == -1) {
-					Fout.toon(parent, "Geen regel om weg te halen");
+					Fout.toon(parent, "Selecteer een regel om weg te halen");
 					return;
 				}
 
-				int confirmation = JOptionPane.showConfirmDialog(this, "Verwijder regel nr. " + index + "?", "Confirm dit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				int confirmation = JOptionPane.showConfirmDialog(this, "Verwijder regel nr. " + (index + 1) + "?", "Confirm dit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (confirmation == JOptionPane.YES_OPTION) {
 					DefaultTableModel model = (DefaultTableModel)klantTable.getModel();
 					db.removeRecordFromDatabase(model.getValueAt(index, 0));

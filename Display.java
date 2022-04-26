@@ -24,9 +24,9 @@ class Display extends JFrame {
         setSize(480, 360);
         setLayout(new GridLayout(1, 1));
 
-        orderPanel = new JPanel();
+        orderPanel = new OrderPanel(this);
         klantPanel = new KlantPanel(this);
-        inpakPanel = new JPanel();
+        inpakPanel = new InpakPanel(this);
 
         keuzeMenu = new JTabbedPane();
         keuzeMenu.addTab("Order", orderPanel);
