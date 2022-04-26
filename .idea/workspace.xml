@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1a2b3a3-97ac-4a4d-8ad2-e7cf2bc19bcd" name="Changes" comment="papaya, inpak layout">
+    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="Changes">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/Display.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InpakPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/InpakPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KlantPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/KlantPanel.java" afterDir="false" />
     </list>
@@ -170,7 +170,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Intellij conversion" />

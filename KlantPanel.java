@@ -47,6 +47,10 @@ class KlantPanel extends JPanel implements ActionListener {
 
 		/* TODO: VOEG HIER KLANTENTABEL IN */
 		model.addRow(new Object[] {"1173066", "Maarten", "van Keulen", "Programmeur"});
+		model.addRow(new Object[] {"1173055", "Netraam", "van Koln", "CEO"});
+		model.addRow(new Object[] {"1173044", "Teun", "Smith", "Tester"});
+		model.addRow(new Object[] {"1173033", "Jan", "Piet", "Koper"});
+		model.addRow(new Object[] {"1173022", "Don", "Sperziboom", "Mens"});
 		klantTableScroller.setViewportView(klantTable);
 
 		setLayout(new GridBagLayout()); // Constraints van de componenten

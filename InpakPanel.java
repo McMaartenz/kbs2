@@ -73,7 +73,32 @@ public class InpakPanel extends JPanel implements ActionListener {
 		};
 
 		doos = new JPanel() { // TODO Teken een doos
+			int getal = 9454;
 
+			@Override
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+
+				Dimension size = this.getSize();
+				int offset = size.width / 6;
+				g.drawLine(0, offset, offset, 0);
+				g.drawLine(size.width, offset, size.width - offset, 0);
+
+				// box
+				g.setColor(new Color(239, 184, 100));
+				g.fillRect(offset, 0, size.width - (offset * 2), size.height);
+				g.setColor(Color.BLACK);
+				g.drawRect(offset, 0, size.width - (offset * 2), size.height);
+
+				g.setFont(new Font("Arial", Font.PLAIN, size.width / 6));
+				String str = Integer.toString(getal);
+				g.drawString(str, size.width / 2 - g.getFontMetrics().stringWidth(str) / 2, size.height / 2);
+			}
+
+			public void setGetal(int getal) {
+				this.getal = getal;
+				repaint();
+			}
 		};
 
 		model = new DefaultTableModel();
@@ -91,6 +116,15 @@ public class InpakPanel extends JPanel implements ActionListener {
 		for (String header : headers) {
 			model.addColumn(header);
 		}
+
+		/* TODO: VOEG HIER INGEPAKTE DOZEN DATA */
+		model.addRow(new Object[] {"9452", "Product 1, Product 2, Product 3", "224466"});
+		model.addRow(new Object[] {"9453", "Product 4", "446678"});
+
+		TableColumnModel cmodel = table.getColumnModel();
+		cmodel.getColumn(0).setPreferredWidth(20);
+		cmodel.getColumn(1).setPreferredWidth(80);
+		cmodel.getColumn(2).setPreferredWidth(20);
 
 		tableScroller = new JScrollPane() {
 			@Override
