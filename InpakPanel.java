@@ -1,12 +1,15 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+
+import static javax.swing.SwingConstants.CENTER;
 
 public class InpakPanel extends JPanel implements ActionListener {
 
@@ -20,7 +23,9 @@ public class InpakPanel extends JPanel implements ActionListener {
 	private JPanel logo;
 	private JPanel doos;
 
-	private JScrollPane tabelScroller;
+	private JScrollPane tableScroller;
+	private JTable table;
+	private DefaultTableModel model;
 
 	private JButton openAlgoritmeSelectie;
 
@@ -40,9 +45,9 @@ public class InpakPanel extends JPanel implements ActionListener {
 			gbc.fill = GridBagConstraints.BOTH;
 		}
 
-		ingepakteDozen = new JLabel("Ingepakte dozen");
-		gekozenAlgoritme = new JLabel("<html>Gekozen algoritme<br>ALGORITME</html>");
-		huidigInpakProces = new JLabel("Huidig inpakproces");
+		ingepakteDozen = new JLabel("Ingepakte dozen", CENTER);
+		gekozenAlgoritme = new JLabel("<html>Gekozen algoritme<br>ALGORITME</html>", CENTER);
+		huidigInpakProces = new JLabel("Huidig inpakproces", CENTER);
 
 		logo = new JPanel() {
 
@@ -71,7 +76,29 @@ public class InpakPanel extends JPanel implements ActionListener {
 
 		};
 
-		tabelScroller = new JScrollPane(new JTable()); // TODO: maak tabel
+		model = new DefaultTableModel();
+		table = new JTable(model) {
+			@Override
+			public boolean isCellEditable(int r, int c) {
+				return false;
+			}
+		};
+
+		table.getTableHeader().setReorderingAllowed(false);
+
+		// Headers
+		String[] headers = new String[] {"Doosnr", "Producten", "Ordernr"};
+		for (String header : headers) {
+			model.addColumn(header);
+		}
+
+		tableScroller = new JScrollPane() {
+			@Override
+			public Dimension getPreferredSize() {
+				return new Dimension(150, 450);
+			}
+		};
+		tableScroller.setViewportView(table);
 
 		add(ingepakteDozen, gbc);
 		gbc.gridx = 0;
@@ -89,7 +116,7 @@ public class InpakPanel extends JPanel implements ActionListener {
 		gbc.gridx++;
 		gbc.gridy = 1;
 		gbc.gridheight = 4;
-		add(tabelScroller, gbc);
+		add(tableScroller, gbc);
 
 		setVisible(true);
 	}

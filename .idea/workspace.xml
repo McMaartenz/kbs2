@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1a2b3a3-97ac-4a4d-8ad2-e7cf2bc19bcd" name="Changes" comment="TODO">
+    <list default="true" id="b1a2b3a3-97ac-4a4d-8ad2-e7cf2bc19bcd" name="Changes" comment="papaya, inpak layout">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/Display.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InpakPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/InpakPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KlantPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/KlantPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +58,7 @@
       <recent name="C:\Users\mcmaa\src\kbs2\out\production\kbs2\img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mcmaa\src\kbs2\out\production\kbs2" />
       <recent name="C:\Users\mcmaa\src\kbs2\out" />
       <recent name="C:\Users\mcmaa\src\kbs2\out\production" />
       <recent name="C:\Users\mcmaa\src\kbs2\img" />
@@ -147,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650976799719</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="papaya, inpak layout">
+      <created>1650978781362</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1650978781362</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -168,6 +178,7 @@
     <MESSAGE value="Order &amp; inpak paneel basis" />
     <MESSAGE value="inpak paneel : algoritme selectie" />
     <MESSAGE value="TODO" />
-    <option name="LAST_COMMIT_MESSAGE" value="TODO" />
+    <MESSAGE value="papaya, inpak layout" />
+    <option name="LAST_COMMIT_MESSAGE" value="papaya, inpak layout" />
   </component>
 </project>

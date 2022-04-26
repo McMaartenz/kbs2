@@ -21,7 +21,7 @@ class Display extends JFrame {
 
         this.db = db;
 
-        setSize(480, 360);
+        setSize(640, 480);
         setLayout(new GridLayout(1, 1));
 
         orderPanel = new OrderPanel(this);

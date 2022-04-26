@@ -28,7 +28,8 @@ class KlantPanel extends JPanel implements ActionListener {
 		this.parent = parent;
 		db = parent.getDB();
 		klantTableScroller = new JScrollPane();
-		klantTable = new JTable(new DefaultTableModel()) {
+		DefaultTableModel model = new DefaultTableModel();
+		klantTable = new JTable(model) {
 			@Override
 			public boolean isCellEditable(int r, int c) {
 				return false;
@@ -36,7 +37,6 @@ class KlantPanel extends JPanel implements ActionListener {
 		};
 
 		// Krijg model van tabel om wijzigingen door te voeren
-		DefaultTableModel model = ((DefaultTableModel)klantTable.getModel());
 		klantTable.getTableHeader().setReorderingAllowed(false);
 
 		// Headers
