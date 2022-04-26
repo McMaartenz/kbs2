@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="Inpak doos af + tabel ingevuld">
-      <change afterPath="$PROJECT_DIR$/Logo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ReadonlyTable.java" afterDir="false" />
+    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="Order tab af (robotmap moet nog)">
+      <change afterPath="$PROJECT_DIR$/Tab.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/Display.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InpakPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/InpakPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KlantPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/KlantPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kbs2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kbs2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kbs2/KlantPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kbs2/KlantPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kbs2/OrderPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kbs2/OrderPanel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -34,6 +35,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedIndex" value="1" />
@@ -84,7 +88,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b1a2b3a3-97ac-4a4d-8ad2-e7cf2bc19bcd" name="Changes" comment="" />
+      <changelist id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="Order tab af (robotmap moet nog)" />
       <created>1650967776387</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -167,7 +171,21 @@
       <option name="project" value="LOCAL" />
       <updated>1650984120741</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Order tab af (robotmap moet nog)">
+      <created>1650987269818</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1650987269818</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Order tab af (robotmap moet nog)">
+      <created>1650987285473</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1650987285473</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -189,6 +207,7 @@
     <MESSAGE value="TODO" />
     <MESSAGE value="papaya, inpak layout" />
     <MESSAGE value="Inpak doos af + tabel ingevuld" />
-    <option name="LAST_COMMIT_MESSAGE" value="Inpak doos af + tabel ingevuld" />
+    <MESSAGE value="Order tab af (robotmap moet nog)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Order tab af (robotmap moet nog)" />
   </component>
 </project>

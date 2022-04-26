@@ -150,6 +150,11 @@ class KlantPanel extends JPanel implements ActionListener {
 			else if (srcBtn == klantBewerken) {
 				int index = klantTable.getSelectedRow();
 
+				if (index == -1) {
+					Fout.toon(parent, "Selecteer een regel om te bewerken");
+					return;
+				}
+
 				dialogBewerken = new JDialog(parent, "Bewerk een klant", true);
 				dialogBewerken.setSize(360, 120);
 				dialogBewerken.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

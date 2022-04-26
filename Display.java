@@ -42,4 +42,8 @@ class Display extends JFrame {
     public Database getDB() {
         return db;
     }
+
+    public void switchTab(Tab newTab) {
+        keuzeMenu.setSelectedIndex(newTab.ordinal());
+    }
 }

@@ -100,6 +100,10 @@ public class OrderPanel extends JPanel implements ActionListener {
 		cancel = new JButton("Cancel");
 		herhaal = new JButton("Herhaal pickronde");
 
+		ok.addActionListener(this);
+		cancel.addActionListener(this);
+		herhaal.addActionListener(this);
+
 		add(robotMap, gbc);
 
 		gbc.gridy += 3;
@@ -151,6 +155,14 @@ public class OrderPanel extends JPanel implements ActionListener {
 		Object src = ae.getSource();
 		if (src instanceof JButton) {
 			JButton srcBtn = (JButton)src;
+			if (srcBtn == ok) {
+				Selectie selectie = new Selectie(Selectie.Optie.DISPOSED);
+				new AlgoritmeSelectie(parent, "Selecteer een algoritme", true, selectie);
+				// TODO: Doe iets met selectie
+				((Display)parent).switchTab(Tab.INPAK_TAB);
+			}
+			// nieuwe algoritme selectie dialog
+			//new AlgoritmeSelectie(parent, "abc", false, new Selectie(Selectie.Optie.DISPOSED));
 		}
 	}
 }
