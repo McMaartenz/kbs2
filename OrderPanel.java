@@ -15,9 +15,8 @@ public class OrderPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		Object src = ae.getSource();
-		if (src instanceof JButton)
-		{
-
+		if (src instanceof JButton) {
+			JButton srcBtn = (JButton)src;
 		}
 	}
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1a2b3a3-97ac-4a4d-8ad2-e7cf2bc19bcd" name="Changes" comment="Verdelen vanuit Display &gt; JPanel klassen">
-      <change afterPath="$PROJECT_DIR$/InpakPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OrderPanel.java" afterDir="false" />
+    <list default="true" id="b1a2b3a3-97ac-4a4d-8ad2-e7cf2bc19bcd" name="Changes" comment="Order &amp; inpak paneel basis">
+      <change afterPath="$PROJECT_DIR$/AlgoritmeSelectie.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Selectie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/Display.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KlantPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/KlantPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InpakPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/InpakPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +17,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -31,6 +32,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="28KaXLDgLeihREwQNwtkV1YiadB" />
   <component name="ProjectLevelVcsManager">
@@ -115,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650970779204</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Order &amp; inpak paneel basis">
+      <created>1650971264570</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1650971264570</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -133,6 +144,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Intellij conversion" />
     <MESSAGE value="Verdelen vanuit Display &gt; JPanel klassen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Verdelen vanuit Display &gt; JPanel klassen" />
+    <MESSAGE value="Order &amp; inpak paneel basis" />
+    <option name="LAST_COMMIT_MESSAGE" value="Order &amp; inpak paneel basis" />
   </component>
 </project>
