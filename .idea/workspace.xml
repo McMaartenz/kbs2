@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment=".gitignore update">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment=".gitignore vervanging">
+      <change afterPath="$PROJECT_DIR$/Robot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +14,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -59,6 +60,7 @@
       <recent name="C:\Users\mcmaa\src\kbs2\out\production\kbs2\img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mcmaa\IdeaProjects\kbs2" />
       <recent name="C:\Users\mcmaa\src\kbs2\out\production\kbs2" />
       <recent name="C:\Users\mcmaa\src\kbs2\out" />
       <recent name="C:\Users\mcmaa\src\kbs2\out\production" />
@@ -193,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651005740121</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary=".gitignore vervanging">
+      <created>1651006026380</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1651006026380</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -218,6 +227,7 @@
     <MESSAGE value="Order tab af (robotmap moet nog)" />
     <MESSAGE value="Tab enum + tab switch functie + tab switcht na algoritme selectie" />
     <MESSAGE value=".gitignore update" />
-    <option name="LAST_COMMIT_MESSAGE" value=".gitignore update" />
+    <MESSAGE value=".gitignore vervanging" />
+    <option name="LAST_COMMIT_MESSAGE" value=".gitignore vervanging" />
   </component>
 </project>

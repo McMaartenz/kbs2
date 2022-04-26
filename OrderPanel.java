@@ -53,7 +53,17 @@ public class OrderPanel extends JPanel implements ActionListener {
 			@Override
 			public void paintComponent(Graphics g) {
 				super.paintComponent(g);
-				setBackground(Color.BLACK);
+
+				// Grootte gedefinieerd per schermontwerp
+				final Dimension GRID_SIZE = new Dimension(5, 5);
+				final int CELL_WIDTH = GRID_SIZE.width / getWidth();
+				final int CELL_HEIGHT = GRID_SIZE.height / getHeight();
+
+				for (int i = 0; i < GRID_SIZE.width; i++) {
+					g.drawLine(0, CELL_HEIGHT * i, getWidth(), CELL_HEIGHT * i);
+					g.drawLine(CELL_WIDTH * i, 0, CELL_WIDTH * i, getHeight());
+				}
+
 				// TODO: teken veld met robot
 			}
 		};
