@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="Order tab af (robotmap moet nog)">
-      <change afterPath="$PROJECT_DIR$/Tab.java" afterDir="false" />
+    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment=".gitignore update">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/Display.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KlantPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/KlantPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kbs2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kbs2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kbs2/KlantPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kbs2/KlantPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/kbs2/OrderPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kbs2/OrderPanel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +179,21 @@
       <option name="project" value="LOCAL" />
       <updated>1650987285473</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Tab enum + tab switch functie + tab switcht na algoritme selectie">
+      <created>1651005630570</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1651005630570</updated>
+    </task>
+    <task id="LOCAL-00015" summary=".gitignore update">
+      <created>1651005740121</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1651005740121</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -208,6 +216,8 @@
     <MESSAGE value="papaya, inpak layout" />
     <MESSAGE value="Inpak doos af + tabel ingevuld" />
     <MESSAGE value="Order tab af (robotmap moet nog)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Order tab af (robotmap moet nog)" />
+    <MESSAGE value="Tab enum + tab switch functie + tab switcht na algoritme selectie" />
+    <MESSAGE value=".gitignore update" />
+    <option name="LAST_COMMIT_MESSAGE" value=".gitignore update" />
   </component>
 </project>
