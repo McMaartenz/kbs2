@@ -1,49 +1,55 @@
 import javax.swing.*;
 import java.awt.*;
 
-class Display extends JFrame {
+class Display extends JFrame
+{
 
-    private Database db;
+	private Database db;
 
-    /* Main panel */
-    private JTabbedPane keuzeMenu;
-    private JPanel orderPanel;
-    private JPanel klantPanel;
-    private JPanel inpakPanel;
+	/* Main panel */
+	private JTabbedPane keuzeMenu;
+	private JPanel orderPanel;
+	private JPanel klantPanel;
+	private JPanel inpakPanel;
 
-    public Display(Database db) {
-        try { // Set system window appearance
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+	public Display(Database db)
+	{
+		try
+		{ // Set system window appearance
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 
-        this.db = db;
+		this.db = db;
 
-        setSize(640, 480);
-        setLayout(new GridLayout(1, 1));
+		setSize(640, 480);
+		setLayout(new GridLayout(1, 1));
 
-        orderPanel = new OrderPanel(this);
-        klantPanel = new KlantPanel(this);
-        inpakPanel = new InpakPanel(this);
+		orderPanel = new OrderPanel(this);
+		klantPanel = new KlantPanel(this);
+		inpakPanel = new InpakPanel(this);
 
-        keuzeMenu = new JTabbedPane();
-        keuzeMenu.addTab("Order", orderPanel);
-        keuzeMenu.addTab("Klant", klantPanel);
-        keuzeMenu.addTab("Inpak", inpakPanel);
+		keuzeMenu = new JTabbedPane();
+		keuzeMenu.addTab("Order", orderPanel);
+		keuzeMenu.addTab("Klant", klantPanel);
+		keuzeMenu.addTab("Inpak", inpakPanel);
 
-        add(keuzeMenu);
+		add(keuzeMenu);
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
-    }
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
+	}
 
-    public Database getDB() {
-        return db;
-    }
+	public Database getDB()
+	{
+		return db;
+	}
 
-    public void switchTab(Tab newTab) {
-        keuzeMenu.setSelectedIndex(newTab.ordinal());
-    }
+	public void switchTab(Tab newTab)
+	{
+		keuzeMenu.setSelectedIndex(newTab.ordinal());
+	}
 }

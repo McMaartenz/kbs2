@@ -1,17 +1,21 @@
 import java.awt.*;
 
-public class Robot {
+public class Robot
+{
 	private Point positie;
 
-	public Robot() {
+	public Robot()
+	{
 		this(new Point(0, 0));
 	}
 
-	public Robot(Point positie) {
+	public Robot(Point positie)
+	{
 		this.positie = positie;
 	}
 
-	public Point getPositie() {
+	public Point getPositie()
+	{
 		return positie;
 	}
 }

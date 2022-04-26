@@ -28,11 +28,13 @@ public class AlgoritmeSelectie extends JDialog implements ActionListener
 	private JButton ok;
 	private JButton cancel;
 
-	public AlgoritmeSelectie(JFrame parent, String title, boolean modal, Selectie selectie) {
+	public AlgoritmeSelectie(JFrame parent, String title, boolean modal, Selectie selectie)
+	{
 		super(parent, title, modal);
 		this.selectie = selectie;
 
-		GridBagConstraints gbc = new GridBagConstraints(); {
+		GridBagConstraints gbc = new GridBagConstraints();
+		{
 			gbc.gridx = 0;
 			gbc.gridy = 0;
 			gbc.ipadx = 0;
@@ -46,18 +48,43 @@ public class AlgoritmeSelectie extends JDialog implements ActionListener
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); // Event zorgt voor disposing
 		this.addWindowListener(new WindowListener()
 		{
-			@Override public void windowClosing(WindowEvent e) {
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
 				selectie.optie = Selectie.Optie.DISPOSED;
 				dispose();
 			}
 
 			/* negeer deze */
-			@Override public void windowOpened(WindowEvent e) {}
-			@Override public void windowClosed(WindowEvent e) {}
-			@Override public void windowIconified(WindowEvent e) {}
-			@Override public void windowDeiconified(WindowEvent e) {}
-			@Override public void windowActivated(WindowEvent e) {}
-			@Override public void windowDeactivated(WindowEvent e) {}
+			@Override
+			public void windowOpened(WindowEvent e)
+			{
+			}
+
+			@Override
+			public void windowClosed(WindowEvent e)
+			{
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e)
+			{
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e)
+			{
+			}
+
+			@Override
+			public void windowActivated(WindowEvent e)
+			{
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e)
+			{
+			}
 		});
 
 		algoritme = new JLabel("Algoritme: (Aantal geschatte dozen: 0)", CENTER);
@@ -93,7 +120,8 @@ public class AlgoritmeSelectie extends JDialog implements ActionListener
 		selectie.optie = Selectie.Optie.BEST_FIT;
 
 		ButtonGroup buttonGroup = new ButtonGroup();
-		for (JRadioButton btn : radioButtons) {
+		for (JRadioButton btn : radioButtons)
+		{
 			buttonGroup.add(btn);
 			btn.addActionListener(this);
 		}
@@ -129,21 +157,27 @@ public class AlgoritmeSelectie extends JDialog implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent ae) {
+	public void actionPerformed(ActionEvent ae)
+	{
 		Object src = ae.getSource();
-		if (src instanceof JRadioButton) {
-			JRadioButton srcBtn = (JRadioButton)src;
-			for (int i = 0; i < 7; i++) {
-				if (srcBtn == radioButtons[i]) {
+		if (src instanceof JRadioButton)
+		{
+			JRadioButton srcBtn = (JRadioButton) src;
+			for (int i = 0; i < 7; i++)
+			{
+				if (srcBtn == radioButtons[i])
+				{
 					selectie.optie = Selectie.Optie.values()[i + 1];
 					// TODO: Calculate aantal dozen & update label!
 					break;
 				}
 			}
 		}
-		else if (src instanceof JButton) {
-			JButton srcBtn = (JButton)src;
-			if (srcBtn == cancel) {
+		else if (src instanceof JButton)
+		{
+			JButton srcBtn = (JButton) src;
+			if (srcBtn == cancel)
+			{
 				selectie.optie = Selectie.Optie.DISPOSED;
 			}
 			dispose();

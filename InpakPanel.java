@@ -1,13 +1,13 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static javax.swing.SwingConstants.CENTER;
 
-public class InpakPanel extends JPanel implements ActionListener {
+public class InpakPanel extends JPanel implements ActionListener
+{
 
 	private Database db;
 	private JFrame parent;
@@ -25,12 +25,14 @@ public class InpakPanel extends JPanel implements ActionListener {
 
 	private JButton openAlgoritmeSelectie;
 
-	public InpakPanel(Display parent) {
+	public InpakPanel(Display parent)
+	{
 		this.parent = parent;
 		db = parent.getDB();
 
 		setLayout(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints(); {
+		GridBagConstraints gbc = new GridBagConstraints();
+		{
 			gbc.gridx = 2;
 			gbc.gridy = 0;
 			gbc.ipadx = 0;
@@ -47,11 +49,13 @@ public class InpakPanel extends JPanel implements ActionListener {
 
 		logo = new Logo();
 
-		doos = new JPanel() { // TODO Teken een doos
+		doos = new JPanel()
+		{ // TODO Teken een doos
 			int getal = 9454;
 
 			@Override
-			public void paintComponent(Graphics g) {
+			public void paintComponent(Graphics g)
+			{
 				super.paintComponent(g);
 
 				Dimension size = this.getSize();
@@ -70,7 +74,8 @@ public class InpakPanel extends JPanel implements ActionListener {
 				g.drawString(str, size.width / 2 - g.getFontMetrics().stringWidth(str) / 2, size.height / 2);
 			}
 
-			public void setGetal(int getal) {
+			public void setGetal(int getal)
+			{
 				this.getal = getal;
 				repaint();
 			}
@@ -80,23 +85,26 @@ public class InpakPanel extends JPanel implements ActionListener {
 		table = new ReadonlyTable(model);
 
 		table.getTableHeader().setReorderingAllowed(false);
-		tableScroller = new JScrollPane() {
+		tableScroller = new JScrollPane()
+		{
 			@Override
-			public Dimension getPreferredSize() {
+			public Dimension getPreferredSize()
+			{
 				return new Dimension(150, 450);
 			}
 		};
 		tableScroller.setViewportView(table);
 
 		// Headers
-		String[] headers = new String[] {"Doosnr", "Producten", "Ordernr"};
-		for (String header : headers) {
+		String[] headers = new String[]{"Doosnr", "Producten", "Ordernr"};
+		for (String header : headers)
+		{
 			model.addColumn(header);
 		}
 
 		/* TODO: VOEG HIER INGEPAKTE DOZEN DATA */
-		model.addRow(new Object[] {"9452", "Product 1, Product 2, Product 3", "224466"});
-		model.addRow(new Object[] {"9453", "Product 4", "446678"});
+		model.addRow(new Object[]{"9452", "Product 1, Product 2, Product 3", "224466"});
+		model.addRow(new Object[]{"9453", "Product 4", "446678"});
 
 		add(ingepakteDozen, gbc);
 
@@ -125,11 +133,14 @@ public class InpakPanel extends JPanel implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent ae) {
+	public void actionPerformed(ActionEvent ae)
+	{
 		Object src = ae.getSource();
-		if (src instanceof JButton) {
-			JButton srcBtn = (JButton)src;
-			if (srcBtn == openAlgoritmeSelectie) {
+		if (src instanceof JButton)
+		{
+			JButton srcBtn = (JButton) src;
+			if (srcBtn == openAlgoritmeSelectie)
+			{
 				Selectie selectie = new Selectie(Selectie.Optie.DISPOSED);
 				AlgoritmeSelectie as = new AlgoritmeSelectie(parent, "Selecteer een algoritme", true, selectie);
 				System.out.println("Selectie: " + selectie.optie);

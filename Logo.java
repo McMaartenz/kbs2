@@ -9,27 +9,35 @@ public class Logo extends JPanel
 {
 	BufferedImage logo;
 
-	public Logo() {
+	public Logo()
+	{
 		super();
 
 		logo = loadImage("img/logo.jpg");
 	}
 
-	private BufferedImage loadImage(String filename) {
+	private BufferedImage loadImage(String filename)
+	{
 		BufferedImage result = null;
-		try {
+		try
+		{
 			result = ImageIO.read(new File(filename));
 		}
-		catch (IOException ie) {
+		catch (IOException ie)
+		{
 			System.out.println("Unable to load papaya image");
 		}
 		return result;
 	}
 
 	@Override
-	protected void paintComponent(Graphics g) {
+	protected void paintComponent(Graphics g)
+	{
 		super.paintComponent(g);
-		if (logo == null) return;
+		if (logo == null)
+		{
+			return;
+		}
 		g.drawImage(logo, 0, 0, getWidth(), getHeight(), null);
 	}
 }

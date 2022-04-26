@@ -6,7 +6,8 @@ import java.awt.event.ActionListener;
 
 import static javax.swing.SwingConstants.CENTER;
 
-public class OrderPanel extends JPanel implements ActionListener {
+public class OrderPanel extends JPanel implements ActionListener
+{
 
 	private Database db;
 	private JFrame parent;
@@ -33,12 +34,14 @@ public class OrderPanel extends JPanel implements ActionListener {
 	private JButton cancel;
 	private JButton herhaal;
 
-	public OrderPanel(Display parent) {
+	public OrderPanel(Display parent)
+	{
 		this.parent = parent;
 		db = parent.getDB();
 
 		setLayout(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints(); {
+		GridBagConstraints gbc = new GridBagConstraints();
+		{
 			gbc.gridx = 0;
 			gbc.gridy = 0;
 			gbc.ipadx = 0;
@@ -49,9 +52,11 @@ public class OrderPanel extends JPanel implements ActionListener {
 			gbc.fill = GridBagConstraints.BOTH;
 		}
 
-		robotMap = new JPanel() {
+		robotMap = new JPanel()
+		{
 			@Override
-			public void paintComponent(Graphics g) {
+			public void paintComponent(Graphics g)
+			{
 				super.paintComponent(g);
 
 				// Grootte gedefinieerd per schermontwerp
@@ -59,7 +64,8 @@ public class OrderPanel extends JPanel implements ActionListener {
 				final int CELL_WIDTH = GRID_SIZE.width / getWidth();
 				final int CELL_HEIGHT = GRID_SIZE.height / getHeight();
 
-				for (int i = 0; i < GRID_SIZE.width; i++) {
+				for (int i = 0; i < GRID_SIZE.width; i++)
+				{
 					g.drawLine(0, CELL_HEIGHT * i, getWidth(), CELL_HEIGHT * i);
 					g.drawLine(CELL_WIDTH * i, 0, CELL_WIDTH * i, getHeight());
 				}
@@ -81,14 +87,14 @@ public class OrderPanel extends JPanel implements ActionListener {
 		orderTableModel.addColumn("Ordernr");
 		productTableModel.addColumn("Product");
 
-		orderTableModel.addRow(new Object[] {"224466"});
-		orderTableModel.addRow(new Object[] {"113355"});
-		orderTableModel.addRow(new Object[] {"336699"});
+		orderTableModel.addRow(new Object[]{"224466"});
+		orderTableModel.addRow(new Object[]{"113355"});
+		orderTableModel.addRow(new Object[]{"336699"});
 
-		productTableModel.addRow(new Object[] {"Product 1"});
-		productTableModel.addRow(new Object[] {"Product 2"});
-		productTableModel.addRow(new Object[] {"Product 3"});
-		productTableModel.addRow(new Object[] {"Product 4"});
+		productTableModel.addRow(new Object[]{"Product 1"});
+		productTableModel.addRow(new Object[]{"Product 2"});
+		productTableModel.addRow(new Object[]{"Product 3"});
+		productTableModel.addRow(new Object[]{"Product 4"});
 
 		orderTable.getTableHeader().setReorderingAllowed(false);
 		productTable.getTableHeader().setReorderingAllowed(false);
@@ -161,15 +167,18 @@ public class OrderPanel extends JPanel implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent ae) {
+	public void actionPerformed(ActionEvent ae)
+	{
 		Object src = ae.getSource();
-		if (src instanceof JButton) {
-			JButton srcBtn = (JButton)src;
-			if (srcBtn == ok) {
+		if (src instanceof JButton)
+		{
+			JButton srcBtn = (JButton) src;
+			if (srcBtn == ok)
+			{
 				Selectie selectie = new Selectie(Selectie.Optie.DISPOSED);
 				new AlgoritmeSelectie(parent, "Selecteer een algoritme", true, selectie);
 				// TODO: Doe iets met selectie
-				((Display)parent).switchTab(Tab.INPAK_TAB);
+				((Display) parent).switchTab(Tab.INPAK_TAB);
 			}
 			// nieuwe algoritme selectie dialog
 			//new AlgoritmeSelectie(parent, "abc", false, new Selectie(Selectie.Optie.DISPOSED));
