@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1a2b3a3-97ac-4a4d-8ad2-e7cf2bc19bcd" name="Changes" comment="inpak paneel : algoritme selectie">
+    <list default="true" id="b1a2b3a3-97ac-4a4d-8ad2-e7cf2bc19bcd" name="Changes" comment="TODO">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgoritmeSelectie.java" beforeDir="false" afterPath="$PROJECT_DIR$/AlgoritmeSelectie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InpakPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/InpakPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,11 +45,21 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/jSerialComm-1.3.11.jar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/out/production/kbs2/img" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3586207" />
     <property name="settings.editor.selected.configurable" value="advanced.settings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mcmaa\src\kbs2\out\production\kbs2\img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mcmaa\src\kbs2\out" />
+      <recent name="C:\Users\mcmaa\src\kbs2\out\production" />
+      <recent name="C:\Users\mcmaa\src\kbs2\img" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -130,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650976508044</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="TODO">
+      <created>1650976799719</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1650976799719</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -150,6 +167,7 @@
     <MESSAGE value="Verdelen vanuit Display &gt; JPanel klassen" />
     <MESSAGE value="Order &amp; inpak paneel basis" />
     <MESSAGE value="inpak paneel : algoritme selectie" />
-    <option name="LAST_COMMIT_MESSAGE" value="inpak paneel : algoritme selectie" />
+    <MESSAGE value="TODO" />
+    <option name="LAST_COMMIT_MESSAGE" value="TODO" />
   </component>
 </project>
