@@ -47,6 +47,13 @@ class Display extends JFrame
 		try
 		{
 			robot1 = new Robot(Port.COM3);
+		}
+		catch (ConnectException ce)
+		{
+			JOptionPane.showMessageDialog(this, ce, "Port connectie fout", JOptionPane.ERROR_MESSAGE);
+		}
+		try
+		{
 			robot2 = new Robot(Port.COM4);
 		}
 		catch (ConnectException ce)

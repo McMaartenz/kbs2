@@ -34,6 +34,7 @@ public class Robot
 		{
 			throw new ConnectException("Cannot connect to port " + port + ": not available");
 		}
+		System.out.println("Opened serial connection to port " + port);
 	}
 
 	public Point getPositie()

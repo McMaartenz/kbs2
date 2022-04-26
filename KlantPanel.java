@@ -77,6 +77,7 @@ class KlantPanel extends JPanel implements ActionListener
 
 		gbc.gridheight = 1;
 		gbc.gridx = 1;
+		gbc.weightx = 0.0;
 		add(klantToevoegen, gbc);
 
 		gbc.gridy = 1;
