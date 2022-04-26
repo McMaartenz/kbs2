@@ -136,6 +136,7 @@ public class AlgoritmeSelectie extends JDialog implements ActionListener
 			for (int i = 0; i < 7; i++) {
 				if (srcBtn == radioButtons[i]) {
 					selectie.optie = Selectie.Optie.values()[i + 1];
+					// TODO: Calculate aantal dozen & update label!
 					break;
 				}
 			}
