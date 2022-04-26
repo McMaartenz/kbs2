@@ -1,6 +1,6 @@
 import javax.naming.AuthenticationException;
 
-public class Database { // TODO: Implementeer SQL connectie
+class Database { // TODO: Implementeer SQL connectie
     private static final String USER = "";
     private static final String PASSWORD = "";
 

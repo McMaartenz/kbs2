@@ -1,7 +1,7 @@
 import javax.naming.AuthenticationException;
 import javax.swing.JOptionPane;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Database db = new Database();
         try {
