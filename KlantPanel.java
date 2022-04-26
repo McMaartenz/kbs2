@@ -29,12 +29,7 @@ class KlantPanel extends JPanel implements ActionListener {
 		db = parent.getDB();
 		klantTableScroller = new JScrollPane();
 		DefaultTableModel model = new DefaultTableModel();
-		klantTable = new JTable(model) {
-			@Override
-			public boolean isCellEditable(int r, int c) {
-				return false;
-			}
-		};
+		klantTable = new ReadonlyTable(model);
 
 		// Krijg model van tabel om wijzigingen door te voeren
 		klantTable.getTableHeader().setReorderingAllowed(false);
@@ -74,14 +69,16 @@ class KlantPanel extends JPanel implements ActionListener {
 		klantVerwijderen.addActionListener(this);
 
 		add(klantTableScroller, gbc);
+
 		gbc.gridheight = 1;
 		gbc.gridx = 1;
 		add(klantToevoegen, gbc);
+
 		gbc.gridy = 1;
 		add(klantBewerken, gbc);
+
 		gbc.gridy = 2;
 		add(klantVerwijderen, gbc);
-
 	}
 
 

@@ -1,13 +1,9 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 import static javax.swing.SwingConstants.CENTER;
 
@@ -49,28 +45,7 @@ public class InpakPanel extends JPanel implements ActionListener {
 		gekozenAlgoritme = new JLabel("<html>Gekozen algoritme<br>ALGORITME</html>", CENTER);
 		huidigInpakProces = new JLabel("Huidig inpakproces", CENTER);
 
-		logo = new JPanel() {
-
-			BufferedImage logo = loadImage();
-
-			private BufferedImage loadImage() {
-				BufferedImage result = null;
-				try {
-					result = ImageIO.read(new File("img/logo.jpg"));
-				}
-				catch (IOException ie) {
-					System.out.println("Unable to load papaya image");
-				}
-				return result;
-			}
-
-			@Override
-			protected void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				if (logo == null) return;
-				g.drawImage(logo, 0, 0, getWidth(), getHeight(), null);
-			}
-		};
+		logo = new Logo();
 
 		doos = new JPanel() { // TODO Teken een doos
 			int getal = 9454;
@@ -102,14 +77,16 @@ public class InpakPanel extends JPanel implements ActionListener {
 		};
 
 		model = new DefaultTableModel();
-		table = new JTable(model) {
-			@Override
-			public boolean isCellEditable(int r, int c) {
-				return false;
-			}
-		};
+		table = new ReadonlyTable(model);
 
 		table.getTableHeader().setReorderingAllowed(false);
+		tableScroller = new JScrollPane() {
+			@Override
+			public Dimension getPreferredSize() {
+				return new Dimension(150, 450);
+			}
+		};
+		tableScroller.setViewportView(table);
 
 		// Headers
 		String[] headers = new String[] {"Doosnr", "Producten", "Ordernr"};
@@ -121,32 +98,24 @@ public class InpakPanel extends JPanel implements ActionListener {
 		model.addRow(new Object[] {"9452", "Product 1, Product 2, Product 3", "224466"});
 		model.addRow(new Object[] {"9453", "Product 4", "446678"});
 
-		TableColumnModel cmodel = table.getColumnModel();
-		cmodel.getColumn(0).setPreferredWidth(20);
-		cmodel.getColumn(1).setPreferredWidth(80);
-		cmodel.getColumn(2).setPreferredWidth(20);
-
-		tableScroller = new JScrollPane() {
-			@Override
-			public Dimension getPreferredSize() {
-				return new Dimension(150, 450);
-			}
-		};
-		tableScroller.setViewportView(table);
-
 		add(ingepakteDozen, gbc);
+
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridheight = 4;
 		add(logo, gbc);
+
 		gbc.gridx++;
 		gbc.gridheight = 2;
 		add(gekozenAlgoritme, gbc);
+
 		gbc.gridy += 2;
 		gbc.gridheight = 1;
 		add(huidigInpakProces, gbc);
+
 		gbc.gridy++;
 		add(doos, gbc);
+
 		gbc.gridx++;
 		gbc.gridy = 1;
 		gbc.gridheight = 4;

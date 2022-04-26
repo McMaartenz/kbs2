@@ -36,7 +36,6 @@ class Display extends JFrame {
         add(keuzeMenu);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        pack();
         setVisible(true);
     }
 
