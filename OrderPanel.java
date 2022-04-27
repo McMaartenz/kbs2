@@ -3,8 +3,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 import static javax.swing.SwingConstants.CENTER;
+import static javax.swing.SwingConstants.SOUTH;
 
 public class OrderPanel extends JPanel implements ActionListener
 {
@@ -80,7 +82,35 @@ public class OrderPanel extends JPanel implements ActionListener
 				g.drawLine(CELL_SIZE, 1, CELL_SIZE, CELL_SIZE - 1);
 				g.drawLine(1, CELL_SIZE, CELL_SIZE - 1, CELL_SIZE);
 
-				// TODO: Teken robot plaatje
+				if (Robot.plaatje == null)
+				{
+					return;
+				}
+
+				Robot robot1 = parent.getRobot(1);
+				Robot robot2 = parent.getRobot(2);
+
+				g.setColor(Color.RED);
+				g.setFont(new Font("Arial", Font.BOLD, CELL_SIZE));
+				if (robot1 != null)
+				{
+					/* TODO: ROBOT LOCATIE MOCK */
+					robot1.verplaatsNaar(new Point(2, 2));
+					Point robot1Pos = robot1.getPositie();
+					Point tekenPos = new Point(CELL_SIZE * (robot1Pos.x + 1), CELL_SIZE * (robot1Pos.y + 1));
+					g.drawImage(Robot.plaatje, tekenPos.x, tekenPos.y, CELL_SIZE, CELL_SIZE, null);
+					g.drawString("1", tekenPos.x + CELL_SIZE / 2 - 2, tekenPos.y + CELL_SIZE / 2 + 3);
+				}
+
+				if (robot2 != null)
+				{
+					/* TODO: ROBOT LOCATIE MOCK */
+					robot2.verplaatsNaar(new Point(4, 4));
+					Point robot2Pos = robot2.getPositie();
+					Point tekenPos = new Point(CELL_SIZE * (robot2Pos.x + 1), CELL_SIZE * (robot2Pos.y + 1));
+					g.drawImage(Robot.plaatje, tekenPos.x, tekenPos.y, CELL_SIZE, CELL_SIZE, null);
+					g.drawString("2", tekenPos.x + CELL_SIZE / 2 - 2, tekenPos.y + CELL_SIZE / 2 + 3);
+				}
 			}
 		};
 

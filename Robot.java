@@ -1,6 +1,6 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.net.ConnectException;
-import java.rmi.ConnectIOException;
 
 import arduino.Arduino;
 
@@ -8,6 +8,7 @@ public class Robot
 {
 	private Point positie;
 	public Arduino serial;
+	public static final BufferedImage plaatje = Plaatje.laad("img/arduino.png");
 
 	public Robot()
 	{

@@ -44,22 +44,31 @@ class Display extends JFrame
 
 		add(keuzeMenu);
 
-		try
+		new Thread(()->
 		{
-			robot1 = new Robot(Port.COM3);
-		}
-		catch (ConnectException ce)
+			try
+			{
+				robot1 = new Robot(Port.COM3);
+			}
+			catch (ConnectException ce)
+			{
+				robot1 = new Robot();
+				JOptionPane.showMessageDialog(this, ce, "Port connectie fout", JOptionPane.ERROR_MESSAGE);
+			}
+		}).start();
+
+		new Thread(() ->
 		{
-			JOptionPane.showMessageDialog(this, ce, "Port connectie fout", JOptionPane.ERROR_MESSAGE);
-		}
-		try
-		{
-			robot2 = new Robot(Port.COM4);
-		}
-		catch (ConnectException ce)
-		{
-			JOptionPane.showMessageDialog(this, ce, "Port connectie fout", JOptionPane.ERROR_MESSAGE);
-		}
+			try
+			{
+				robot2 = new Robot(Port.COM4);
+			}
+			catch (ConnectException ce)
+			{
+				robot2 = new Robot();
+				JOptionPane.showMessageDialog(this, ce, "Port connectie fout", JOptionPane.ERROR_MESSAGE);
+			}
+		}).start();
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
@@ -73,5 +82,21 @@ class Display extends JFrame
 	public void switchTab(Tab newTab)
 	{
 		keuzeMenu.setSelectedIndex(newTab.ordinal());
+	}
+
+	public Robot getRobot(int n)
+	{
+		if (n == 1)
+		{
+			return robot1;
+		}
+		else if (n == 2)
+		{
+			return robot2;
+		}
+		else
+		{
+			return null;
+		}
 	}
 }
