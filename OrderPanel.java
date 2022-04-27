@@ -217,7 +217,6 @@ public class OrderPanel extends JPanel implements ActionListener
 			{
 				Selectie selectie = new Selectie(Selectie.Optie.DISPOSED);
 				new AlgoritmeSelectie(parent, "Selecteer een algoritme", true, selectie);
-				// TODO: Doe iets met selectie
 				if (selectie.optie != Selectie.Optie.DISPOSED)
 				{
 					Display parent = (Display)this.parent;

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="layout changes">
+    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="Gekozen algoritme updatet wanneer knop &quot;stuur naar inpakmachine&quot; is ingedrukt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgoritmeSelectie.java" beforeDir="false" afterPath="$PROJECT_DIR$/AlgoritmeSelectie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/Display.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InpakPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/InpakPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Selectie.java" beforeDir="false" afterPath="$PROJECT_DIR$/Selectie.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651061753262</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Gekozen algoritme updatet wanneer knop &quot;stuur naar inpakmachine&quot; is ingedrukt">
+      <created>1651079788444</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1651079788444</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -306,6 +310,7 @@
     <MESSAGE value="todo @ Display.java" />
     <MESSAGE value="arduino.jar update: geen alertbox, portselector systeem" />
     <MESSAGE value="layout changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="layout changes" />
+    <MESSAGE value="Gekozen algoritme updatet wanneer knop &quot;stuur naar inpakmachine&quot; is ingedrukt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gekozen algoritme updatet wanneer knop &quot;stuur naar inpakmachine&quot; is ingedrukt" />
   </component>
 </project>

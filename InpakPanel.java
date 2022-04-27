@@ -53,7 +53,7 @@ public class InpakPanel extends JPanel implements ActionListener
 		logo = new Logo();
 
 		doos = new JPanel()
-		{ // TODO Teken een doos
+		{
 			int getal = 9454;
 
 			@Override
@@ -151,7 +151,6 @@ public class InpakPanel extends JPanel implements ActionListener
 				AlgoritmeSelectie as = new AlgoritmeSelectie(parent, "Selecteer een algoritme", true, selectie);
 				System.out.println("Selectie: " + selectie.optie);
 				setAlgoritme(selectie);
-				// TODO: if logica baseerd op selectie
 			}
 		}
 	}
