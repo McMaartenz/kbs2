@@ -44,31 +44,71 @@ class Display extends JFrame
 
 		add(keuzeMenu);
 
-		// TODO: selecteer een port als connectie faalt met mogelijkheden: OK/Cancel
+		Port.updatePorten();
 
 		new Thread(()->
 		{
+			Port gewenstePort;
 			try
 			{
-				robot1 = new Robot(Port.COM3);
+				gewenstePort = new Port(Port.porten[0]);
 			}
-			catch (ConnectException ce)
+			catch (ArrayIndexOutOfBoundsException ae)
 			{
-				robot1 = new Robot();
-				JOptionPane.showMessageDialog(this, ce, "Port connectie fout", JOptionPane.ERROR_MESSAGE);
+				gewenstePort = new Port(-1);
+			}
+
+			boolean connected = false;
+			while (!connected)
+			{
+				try
+				{
+					robot1 = new Robot(gewenstePort);
+					connected = true;
+				}
+				catch (ConnectException ce)
+				{
+					gewenstePort = PortSelector.PortSelector(this, gewenstePort);
+				}
+
+				if (gewenstePort == null)
+				{
+					robot1 = new Robot();
+					break;
+				}
 			}
 		}).start();
 
-		new Thread(() ->
+		new Thread(()->
 		{
+			Port gewenstePort;
 			try
 			{
-				robot2 = new Robot(Port.COM4);
+				gewenstePort = new Port(Port.porten[0]);
 			}
-			catch (ConnectException ce)
+			catch (ArrayIndexOutOfBoundsException ae)
 			{
-				robot2 = new Robot();
-				JOptionPane.showMessageDialog(this, ce, "Port connectie fout", JOptionPane.ERROR_MESSAGE);
+				gewenstePort = new Port(-1);
+			}
+
+			boolean connected = false;
+			while (!connected)
+			{
+				try
+				{
+					robot2 = new Robot(gewenstePort);
+					connected = true;
+				}
+				catch (ConnectException ce)
+				{
+					gewenstePort = PortSelector.PortSelector(this, gewenstePort);
+				}
+
+				if (gewenstePort == null)
+				{
+					robot2 = new Robot();
+					break;
+				}
 			}
 		}).start();
 

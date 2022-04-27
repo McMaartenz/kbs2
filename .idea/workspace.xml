@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="Robotveld af">
+    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="todo @ Display.java">
+      <change afterPath="$PROJECT_DIR$/PortSelector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/Display.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Port.java" beforeDir="false" afterPath="$PROJECT_DIR$/Port.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/arduino.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/arduino.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651046703545</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="todo @ Display.java">
+      <created>1651048641667</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1651048641667</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -278,6 +289,7 @@
     <MESSAGE value="Robotmap nummert, robot class met COM port class" />
     <MESSAGE value="Klant tab heeft geen grote knoppen meer" />
     <MESSAGE value="Robotveld af" />
-    <option name="LAST_COMMIT_MESSAGE" value="Robotveld af" />
+    <MESSAGE value="todo @ Display.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="todo @ Display.java" />
   </component>
 </project>
