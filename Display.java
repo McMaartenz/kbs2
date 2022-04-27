@@ -44,6 +44,8 @@ class Display extends JFrame
 
 		add(keuzeMenu);
 
+		// TODO: selecteer een port als connectie faalt met mogelijkheden: OK/Cancel
+
 		new Thread(()->
 		{
 			try
