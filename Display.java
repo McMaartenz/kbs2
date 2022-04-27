@@ -1,5 +1,3 @@
-import arduino.Arduino;
-
 import javax.swing.*;
 import java.awt.*;
 import java.net.ConnectException;
@@ -140,5 +138,10 @@ class Display extends JFrame
 		{
 			return null;
 		}
+	}
+
+	public Runnable setAlgoritme(Selectie selectie)
+	{
+		return () -> ((InpakPanel)inpakPanel).setAlgoritme(selectie);
 	}
 }

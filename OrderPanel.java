@@ -3,10 +3,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
 import static javax.swing.SwingConstants.CENTER;
-import static javax.swing.SwingConstants.SOUTH;
 
 public class OrderPanel extends JPanel implements ActionListener
 {
@@ -222,7 +220,9 @@ public class OrderPanel extends JPanel implements ActionListener
 				// TODO: Doe iets met selectie
 				if (selectie.optie != Selectie.Optie.DISPOSED)
 				{
-					((Display) parent).switchTab(Tab.INPAK_TAB);
+					Display parent = (Display)this.parent;
+					parent.switchTab(Tab.INPAK_TAB);
+					parent.setAlgoritme(selectie).run();
 				}
 			}
 		}

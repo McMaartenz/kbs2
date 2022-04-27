@@ -87,6 +87,7 @@ public class AlgoritmeSelectie extends JDialog implements ActionListener
 			}
 		});
 
+		//TODO: aantal geschatte dozen op basis van gekozen algoritme
 		algoritme = new JLabel("Algoritme: (Aantal geschatte dozen: 0)", CENTER);
 		online = new JLabel("<html><b>Online:</b></html>");
 		offline = new JLabel("<html><b>Offline:</b></html>");

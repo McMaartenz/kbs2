@@ -24,6 +24,7 @@ public class InpakPanel extends JPanel implements ActionListener
 	private DefaultTableModel model;
 
 	private JButton openAlgoritmeSelectie;
+	private Selectie algoritme;
 
 	public InpakPanel(Display parent)
 	{
@@ -43,8 +44,10 @@ public class InpakPanel extends JPanel implements ActionListener
 			gbc.fill = GridBagConstraints.BOTH;
 		}
 
+		algoritme = new Selectie(Selectie.Optie.BEST_FIT);
+
 		ingepakteDozen = new JLabel("Ingepakte dozen", CENTER);
-		gekozenAlgoritme = new JLabel("<html>Gekozen algoritme<br>ALGORITME</html>", CENTER);
+		gekozenAlgoritme = new JLabel("<html>Gekozen algoritme<br>" + algoritme + "</html>", CENTER);
 		huidigInpakProces = new JLabel("Huidig inpakproces", CENTER);
 
 		logo = new Logo();
@@ -147,8 +150,16 @@ public class InpakPanel extends JPanel implements ActionListener
 				Selectie selectie = new Selectie(Selectie.Optie.DISPOSED);
 				AlgoritmeSelectie as = new AlgoritmeSelectie(parent, "Selecteer een algoritme", true, selectie);
 				System.out.println("Selectie: " + selectie.optie);
+				setAlgoritme(selectie);
 				// TODO: if logica baseerd op selectie
 			}
 		}
+	}
+
+	public void setAlgoritme(Selectie algoritme)
+	{
+		this.algoritme = algoritme;
+
+		gekozenAlgoritme.setText("<html>Gekozen algoritme<br>" + algoritme + "</html>");
 	}
 }
