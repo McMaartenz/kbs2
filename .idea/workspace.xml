@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="todo @ Display.java">
-      <change afterPath="$PROJECT_DIR$/PortSelector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/README.md" afterDir="false" />
+    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="arduino.jar update: geen alertbox, portselector systeem">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/Display.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Port.java" beforeDir="false" afterPath="$PROJECT_DIR$/Port.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/arduino.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/arduino.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InpakPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/InpakPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651048641667</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="arduino.jar update: geen alertbox, portselector systeem">
+      <created>1651060914097</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1651060914097</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -290,6 +294,7 @@
     <MESSAGE value="Klant tab heeft geen grote knoppen meer" />
     <MESSAGE value="Robotveld af" />
     <MESSAGE value="todo @ Display.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="todo @ Display.java" />
+    <MESSAGE value="arduino.jar update: geen alertbox, portselector systeem" />
+    <option name="LAST_COMMIT_MESSAGE" value="arduino.jar update: geen alertbox, portselector systeem" />
   </component>
 </project>

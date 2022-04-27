@@ -195,6 +195,7 @@ public class OrderPanel extends JPanel implements ActionListener
 
 		gbc.gridx++;
 		gbc.gridy = 0;
+		gbc.weightx = 0.0;
 		add(logo, gbc);
 
 		gbc.gridy++;

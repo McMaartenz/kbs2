@@ -38,7 +38,7 @@ public class InpakPanel extends JPanel implements ActionListener
 			gbc.ipadx = 0;
 			gbc.ipady = 0;
 			gbc.weightx = 1.0;
-			gbc.weighty = 1.0;
+			gbc.weighty = 0.0;
 			gbc.gridheight = 1;
 			gbc.fill = GridBagConstraints.BOTH;
 		}
@@ -108,6 +108,8 @@ public class InpakPanel extends JPanel implements ActionListener
 
 		add(ingepakteDozen, gbc);
 
+		gbc.weightx = 0.5;
+		gbc.weighty = 1.0;
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridheight = 4;
@@ -127,6 +129,7 @@ public class InpakPanel extends JPanel implements ActionListener
 		gbc.gridx++;
 		gbc.gridy = 1;
 		gbc.gridheight = 4;
+		gbc.weightx = 1.0;
 		add(tableScroller, gbc);
 
 		setVisible(true);
