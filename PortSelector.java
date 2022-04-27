@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class PortSelector
 {
-	public static Port PortSelector(JFrame parent, Port port)
+	public static Port keuze(JFrame parent, Port port)
 	{
 		Port.updatePorten();
 		Object[] comPorten = Port.porten;

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="Gekozen algoritme updatet wanneer knop &quot;stuur naar inpakmachine&quot; is ingedrukt">
+    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="Onnodige TODO's">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InpakPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/InpakPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/Display.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PortSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/PortSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Selectie.java" beforeDir="false" afterPath="$PROJECT_DIR$/Selectie.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +47,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="28KaXLDgLeihREwQNwtkV1YiadB" />
   <component name="ProjectLevelVcsManager">
@@ -64,6 +65,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3586207" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="advanced.settings" />
   </component>
   <component name="RecentsManager">
@@ -276,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651079788444</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Onnodige TODO's">
+      <created>1651079931742</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1651079931742</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -311,6 +320,7 @@
     <MESSAGE value="arduino.jar update: geen alertbox, portselector systeem" />
     <MESSAGE value="layout changes" />
     <MESSAGE value="Gekozen algoritme updatet wanneer knop &quot;stuur naar inpakmachine&quot; is ingedrukt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gekozen algoritme updatet wanneer knop &quot;stuur naar inpakmachine&quot; is ingedrukt" />
+    <MESSAGE value="Onnodige TODO's" />
+    <option name="LAST_COMMIT_MESSAGE" value="Onnodige TODO's" />
   </component>
 </project>

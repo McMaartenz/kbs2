@@ -66,7 +66,7 @@ class Display extends JFrame
 				}
 				catch (ConnectException ce)
 				{
-					gewenstePort = PortSelector.PortSelector(this, gewenstePort);
+					gewenstePort = PortSelector.keuze(this, gewenstePort);
 				}
 
 				if (gewenstePort == null)
@@ -99,7 +99,7 @@ class Display extends JFrame
 				}
 				catch (ConnectException ce)
 				{
-					gewenstePort = PortSelector.PortSelector(this, gewenstePort);
+					gewenstePort = PortSelector.keuze(this, gewenstePort);
 				}
 
 				if (gewenstePort == null)
