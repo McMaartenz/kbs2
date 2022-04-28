@@ -17,13 +17,15 @@ public class DemoPanel extends JPanel implements ActionListener
 
 	private JButton roodToggle;
 	private JSlider potmeterSlider;
+	private JTextArea requestQueueText;
+	private JTextArea responseQueueText;
 
 	public DemoPanel(Display parent)
 	{
 		this.parent = parent;
 		robot = parent.getRobot(1);
 
-		setLayout(new GridLayout(3, 1));
+		setLayout(new GridLayout(3, 2));
 
 		potmeterSlider = new JSlider(0, 100);
 
@@ -34,8 +36,13 @@ public class DemoPanel extends JPanel implements ActionListener
 		requestQueue = new LinkedList<>();
 		serialIn = new String[5];
 
+		requestQueueText = new JTextArea();
+		responseQueueText = new JTextArea();
+
 		add(potmeterSlider);
 		add(roodToggle);
+		add(requestQueueText);
+		add(responseQueueText);
 
 		Thread requestQueueThread = new Thread(this::requestQueueHandler);
 		requestQueueThread.start();
@@ -77,7 +84,14 @@ public class DemoPanel extends JPanel implements ActionListener
 		{
 			if (!requestQueue.isEmpty())
 			{
-				String totaalrequest = "";
+				String[] requests = requestQueue.toArray(String[]::new);
+				StringBuilder text = new StringBuilder("Request queue:\n");
+				for (int i = 0; i < requests.length; i++)
+				{
+					text.append(requests[i]).append("\n");
+				}
+				requestQueueText.setText(text.toString());
+				StringBuilder totaalrequest = new StringBuilder();
 				for (int i = 0; i < 5; i++)
 				{
 					if (requestQueue.isEmpty())
@@ -85,19 +99,20 @@ public class DemoPanel extends JPanel implements ActionListener
 						break;
 					}
 					String request = requestQueue.poll();
-					System.out.println("Stuur " + request + " request (Event queue size: " + requestQueue.size() + ")");
-					totaalrequest += request + ",";
+					totaalrequest.append(request).append(",");
 				}
-				robot.serial.serialWrite(totaalrequest);
+				robot.serial.serialWrite(totaalrequest.toString());
 			}
+			StringBuilder text = new StringBuilder("Response queue:\n");
 			for(int i = 0; i < 5; i++)
 			{
 				serialIn[i] = robot.serial.serialRead();
 				if (serialIn[i].length() > 0)
 				{
-					System.out.println("Get van arduino: " + serialIn[i]);
+					text.append(serialIn[i]).append("\n");
 				}
 			}
+			responseQueueText.setText(text.toString());
 		}
 	}
 
