@@ -25,7 +25,7 @@ public class DemoPanel extends JPanel implements ActionListener
 		this.parent = parent;
 		robot = parent.getRobot(1);
 
-		setLayout(new GridLayout(3, 2));
+		setLayout(new GridLayout(2, 2));
 
 		potmeterSlider = new JSlider(0, 100);
 
