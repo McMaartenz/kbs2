@@ -8,17 +8,23 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  int x = map(analogRead(A0), 0, 1023, 1, 100);
+  int x = map(analogRead(A0), 0, 1023, 0, 100);
 
-  if (Serial.available() > 0) {
+  if (Serial.available() > 0)
+  {
     String b = Serial.readString();
     b.trim();
-    if(b == "rood") {
+    if(b == "roodaan")
+    {
       digitalWrite(13, HIGH);
     }
-    else {
+    else if (b == "rooduit")
+    {
       digitalWrite(13, LOW);
     }
+    else if(b == "pot")
+    {
+      Serial.println(String(x) + ",");
+    }
   }
-  Serial.println(x);
 }

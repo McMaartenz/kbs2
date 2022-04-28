@@ -7,14 +7,14 @@ import java.lang.reflect.InvocationTargetException;
 public class DemoPanel extends JPanel implements ActionListener
 {
 	private JFrame parent;
-	private Robot robot1;
+	private Robot robot;
 
 	private JSlider potmeterSlider;
 
 	public DemoPanel(Display parent)
 	{
 		this.parent = parent;
-		robot1 = parent.getRobot(1);
+		robot = parent.getRobot(1);
 
 		setLayout(new GridLayout(3, 1));
 
@@ -28,21 +28,40 @@ public class DemoPanel extends JPanel implements ActionListener
 
 	public void potmeterThread()
 	{
+		Display display = (Display) parent;
+		while (true)
+		{
+			robot = display.getRobot(1);
+			if (robot != null)
+			{
+				if (robot.serial != null && robot.ok)
+				{
+					break;
+				}
+			}
+			robot = display.getRobot(2);
+			if (robot != null)
+			{
+				if (robot.serial != null && robot.ok)
+				{
+					break;
+				}
+			}
+			Thread.onSpinWait();
+		}
+
+		System.out.println("Connected");
+
 		while (true)
 		{
 			String in;
-			if (robot1 == null)
-			{
-				robot1 = ((Display)parent).getRobot(1);
-				if (robot1 == null)
-				{
-					Thread.onSpinWait();
-					continue;
-				}
-			}
 
-			in = robot1.serial.serialRead();
-			String[] inlijst = in.split("\n");
+
+			robot.serial.serialWrite("pot\n");
+			System.out.println("Stuur POT request");
+			in = robot.serial.serialRead();
+			System.out.println("Terug: " + in);
+			String[] inlijst = in.split(",");
 
 			try
 			{
@@ -52,18 +71,19 @@ public class DemoPanel extends JPanel implements ActionListener
 					int i = 0;
 					while (!set)
 					{
+						if (i >= inlijst.length)
+						{
+							break;
+						}
 						try
 						{
-							potmeterSlider.setValue(Integer.parseInt(inlijst[i++]));
+							//potmeterSlider.setValue(Integer.parseInt(inlijst[i++]));
 							System.out.println(potmeterSlider.getValue());
 							set = true;
 						}
-						catch (NumberFormatException | ArrayIndexOutOfBoundsException e)
+						catch (NumberFormatException ne)
 						{
-							if (e instanceof ArrayIndexOutOfBoundsException)
-							{
-								set = true;
-							}
+							ne.printStackTrace();
 						}
 					}
 				});

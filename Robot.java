@@ -9,6 +9,7 @@ public class Robot
 	private Point positie;
 	public Arduino serial;
 	public int robotNummer;
+	public boolean ok = false;
 	public static final BufferedImage plaatje = Plaatje.laad("img/arduino.png");
 
 	public Robot(int robotNummer)
@@ -33,6 +34,7 @@ public class Robot
 	{
 		serial = new Arduino(String.valueOf(port));
 		boolean ok = serial.openConnection();
+		this.ok = ok;
 		if (!ok)
 		{
 			throw new ConnectException("Robot " + robotNummer + ": Cannot connect to port " + port + ": not available");
