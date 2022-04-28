@@ -11,6 +11,7 @@ class Display extends JFrame
 	private JPanel orderPanel;
 	private JPanel klantPanel;
 	private JPanel inpakPanel;
+	private JPanel demoPanel;
 
 	private Robot robot1;
 	private Robot robot2;
@@ -34,11 +35,13 @@ class Display extends JFrame
 		orderPanel = new OrderPanel(this);
 		klantPanel = new KlantPanel(this);
 		inpakPanel = new InpakPanel(this);
+		demoPanel = new DemoPanel(this);
 
 		keuzeMenu = new JTabbedPane();
 		keuzeMenu.addTab("Order", orderPanel);
 		keuzeMenu.addTab("Klant", klantPanel);
 		keuzeMenu.addTab("Inpak", inpakPanel);
+		keuzeMenu.addTab("Demo", demoPanel);
 
 		add(keuzeMenu);
 
