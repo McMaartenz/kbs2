@@ -36,6 +36,7 @@ public class DemoPanel extends JPanel implements ActionListener
 			{
 				if (robot.serial != null && robot.ok)
 				{
+					System.out.println("Robot 1");
 					break;
 				}
 			}
@@ -44,6 +45,7 @@ public class DemoPanel extends JPanel implements ActionListener
 			{
 				if (robot.serial != null && robot.ok)
 				{
+					System.out.println("Robot 2");
 					break;
 				}
 			}
@@ -54,36 +56,45 @@ public class DemoPanel extends JPanel implements ActionListener
 
 		while (true)
 		{
-			String in;
+			String in = "";
 
 
 			robot.serial.serialWrite("pot\n");
 			System.out.println("Stuur POT request");
-			in = robot.serial.serialRead();
-			System.out.println("Terug: " + in);
-			String[] inlijst = in.split(",");
+
+			String[] inlijst = null;
+			int tries = 0;
+			while (in.length() == 0 && tries++ <= 10)
+			{
+				in = robot.serial.serialRead();
+
+				System.out.println("Terug: '" + in + "'");
+				inlijst = in.split(",");
+				Thread.onSpinWait();
+			}
 
 			try
 			{
+				String[] finalInlijst = inlijst;
 				SwingUtilities.invokeAndWait(() ->
 				{
 					boolean set = false;
 					int i = 0;
 					while (!set)
 					{
-						if (i >= inlijst.length)
+						if (i >= finalInlijst.length)
 						{
 							break;
 						}
 						try
 						{
-							//potmeterSlider.setValue(Integer.parseInt(inlijst[i++]));
+							potmeterSlider.setValue(Integer.parseInt(finalInlijst[i++]));
 							System.out.println(potmeterSlider.getValue());
 							set = true;
 						}
 						catch (NumberFormatException ne)
 						{
-							ne.printStackTrace();
+							System.out.println("fout");
 						}
 					}
 				});
