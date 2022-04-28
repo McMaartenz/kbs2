@@ -215,13 +215,22 @@ public class OrderPanel extends JPanel implements ActionListener
 			JButton srcBtn = (JButton) src;
 			if (srcBtn == ok)
 			{
+				int geselecteerdeOrder = orderTable.getSelectedRow();
+				if (geselecteerdeOrder == -1)
+				{
+					JOptionPane.showMessageDialog(parent, "Er is geen ordernummer geselecteerd uit de tabel. Selecteer een regel om verder te gaan.", "Kan niet versturen", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Object orderNummer = orderTable.getValueAt(geselecteerdeOrder, 0);
+
 				Selectie selectie = new Selectie(Selectie.Optie.DISPOSED);
 				new AlgoritmeSelectie(parent, "Selecteer een algoritme", true, selectie);
 				if (selectie.optie != Selectie.Optie.DISPOSED)
 				{
 					Display parent = (Display)this.parent;
 					parent.switchTab(Tab.INPAK_TAB);
-					parent.setAlgoritme(selectie).run();
+					parent.setAlgoritme(selectie, orderNummer).run();
 				}
 			}
 		}

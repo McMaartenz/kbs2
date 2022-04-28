@@ -8,17 +8,20 @@ public class Robot
 {
 	private Point positie;
 	public Arduino serial;
+	public int robotNummer;
+	public boolean ok = false;
 	public static final BufferedImage plaatje = Plaatje.laad("img/arduino.png");
 
-	public Robot()
+	public Robot(int robotNummer)
 	{
 		serial = null;
 		positie = new Point(0, 0);
+		this.robotNummer = robotNummer;
 	}
 
-	public Robot(Port port) throws ConnectException
+	public Robot(Port port, int robotNummer) throws ConnectException
 	{
-		this();
+		this(robotNummer);
 		initCom(port);
 	}
 
@@ -29,13 +32,14 @@ public class Robot
 
 	public void initCom(Port port) throws ConnectException
 	{
-		serial = new Arduino(String.valueOf(port));
+		serial = new Arduino(String.valueOf(port), 115200);
 		boolean ok = serial.openConnection();
+		this.ok = ok;
 		if (!ok)
 		{
-			throw new ConnectException("Cannot connect to port " + port + ": not available");
+			throw new ConnectException("Robot " + robotNummer + ": Cannot connect to port " + port + ": not available");
 		}
-		System.out.println("Opened serial connection to port " + port);
+		System.out.println("Robot " + robotNummer + ": Opened serial connection to port " + port);
 	}
 
 	public Point getPositie()

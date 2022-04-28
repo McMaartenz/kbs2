@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="hernoeming">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="layout 3,2 -&gt; 2,2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,22 +27,22 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/OrderPanel.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/KlantPanel.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Display.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Robot.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ReadonlyTable.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Main.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Selectie.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Database.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/KlantPanel.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/AlgoritmeSelectie.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OrderPanel.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/Tab.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Database.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="28KaXLDgLeihREwQNwtkV1YiadB" />
   <component name="ProjectLevelVcsManager">
@@ -57,7 +55,6 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/out/production/kbs2/img" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -282,14 +279,70 @@
       <option name="project" value="LOCAL" />
       <updated>1651079931742</updated>
     </task>
-    <task id="LOCAL-00027" summary="hernoeming">
-      <created>1651080092305</created>
+    <task id="LOCAL-00027" summary="Geen porten dialog">
+      <created>1651138985056</created>
       <option name="number" value="00027" />
       <option name="presentableId" value="LOCAL-00027" />
       <option name="project" value="LOCAL" />
-      <updated>1651080092305</updated>
+      <updated>1651138985056</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Robotnummering">
+      <created>1651142306238</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1651142306238</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Demo basis">
+      <created>1651143566847</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1651143566847</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Demo pot polling">
+      <created>1651144951441</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1651144951441</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Demo pot polling compleet">
+      <created>1651145444786</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1651145444786</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Hogere baud, meerdere requests per seconde">
+      <created>1651153025024</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1651153025025</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Layout + request/response lijsten">
+      <created>1651154393089</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1651154393089</updated>
+    </task>
+    <task id="LOCAL-00034" summary="run config">
+      <created>1651154439106</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1651154439106</updated>
+    </task>
+    <task id="LOCAL-00035" summary="layout 3,2 -&gt; 2,2">
+      <created>1651154524442</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1651154524442</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -302,13 +355,9 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Intellij conversion" />
-    <MESSAGE value="Verdelen vanuit Display &gt; JPanel klassen" />
-    <MESSAGE value="Order &amp; inpak paneel basis" />
-    <MESSAGE value="inpak paneel : algoritme selectie" />
-    <MESSAGE value="TODO" />
     <MESSAGE value="papaya, inpak layout" />
     <MESSAGE value="Inpak doos af + tabel ingevuld" />
     <MESSAGE value="Order tab af (robotmap moet nog)" />
@@ -325,7 +374,15 @@
     <MESSAGE value="layout changes" />
     <MESSAGE value="Gekozen algoritme updatet wanneer knop &quot;stuur naar inpakmachine&quot; is ingedrukt" />
     <MESSAGE value="Onnodige TODO's" />
-    <MESSAGE value="hernoeming" />
-    <option name="LAST_COMMIT_MESSAGE" value="hernoeming" />
+    <MESSAGE value="Geen porten dialog" />
+    <MESSAGE value="Robotnummering" />
+    <MESSAGE value="Demo basis" />
+    <MESSAGE value="Demo pot polling" />
+    <MESSAGE value="Demo pot polling compleet" />
+    <MESSAGE value="Hogere baud, meerdere requests per seconde" />
+    <MESSAGE value="Layout + request/response lijsten" />
+    <MESSAGE value="run config" />
+    <MESSAGE value="layout 3,2 -&gt; 2,2" />
+    <option name="LAST_COMMIT_MESSAGE" value="layout 3,2 -&gt; 2,2" />
   </component>
 </project>

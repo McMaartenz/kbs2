@@ -11,6 +11,7 @@ class Display extends JFrame
 	private JPanel orderPanel;
 	private JPanel klantPanel;
 	private JPanel inpakPanel;
+	private JPanel demoPanel;
 
 	private Robot robot1;
 	private Robot robot2;
@@ -34,11 +35,13 @@ class Display extends JFrame
 		orderPanel = new OrderPanel(this);
 		klantPanel = new KlantPanel(this);
 		inpakPanel = new InpakPanel(this);
+		demoPanel = new DemoPanel(this);
 
 		keuzeMenu = new JTabbedPane();
 		keuzeMenu.addTab("Order", orderPanel);
 		keuzeMenu.addTab("Klant", klantPanel);
 		keuzeMenu.addTab("Inpak", inpakPanel);
+		keuzeMenu.addTab("Demo", demoPanel);
 
 		add(keuzeMenu);
 
@@ -61,17 +64,17 @@ class Display extends JFrame
 			{
 				try
 				{
-					robot1 = new Robot(gewenstePort);
+					robot1 = new Robot(gewenstePort, 1);
 					connected = true;
 				}
 				catch (ConnectException ce)
 				{
-					gewenstePort = PortSelector.keuze(this, gewenstePort);
+					gewenstePort = PortSelector.keuze(this, gewenstePort, 1);
 				}
 
 				if (gewenstePort == null)
 				{
-					robot1 = new Robot();
+					robot1 = new Robot(1);
 					break;
 				}
 			}
@@ -94,17 +97,17 @@ class Display extends JFrame
 			{
 				try
 				{
-					robot2 = new Robot(gewenstePort);
+					robot2 = new Robot(gewenstePort, 2);
 					connected = true;
 				}
 				catch (ConnectException ce)
 				{
-					gewenstePort = PortSelector.keuze(this, gewenstePort);
+					gewenstePort = PortSelector.keuze(this, gewenstePort, 2);
 				}
 
 				if (gewenstePort == null)
 				{
-					robot2 = new Robot();
+					robot2 = new Robot(2);
 					break;
 				}
 			}
@@ -140,8 +143,8 @@ class Display extends JFrame
 		}
 	}
 
-	public Runnable setAlgoritme(Selectie selectie)
+	public Runnable setAlgoritme(Selectie selectie, Object orderNummer)
 	{
-		return () -> ((InpakPanel)inpakPanel).setAlgoritme(selectie);
+		return () -> ((InpakPanel)inpakPanel).setAlgoritme(selectie, orderNummer);
 	}
 }
