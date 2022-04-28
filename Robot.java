@@ -32,7 +32,7 @@ public class Robot
 
 	public void initCom(Port port) throws ConnectException
 	{
-		serial = new Arduino(String.valueOf(port));
+		serial = new Arduino(String.valueOf(port), 115200);
 		boolean ok = serial.openConnection();
 		this.ok = ok;
 		if (!ok)

@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
@@ -9,6 +11,11 @@ public class DemoPanel extends JPanel implements ActionListener
 	private JFrame parent;
 	private Robot robot;
 
+	private boolean statusLED;
+	private Queue<String> requestQueue;
+	private String[] serialIn;
+
+	private JButton roodToggle;
 	private JSlider potmeterSlider;
 
 	public DemoPanel(Display parent)
@@ -20,13 +27,23 @@ public class DemoPanel extends JPanel implements ActionListener
 
 		potmeterSlider = new JSlider(0, 100);
 
-		add(potmeterSlider);
+		statusLED = true;
+		roodToggle = new JButton("Zet LED uit");
+		roodToggle.addActionListener(this);
 
+		requestQueue = new LinkedList<>();
+		serialIn = new String[5];
+
+		add(potmeterSlider);
+		add(roodToggle);
+
+		Thread requestQueueThread = new Thread(this::requestQueueHandler);
+		requestQueueThread.start();
 		Thread potmeterThread = new Thread(this::potmeterThread);
 		potmeterThread.start();
 	}
 
-	public void potmeterThread()
+	private void wachtOpSerial()
 	{
 		Display display = (Display) parent;
 		while (true)
@@ -51,50 +68,134 @@ public class DemoPanel extends JPanel implements ActionListener
 			}
 			Thread.onSpinWait();
 		}
+	}
 
+	private void requestQueueHandler()
+	{
+		wachtOpSerial();
+		while (true)
+		{
+			if (!requestQueue.isEmpty())
+			{
+				String totaalrequest = "";
+				for (int i = 0; i < 5; i++)
+				{
+					if (requestQueue.isEmpty())
+					{
+						break;
+					}
+					String request = requestQueue.poll();
+					System.out.println("Stuur " + request + " request (Event queue size: " + requestQueue.size() + ")");
+					totaalrequest += request + ",";
+				}
+				robot.serial.serialWrite(totaalrequest);
+			}
+			for(int i = 0; i < 5; i++)
+			{
+				serialIn[i] = robot.serial.serialRead();
+				if (serialIn[i].length() > 0)
+				{
+					System.out.println("Get van arduino: " + serialIn[i]);
+				}
+			}
+		}
+	}
+
+	private void wacht(int millis)
+	{
+		try
+		{
+			Thread.sleep(millis);
+		}
+		catch (InterruptedException ie)
+		{
+			System.out.println("Interrupted: " + ie);
+		}
+	}
+
+	private void toggleLED()
+	{
+		statusLED = !statusLED;
+
+		if (statusLED)
+		{
+			roodToggle.setText("Zet LED uit");
+			requestQueue.add("roodaan");
+		}
+		else
+		{
+			roodToggle.setText("Zet LED aan");
+			requestQueue.add("rooduit");
+		}
+	}
+
+	public static int totalLength(String[] arr)
+	{
+		if (arr == null)
+		{
+			return 0;
+		}
+
+		int totaal = 0;
+		for (int i = 0; i < arr.length; i++)
+		{
+			if (arr[i] == null)
+			{
+				continue;
+			}
+			totaal += arr[i].length();
+		}
+		return totaal;
+	}
+
+	public void potmeterThread()
+	{
+		wachtOpSerial();
 		System.out.println("Connected");
 
 		while (true)
 		{
-			String in = "";
+			requestQueue.add("pot");
 
-
-			robot.serial.serialWrite("pot\n");
-			System.out.println("Stuur POT request");
-
-			String[] inlijst = null;
 			int tries = 0;
-			while (in.length() == 0 && tries++ <= 10)
+			while (totalLength(serialIn) == 0 && tries++ <= 10)
 			{
-				in = robot.serial.serialRead();
-
-				System.out.println("Terug: '" + in + "'");
-				inlijst = in.split(",");
 				Thread.onSpinWait();
+			}
+
+			String[][] responseLijst = new String[serialIn.length][];
+			for (int i = 0; i < serialIn.length; i++)
+			{
+				if (serialIn[i] == null)
+				{
+					responseLijst[i] = new String[0];
+					continue;
+				}
+				responseLijst[i] = serialIn[i].split(",");
 			}
 
 			try
 			{
-				String[] finalInlijst = inlijst;
 				SwingUtilities.invokeAndWait(() ->
 				{
-					boolean set = false;
-					int i = 0;
-					while (!set)
+					for (String[] strings : responseLijst)
 					{
-						if (i >= finalInlijst.length)
+						boolean set = false;
+						int j = 0;
+						while (!set)
 						{
-							break;
-						}
-						try
-						{
-							potmeterSlider.setValue(Integer.parseInt(finalInlijst[i++]));
-							System.out.println(potmeterSlider.getValue());
-							set = true;
-						}
-						catch (NumberFormatException ne)
-						{
-							System.out.println("fout");
+							if (j >= strings.length)
+							{
+								break;
+							}
+							try
+							{
+								potmeterSlider.setValue(Integer.parseInt(strings[j++]));
+								set = true;
+							}
+							catch (NumberFormatException ne)
+							{
+							}
 						}
 					}
 				});
@@ -104,16 +205,7 @@ public class DemoPanel extends JPanel implements ActionListener
 				System.out.println("potmeterThread: ");
 				ie.printStackTrace();
 			}
-
-			try
-			{
-				Thread.sleep(100);
-			}
-			catch (InterruptedException ie)
-			{
-				System.out.println("potmeterThread: ");
-				ie.printStackTrace();
-			}
+			wacht(750);
 		}
 	}
 
@@ -124,9 +216,9 @@ public class DemoPanel extends JPanel implements ActionListener
 		if (src instanceof JButton)
 		{
 			JButton srcBtn = (JButton) src;
-			if (srcBtn == null)
+			if (srcBtn == roodToggle)
 			{
-
+				toggleLED();
 			}
 		}
 	}

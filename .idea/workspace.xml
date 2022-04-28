@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="Demo pot polling">
+    <list default="true" id="be0ec6ee-8281-4fdf-96dd-b3c7b3e1b8ab" name="Changes" comment="Hogere baud, meerdere requests per seconde">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DemoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/DemoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/Robot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arduino/demo/demo.ino" beforeDir="false" afterPath="$PROJECT_DIR$/arduino/demo/demo.ino" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -311,7 +313,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651144951441</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Demo pot polling compleet">
+      <created>1651145444786</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1651145444786</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -327,8 +336,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Intellij conversion" />
-    <MESSAGE value="Verdelen vanuit Display &gt; JPanel klassen" />
     <MESSAGE value="Order &amp; inpak paneel basis" />
     <MESSAGE value="inpak paneel : algoritme selectie" />
     <MESSAGE value="TODO" />
@@ -352,6 +359,8 @@
     <MESSAGE value="Robotnummering" />
     <MESSAGE value="Demo basis" />
     <MESSAGE value="Demo pot polling" />
-    <option name="LAST_COMMIT_MESSAGE" value="Demo pot polling" />
+    <MESSAGE value="Demo pot polling compleet" />
+    <MESSAGE value="Hogere baud, meerdere requests per seconde" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hogere baud, meerdere requests per seconde" />
   </component>
 </project>
