@@ -8,7 +8,6 @@ import static javax.swing.SwingConstants.CENTER;
 
 public class InpakPanel extends JPanel implements ActionListener
 {
-
 	private Database db;
 	private JFrame parent;
 
@@ -23,8 +22,8 @@ public class InpakPanel extends JPanel implements ActionListener
 	private JTable table;
 	private DefaultTableModel model;
 
-	private JButton openAlgoritmeSelectie;
 	private Selectie algoritme;
+	private Object orderNummer;
 
 	public InpakPanel(Display parent)
 	{
@@ -145,19 +144,13 @@ public class InpakPanel extends JPanel implements ActionListener
 		if (src instanceof JButton)
 		{
 			JButton srcBtn = (JButton) src;
-			if (srcBtn == openAlgoritmeSelectie)
-			{
-				Selectie selectie = new Selectie(Selectie.Optie.DISPOSED);
-				AlgoritmeSelectie as = new AlgoritmeSelectie(parent, "Selecteer een algoritme", true, selectie);
-				System.out.println("Selectie: " + selectie.optie);
-				setAlgoritme(selectie);
-			}
 		}
 	}
 
-	public void setAlgoritme(Selectie algoritme)
+	public void setAlgoritme(Selectie algoritme, Object orderNummer)
 	{
 		this.algoritme = algoritme;
+		this.orderNummer = orderNummer;
 
 		gekozenAlgoritme.setText("<html>Gekozen algoritme<br>" + algoritme + "</html>");
 	}

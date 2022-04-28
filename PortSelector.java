@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class PortSelector
 {
-	public static Port keuze(JFrame parent, Port port)
+	public static Port keuze(JFrame parent, Port port, int robotNummer)
 	{
 		Port.updatePorten();
 		Object[] comPorten = Port.porten;
@@ -11,14 +11,14 @@ public class PortSelector
 		if (comPorten.length == 0)
 		{
 			JOptionPane.showMessageDialog(parent, "Kan niet verbinden met COM. Sluit een Arduino aan en herstart het programma.",
-					"Verbindingsfout", JOptionPane.ERROR_MESSAGE);
+					"Verbindingsfout (Robot " + robotNummer + ")", JOptionPane.ERROR_MESSAGE);
 			return null;
 		}
 		else
 		{
 			selectie = JOptionPane.showInputDialog(parent,
 					"Kan niet verbinden op port " + port + ". Probeer opnieuw of annuleer:",
-					"Verbindingsfout",
+					"Verbindingsfout (Robot " + robotNummer + ")",
 					JOptionPane.ERROR_MESSAGE,
 					null,
 					comPorten,
