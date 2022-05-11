@@ -14,18 +14,32 @@ void setup()
   pinMode(13, 0x1);
   pinMode(11, 0x1);
   pinMode(8, 0x1);
+  pinMode(12, 0x1);
+  pinMode(13, 0x1);
+  digitalWrite(12, 0x0);
+  digitalWrite(13, 0x1);
 
   Serial.begin(115200);
 }
 
 void loop()
 {
-  A_beweeg(255, true, 1000);
+  B_beweeg(255, false, 1000);
 
   delay(1000);
-  A_set_brake(true);
+  B_set_brake(true);
   delay(1000);
 }
+
+////// SERIAL INTERFACE ///////////////
+
+int SI_send_packet(int reqid, const char* data)
+{
+  int packetid = 0;
+  return packetid;
+}
+
+////// MOTOR A ////////////////////////
 
 void A_beweeg(int pwm, bool direction, int duratie)
 {
@@ -42,6 +56,23 @@ void A_beweeg(int pwm, bool direction)
   A_set_pwm(pwm);
 }
 
+void A_set_pwm(int value)
+{
+  analogWrite(3, value);
+}
+
+void A_set_direction(bool direction)
+{
+  digitalWrite(12, direction);
+}
+
+void A_set_brake(bool enabled)
+{
+  digitalWrite(9, enabled);
+}
+
+////// MOTOR B ////////////////////////
+
 void B_beweeg(int pwm, bool direction, int duratie)
 {
   B_beweeg(pwm, direction);
@@ -57,29 +88,14 @@ void B_beweeg(int pwm, bool direction)
   B_set_pwm(pwm);
 }
 
-void A_set_pwm(int value)
-{
-  analogWrite(3, value);
-}
-
 void B_set_pwm(int value)
 {
   analogWrite(11, value);
 }
 
-void A_set_direction(bool direction)
-{
-  digitalWrite(12, direction);
-}
-
 void B_set_direction(bool direction)
 {
   digitalWrite(13, direction);
-}
-
-void A_set_brake(bool enabled)
-{
-  digitalWrite(9, enabled);
 }
 
 void B_set_brake(bool enabled)

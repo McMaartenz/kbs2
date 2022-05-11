@@ -13,6 +13,10 @@ void setup()
   pinMode(PIN_B_DIRECTION, OUTPUT);
   pinMode(PIN_B_PWM,       OUTPUT);
   pinMode(PIN_B_BRAKE,     OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(13, OUTPUT);
+  digitalWrite(12, LOW);
+  digitalWrite(13, HIGH);
 
   Serial.begin(115200);
 }
@@ -32,6 +36,26 @@ int SI_send_packet(int reqid, const char* data)
 {
   int packetid = 0;
   return packetid;
+}
+
+void SI_recv_packets()
+{
+  // Put packets into buffer
+}
+
+bool SI_packet_handshake(int packetid)
+{
+  // Whether packet handshake was successful
+}
+
+bool SI_packet_available(int packetid)
+{
+  // Whether packet has been received
+}
+
+const char* SI_get_packet(int packetid)
+{
+  // Return last packet data or null if none was received
 }
 
 ////// MOTOR A ////////////////////////
