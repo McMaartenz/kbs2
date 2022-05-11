@@ -20,13 +20,41 @@ void setup()
 
 void loop()
 {
-  A_set_direction(true);
-  A_set_brake(false);
-  A_set_pwm(100);
-  delay(1000);
+  A_beweeg(255, true, 1000);
 
+  delay(1000);
   A_set_brake(true);
   delay(1000);
+}
+
+void A_beweeg(int pwm, bool direction, int duratie)
+{
+  A_beweeg(pwm, direction);
+  delay(duratie);
+  A_beweeg(0, false);
+}
+
+void A_beweeg(int pwm, bool direction)
+{
+  A_set_brake(true);
+  A_set_direction(direction);
+  A_set_brake(false);
+  A_set_pwm(pwm);
+}
+
+void B_beweeg(int pwm, bool direction, int duratie)
+{
+  B_beweeg(pwm, direction);
+  delay(duratie);
+  B_beweeg(0, false);
+}
+
+void B_beweeg(int pwm, bool direction)
+{
+  B_set_brake(true);
+  B_set_direction(direction);
+  B_set_brake(false);
+  B_set_pwm(pwm);
 }
 
 void A_set_pwm(int value)

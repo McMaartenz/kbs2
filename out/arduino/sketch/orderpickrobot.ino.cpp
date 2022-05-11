@@ -11,17 +11,25 @@
 void setup();
 #line 20 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void loop();
-#line 31 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
-void A_set_pwm(int value);
+#line 29 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void A_beweeg(int pwm, bool direction, int duratie);
 #line 36 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
-void B_set_pwm(int value);
-#line 41 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
-void A_set_direction(bool direction);
-#line 46 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
-void B_set_direction(bool direction);
+void A_beweeg(int pwm, bool direction);
+#line 44 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void B_beweeg(int pwm, bool direction, int duratie);
 #line 51 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void B_beweeg(int pwm, bool direction);
+#line 59 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void A_set_pwm(int value);
+#line 64 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void B_set_pwm(int value);
+#line 69 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void A_set_direction(bool direction);
+#line 74 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void B_set_direction(bool direction);
+#line 79 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void A_set_brake(bool enabled);
-#line 56 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+#line 84 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void B_set_brake(bool enabled);
 #line 8 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void setup()
@@ -38,13 +46,41 @@ void setup()
 
 void loop()
 {
-  A_set_direction(true);
-  A_set_brake(false);
-  A_set_pwm(100);
-  delay(1000);
+  A_beweeg(255, true, 1000);
 
+  delay(1000);
   A_set_brake(true);
   delay(1000);
+}
+
+void A_beweeg(int pwm, bool direction, int duratie)
+{
+  A_beweeg(pwm, direction);
+  delay(duratie);
+  A_beweeg(0, false);
+}
+
+void A_beweeg(int pwm, bool direction)
+{
+  A_set_brake(true);
+  A_set_direction(direction);
+  A_set_brake(false);
+  A_set_pwm(pwm);
+}
+
+void B_beweeg(int pwm, bool direction, int duratie)
+{
+  B_beweeg(pwm, direction);
+  delay(duratie);
+  B_beweeg(0, false);
+}
+
+void B_beweeg(int pwm, bool direction)
+{
+  B_set_brake(true);
+  B_set_direction(direction);
+  B_set_brake(false);
+  B_set_pwm(pwm);
 }
 
 void A_set_pwm(int value)
