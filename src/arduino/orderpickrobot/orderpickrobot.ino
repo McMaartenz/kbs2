@@ -1,32 +1,33 @@
-#define PIN_A_DIRECTION 12
-#define PIN_A_PWM        3
-#define PIN_A_BRAKE      9
-#define PIN_B_DIRECTION 13
-#define PIN_B_PWM       11
-#define PIN_B_BRAKE      8
+#define PIN_X_DIRECTION 12
+#define PIN_X_PWM        3
+#define PIN_X_BRAKE      9
+#define PIN_Y_DIRECTION 13
+#define PIN_Y_PWM       11
+#define PIN_Y_BRAKE      8
+#define LINKS         true
+#define RECHTS       false
+#define OMHOOG        true
+#define OMLAAG       false
+#define MOTOR_PK       255
 
 void setup()
 {
-  pinMode(PIN_A_DIRECTION, OUTPUT);
-  pinMode(PIN_A_PWM,       OUTPUT);
-  pinMode(PIN_A_BRAKE,     OUTPUT);
-  pinMode(PIN_B_DIRECTION, OUTPUT);
-  pinMode(PIN_B_PWM,       OUTPUT);
-  pinMode(PIN_B_BRAKE,     OUTPUT);
-  pinMode(12, OUTPUT);
-  pinMode(13, OUTPUT);
-  digitalWrite(12, LOW);
-  digitalWrite(13, HIGH);
+  pinMode(PIN_X_DIRECTION, OUTPUT);
+  pinMode(PIN_X_PWM,       OUTPUT);
+  pinMode(PIN_X_BRAKE,     OUTPUT);
+  pinMode(PIN_Y_DIRECTION, OUTPUT);
+  pinMode(PIN_Y_PWM,       OUTPUT);
+  pinMode(PIN_Y_BRAKE,     OUTPUT);
 
   Serial.begin(115200);
 }
 
 void loop()
 {
-  A_beweeg(255, true, 1000);
+  X_beweeg(MOTOR_PK, LINKS, 1000);
 
   delay(1000);
-  A_set_brake(true);
+  X_set_brake(true);
   delay(1000);
 }
 
@@ -46,78 +47,84 @@ void SI_recv_packets()
 bool SI_packet_handshake(int packetid)
 {
   // Whether packet handshake was successful
+  bool packet_handshake = false;
+  return packet_handshake;
 }
 
 bool SI_packet_available(int packetid)
 {
-  // Whether packet has been received
+  // Whether packet has been 
+  bool packet_available = false;
+  return packet_available;
 }
 
 const char* SI_get_packet(int packetid)
 {
   // Return last packet data or null if none was received
+  const char* packet_data = "packetdata";
+  return packet_data;
 }
 
-////// MOTOR A ////////////////////////
+////// MOTOR X-axis ///////////////////
 
-void A_beweeg(int pwm, bool direction, int duratie)
+void X_beweeg(int pwm, bool direction, int duratie)
 {
-  A_beweeg(pwm, direction);
+  X_beweeg(pwm, direction);
   delay(duratie);
-  A_beweeg(0, false);
+  X_beweeg(0, false);
 }
 
-void A_beweeg(int pwm, bool direction)
+void X_beweeg(int pwm, bool direction)
 {
-  A_set_brake(true);
-  A_set_direction(direction);
-  A_set_brake(false);
-  A_set_pwm(pwm);
+  X_set_brake(true);
+  X_set_direction(direction);
+  X_set_brake(false);
+  X_set_pwm(pwm);
 }
 
-void A_set_pwm(int value)
+void X_set_pwm(int value)
 {
-  analogWrite(PIN_A_PWM, value);
+  analogWrite(PIN_X_PWM, value);
 }
 
-void A_set_direction(bool direction)
+void X_set_direction(bool direction)
 {
-  digitalWrite(PIN_A_DIRECTION, direction);
+  digitalWrite(PIN_X_DIRECTION, direction);
 }
 
-void A_set_brake(bool enabled)
+void X_set_brake(bool enabled)
 {
-  digitalWrite(PIN_A_BRAKE, enabled);
+  digitalWrite(PIN_X_BRAKE, enabled);
 }
 
-////// MOTOR B ////////////////////////
+////// MOTOR Y-axis ///////////////////
 
-void B_beweeg(int pwm, bool direction, int duratie)
+void Y_beweeg(int pwm, bool direction, int duratie)
 {
-  B_beweeg(pwm, direction);
+  Y_beweeg(pwm, direction);
   delay(duratie);
-  B_beweeg(0, false);
+  Y_beweeg(0, false);
 }
 
-void B_beweeg(int pwm, bool direction)
+void Y_beweeg(int pwm, bool direction)
 {
-  B_set_brake(true);
-  B_set_direction(direction);
-  B_set_brake(false);
-  B_set_pwm(pwm);
+  Y_set_brake(true);
+  Y_set_direction(direction);
+  Y_set_brake(false);
+  Y_set_pwm(pwm);
 }
 
-void B_set_pwm(int value)
+void Y_set_pwm(int value)
 {
-  analogWrite(PIN_B_PWM, value);
+  analogWrite(PIN_Y_PWM, value);
 }
 
-void B_set_direction(bool direction)
+void Y_set_direction(bool direction)
 {
-  digitalWrite(PIN_B_DIRECTION, direction);
+  digitalWrite(PIN_Y_DIRECTION, direction);
 }
 
-void B_set_brake(bool enabled)
+void Y_set_brake(bool enabled)
 {
-  digitalWrite(PIN_B_BRAKE, enabled);
+  digitalWrite(PIN_Y_BRAKE, enabled);
 }

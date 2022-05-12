@@ -1,6 +1,6 @@
-De structuur van serial packets als volgt:
-reqid:packetid:datastr;
-
+De structuur van serial packets als volgt in bytes:
+reqid | packetid | packetdata (str)
+0x01 0x02 0x03 0x04 0x00
 
 Packet proces
 (A) Arduino

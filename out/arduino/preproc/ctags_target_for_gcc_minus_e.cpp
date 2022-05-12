@@ -1,11 +1,5 @@
 # 1 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
-
-
-
-
-
-
-
+# 13 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void setup()
 {
   pinMode(12, 0x1);
@@ -14,20 +8,16 @@ void setup()
   pinMode(13, 0x1);
   pinMode(11, 0x1);
   pinMode(8, 0x1);
-  pinMode(12, 0x1);
-  pinMode(13, 0x1);
-  digitalWrite(12, 0x0);
-  digitalWrite(13, 0x1);
 
   Serial.begin(115200);
 }
 
 void loop()
 {
-  B_beweeg(255, false, 1000);
+  X_beweeg(255, true, 1000);
 
   delay(1000);
-  B_set_brake(true);
+  X_set_brake(true);
   delay(1000);
 }
 
@@ -39,66 +29,86 @@ int SI_send_packet(int reqid, const char* data)
   return packetid;
 }
 
-////// MOTOR A ////////////////////////
-
-void A_beweeg(int pwm, bool direction, int duratie)
+void SI_recv_packets()
 {
-  A_beweeg(pwm, direction);
+  // Put packets into buffer
+}
+
+bool SI_packet_handshake(int packetid)
+{
+  // Whether packet handshake was successful
+}
+
+bool SI_packet_available(int packetid)
+{
+  // Whether packet has been received
+}
+
+const char* SI_get_packet(int packetid)
+{
+  // Return last packet data or null if none was received
+}
+
+////// MOTOR X-axis ///////////////////
+
+void X_beweeg(int pwm, bool direction, int duratie)
+{
+  X_beweeg(pwm, direction);
   delay(duratie);
-  A_beweeg(0, false);
+  X_beweeg(0, false);
 }
 
-void A_beweeg(int pwm, bool direction)
+void X_beweeg(int pwm, bool direction)
 {
-  A_set_brake(true);
-  A_set_direction(direction);
-  A_set_brake(false);
-  A_set_pwm(pwm);
+  X_set_brake(true);
+  X_set_direction(direction);
+  X_set_brake(false);
+  X_set_pwm(pwm);
 }
 
-void A_set_pwm(int value)
+void X_set_pwm(int value)
 {
   analogWrite(3, value);
 }
 
-void A_set_direction(bool direction)
+void X_set_direction(bool direction)
 {
   digitalWrite(12, direction);
 }
 
-void A_set_brake(bool enabled)
+void X_set_brake(bool enabled)
 {
   digitalWrite(9, enabled);
 }
 
-////// MOTOR B ////////////////////////
+////// MOTOR Y-axis ///////////////////
 
-void B_beweeg(int pwm, bool direction, int duratie)
+void Y_beweeg(int pwm, bool direction, int duratie)
 {
-  B_beweeg(pwm, direction);
+  Y_beweeg(pwm, direction);
   delay(duratie);
-  B_beweeg(0, false);
+  Y_beweeg(0, false);
 }
 
-void B_beweeg(int pwm, bool direction)
+void Y_beweeg(int pwm, bool direction)
 {
-  B_set_brake(true);
-  B_set_direction(direction);
-  B_set_brake(false);
-  B_set_pwm(pwm);
+  Y_set_brake(true);
+  Y_set_direction(direction);
+  Y_set_brake(false);
+  Y_set_pwm(pwm);
 }
 
-void B_set_pwm(int value)
+void Y_set_pwm(int value)
 {
   analogWrite(11, value);
 }
 
-void B_set_direction(bool direction)
+void Y_set_direction(bool direction)
 {
   digitalWrite(13, direction);
 }
 
-void B_set_brake(bool enabled)
+void Y_set_brake(bool enabled)
 {
   digitalWrite(8, enabled);
 }
