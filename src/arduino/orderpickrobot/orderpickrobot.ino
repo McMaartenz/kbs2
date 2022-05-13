@@ -50,13 +50,13 @@ void loop()
 {
   for(int i = 0; i < 5; i++)
   {
+    SI_log("Going to X,Y " + String(i) + ", " + String(i));
     X_naar(i);
-    delay(HALF_SECOND);
+    delay(QUARTER_SECOND);
     Y_naar(i);
-    delay(HALF_SECOND);
+    delay(QUARTER_SECOND);
     Z_duw();
-
-    SI_log("Going to X,Y" + String(i) + ", " + String(i));
+    delay(HALF_SECOND);
   }
 }
 

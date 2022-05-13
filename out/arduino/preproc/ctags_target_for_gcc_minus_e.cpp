@@ -1,6 +1,7 @@
 # 1 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 # 29 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
-//#define DEBUG_LOG
+// Stop de volgende lijn in comments om de serial niet te exploderen bij het pakkettensysteem
+
 
 void setup()
 {
@@ -13,22 +14,22 @@ void setup()
 
   Serial.begin(115200);
   
-# 41 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino" 3
+# 42 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino" 3
  (*(volatile uint8_t *)(0xB1)) 
-# 41 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+# 42 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
         = 
-# 41 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino" 3
+# 42 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino" 3
           (*(volatile uint8_t *)(0xB1)) 
-# 41 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+# 42 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
                  & 248 | 1; // TCCR2B: 1 / 1
   
-# 42 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino" 3
+# 43 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino" 3
  (*(volatile uint8_t *)(0xB0)) 
-# 42 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+# 43 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
         = 
-# 42 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino" 3
+# 43 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino" 3
           (*(volatile uint8_t *)(0xB0)) 
-# 42 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+# 43 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
                  & 248 | 1; // TCCR2A: 1 / 1
 
   SI_log("Resetting Z");
@@ -45,7 +46,7 @@ void loop()
     delay(500);
     Z_duw();
 
-    SI_log("Going to X,Y" + String(i) + ", " + String(i));
+    SI_log("Going to X,Y " + String(i) + ", " + String(i));
   }
 }
 
@@ -60,7 +61,7 @@ void loop()
  * @param pos 0 - 4
 
  */
-# 69 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+# 70 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void X_naar(int pos)
 {
   X_beweeg(192, true, 1525);
@@ -77,7 +78,7 @@ void X_naar(int pos)
  * @param pos 0 - 4
 
  */
-# 81 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+# 82 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void Y_naar(int pos)
 {
   Y_beweeg(192, false, 1525);
@@ -92,7 +93,7 @@ void Y_naar(int pos)
  * 
 
  */
-# 92 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+# 93 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void Z_duw()
 {
   Z_beweeg(192, true, 500);
@@ -107,7 +108,7 @@ void Z_duw()
  * 
 
  */
-# 103 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+# 104 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void Z_reset()
 {
   Z_beweeg(192, false, 500);
@@ -118,7 +119,7 @@ void Z_reset()
 void SI_log(String msg)
 {
 
-
+  Serial.println(msg);
 
 }
 
