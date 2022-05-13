@@ -4,11 +4,27 @@
 #define PIN_Y_DIRECTION 13
 #define PIN_Y_PWM       11
 #define PIN_Y_BRAKE      8
+#define PIN_Z_DIRECTION  4
+#define PIN_Z_PWM        5
+
 #define LINKS         true
 #define RECHTS       false
 #define OMHOOG        true
 #define OMLAAG       false
-#define MOTOR_PK       255
+#define VOORUIT       true
+#define ACHTERUIT    false
+#define MOTOR_PK       192
+
+#define QUARTER_SECOND 250
+#define HALF_SECOND    500
+#define ONE_SECOND    1000
+#define X_BAAN_TIJD   1525
+#define Y_BAAN_TIJD   1525
+
+#define Y_INITIAL_DIST 200
+#define CALIBRATION     40
+
+#define DEBUG_LOG
 
 void setup()
 {
@@ -20,18 +36,57 @@ void setup()
   pinMode(PIN_Y_BRAKE,     OUTPUT);
 
   Serial.begin(115200);
+  TCCR2B = TCCR2B & B11111000 | B00000001; // TCCR2B: 1 / 1
+  TCCR2A = TCCR2A & B11111000 | B00000001; // TCCR2A: 1 / 1
 }
 
 void loop()
 {
-  X_beweeg(MOTOR_PK, LINKS, 1000);
+  for(int i = 0; i < 5; i++)
+  {
+    X_naar(i);
+    delay(HALF_SECOND);
+    Y_naar(i);
+    delay(HALF_SECOND);
 
-  delay(1000);
-  X_set_brake(true);
-  delay(1000);
+    SI_log("Going to X,Y" + String(i) + ", " + String(i));
+  }
+}
+
+////// POSITIE FUCNTIES ///////////////
+
+/**
+ * @brief Beweeg naar X-positie
+ * 
+ * @param pos 0 - 4
+ */
+void X_naar(int pos)
+{
+  X_beweeg(MOTOR_PK, LINKS, X_BAAN_TIJD);
+  delay(QUARTER_SECOND);
+  X_beweeg(MOTOR_PK, RECHTS, X_BAAN_TIJD / 4 * pos + pos * CALIBRATION);
+}
+
+/**
+ * @brief Beweeg naar Y-positie
+ * 
+ * @param pos 0 - 4
+ */
+void Y_naar(int pos)
+{
+  Y_beweeg(MOTOR_PK, OMLAAG, Y_BAAN_TIJD);
+  delay(QUARTER_SECOND);
+  Y_beweeg(MOTOR_PK, OMHOOG, Y_BAAN_TIJD / 4 * pos + pos * CALIBRATION + Y_INITIAL_DIST);
 }
 
 ////// SERIAL INTERFACE ///////////////
+
+void SI_log(String msg)
+{
+#ifdef DEBUG_LOG
+  Serial.println(msg);
+#endif
+}
 
 int SI_send_packet(int reqid, const char* data)
 {
@@ -127,4 +182,37 @@ void Y_set_direction(bool direction)
 void Y_set_brake(bool enabled)
 {
   digitalWrite(PIN_Y_BRAKE, enabled);
+}
+
+////// MOTOR Y-axis ///////////////////
+
+void Z_beweeg(int pwm, bool direction, int duratie)
+{
+  Z_beweeg(pwm, direction);
+  delay(duratie);
+  Z_beweeg(0, false);
+}
+
+void Z_beweeg(int pwm, bool direction)
+{
+  Z_set_brake(true);
+  Z_set_direction(direction);
+  Z_set_brake(false);
+  Z_set_pwm(pwm);
+}
+
+void Z_set_pwm(int value)
+{
+  analogWrite(PIN_Z_PWM, value);
+}
+
+void Z_set_direction(bool direction)
+{
+  digitalWrite(PIN_Z_DIRECTION, direction);
+}
+
+void Z_set_brake(bool enabled)
+{
+  // TODO
+  //digitalWrite(PIN_Z_BRAKE, enabled);
 }
