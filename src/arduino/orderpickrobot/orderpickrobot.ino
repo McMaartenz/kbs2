@@ -23,11 +23,22 @@
 #define Y_BAAN_TIJD   1525
 #define Z_BAAN_TIJD    500
 
-#define Y_INITIAL_DIST 200
-#define CALIBRATION     40
+#define Y_INITIAL_DIST  70
+#define CALIBRATION    110
 
 // Stop de volgende lijn in comments om de serial niet te exploderen bij het pakkettensysteem
 #define DEBUG_LOG
+
+/*
+ * Motor X - Geel & bruin
+ * Motor X + Geel & wit
+ * 
+ * Motor Y - Blauw
+ * Motor Y + Rood
+ * 
+ * Motor Z - Roze & bruin
+ * Motor Z + Roze & wit
+ */
 
 void setup()
 {
@@ -48,28 +59,49 @@ void setup()
 
 void loop()
 {
-  for(int i = 0; i < 5; i++)
+  for(int i = 1; i <= 5; i++)
   {
-    SI_log("Going to X,Y " + String(i) + ", " + String(i));
+    Y_reset();
     X_naar(i);
-    delay(QUARTER_SECOND);
-    Y_naar(i);
-    delay(QUARTER_SECOND);
-    Z_duw();
-    delay(HALF_SECOND);
+    for(int j = 1; j <= 5; j++)
+    {
+      SI_log("Going to X,Y " + String(i) + ", " + String(j));
+      Y_naar(j);
+      delay(HALF_SECOND);
+      Z_duw();
+    }
   }
 }
 
 ////// POSITIE FUNCTIES ///////////////
 
 /**
+ * @brief Reset X-baan
+ * 
+ */
+void X_reset()
+{
+  X_beweeg(MOTOR_PK, LINKS, X_BAAN_TIJD * 1.2);
+}
+
+/**
+ * @brief Reset Y-baan
+ * 
+ */
+void Y_reset()
+{
+  Y_beweeg(MOTOR_PK, OMLAAG, Y_BAAN_TIJD * 1.2);
+}
+
+/**
  * @brief Beweeg naar X-positie
  * 
- * @param pos 0 - 4
+ * @param pos 1 - 5
  */
 void X_naar(int pos)
 {
-  X_beweeg(MOTOR_PK, LINKS, X_BAAN_TIJD);
+  --pos;
+  X_reset();
   delay(QUARTER_SECOND);
   X_beweeg(MOTOR_PK, RECHTS, X_BAAN_TIJD / 4 * pos + pos * CALIBRATION);
 }
@@ -77,11 +109,11 @@ void X_naar(int pos)
 /**
  * @brief Beweeg naar Y-positie
  * 
- * @param pos 0 - 4
+ * @param pos 1 - 5
  */
 void Y_naar(int pos)
 {
-  Y_beweeg(MOTOR_PK, OMLAAG, Y_BAAN_TIJD);
+  Y_reset();
   delay(QUARTER_SECOND);
   Y_beweeg(MOTOR_PK, OMHOOG, Y_BAAN_TIJD / 4 * pos + pos * CALIBRATION + Y_INITIAL_DIST);
 }
