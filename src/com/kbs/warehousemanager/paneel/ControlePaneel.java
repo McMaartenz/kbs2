@@ -16,7 +16,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 
 
 	public ControlePaneel() {
-		super.setLayout(new GridLayout(1, 1));
+		super.setLayout(new GridLayout(9, 1));
 		super.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		final JLabel bppLabel = new JLabel("BPP-algoritme:");
 		final JLabel boxesLabel = new JLabel("Aantal dozen: ");
