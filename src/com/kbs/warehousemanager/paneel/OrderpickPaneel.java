@@ -6,6 +6,7 @@ import java.io.File;
 import javax.swing.*;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 public class OrderpickPaneel extends JPanel implements ActionListener
 {
 	JPanel magazijnPaneel = new MagazijnPaneel();
@@ -62,6 +63,8 @@ public class OrderpickPaneel extends JPanel implements ActionListener
 		}
 	}
 =======
+=======
+>>>>>>> Stashed changes
 public class OrderpickPaneel extends JPanel implements ActionListener {
     JPanel magazijnPaneel = new MagazijnPaneel();
     JPanel orderpicker = new Orderpicker();
@@ -114,5 +117,8 @@ public class OrderpickPaneel extends JPanel implements ActionListener {
             JButton srcBtn = (JButton) src;
         }
     }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
