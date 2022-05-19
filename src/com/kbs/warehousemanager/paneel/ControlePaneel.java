@@ -27,6 +27,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	int aantalDozen = 23;
 
 	//define the different labels
+	JLabel header = new JLabel("Controleknoppen");
 	JLabel bppLabel = new JLabel("BPP-algoritme: " + bppSelected);
 	JLabel boxesLabel = new JLabel("Aantal dozen: " + aantalDozen);
 	JLabel tspLabel = new JLabel("TSP-algoritme: " + tspSelected);
@@ -34,12 +35,22 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	public ControlePaneel() {
 		super.setLayout(new GridLayout(9, 1));
 		super.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+		StartButton.setBorder(new RoundBtn(15));
+		StopButton.setBorder(new RoundBtn(15));
+		RepeatButton.setBorder(new RoundBtn(15));
 		bppList.addActionListener(this);
 		tspList.addActionListener(this);
 
 		String bppSelected = bppList.getSelectedItem().toString();
 		String tspSelected = tspList.getSelectedItem().toString();
 
+		header.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		header.setOpaque(true);
+		header.setBackground(Color.PINK);
+
+
+		add(header);
 		add(StartButton);
 		add(StopButton);
 		add(RepeatButton);
