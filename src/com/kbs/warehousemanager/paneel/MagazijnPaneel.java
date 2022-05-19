@@ -5,15 +5,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 public class MagazijnPaneel extends JPanel implements ActionListener {
 
-        static JPanel magazijnPaneel = new MagazijnPaneel();
-        JButton[] magazijnButton = new JButton[25];
-        File file = new File("orderpickImages");
-        Boolean[] btnPressed = new Boolean[25];
+        static JButton[] magazijnButton = new JButton[25];
+        static Boolean[] btnPressed = new Boolean[25];
+        private ItemList itemlist;
 
-        public MagazijnPaneel() {
+        public MagazijnPaneel(ItemList itemList) {
+            this.itemlist = itemList;
+
             setLayout(new GridLayout(5, 5));
             for (int i = 0; i < 25; i++) {
                 JButton button = new JButton("item " + (i+1));
@@ -26,6 +28,7 @@ public class MagazijnPaneel extends JPanel implements ActionListener {
             }
         }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
@@ -35,11 +38,15 @@ public class MagazijnPaneel extends JPanel implements ActionListener {
             for (int i = 0; i < 25; i++) {
                 if(text.equals("item " + (i+1))){
                     if(!btnPressed[i]) {
+                        itemlist.addItem("item " + (i+1));
                         button.setForeground(Color.RED);
                         btnPressed[i] = true;
+                        itemlist.refresh();
                     } else {
                         button.setForeground(Color.GRAY);
+                        itemlist.removeItem("item " + (i+1));
                         btnPressed[i] = false;
+                        itemlist.refresh();
                     }
                 }
             }
