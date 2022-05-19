@@ -36,7 +36,7 @@ public class OrderpickPaneel extends JPanel implements ActionListener
 	public class Orderpicker extends JPanel implements ActionListener {
 		public Orderpicker(){
 			String[] orderOptions = {"voorbeeldOrder 1", "voorbeeldOrder 2", "voorbeeldOrder 3"};
-			JComboBox orderList = new JComboBox(orderOptions);
+			JComboBox<String> orderList = new JComboBox<>(orderOptions);
 			orderList.addActionListener(this);
 			add(orderList);
 		}
