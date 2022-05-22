@@ -8,25 +8,29 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class MagazijnPaneel extends JPanel implements ActionListener {
-
-        static JButton[] magazijnButton = new JButton[25];
-        static Boolean[] btnPressed = new Boolean[25];
-        private ItemList itemlist;
-
-        public MagazijnPaneel(ItemList itemList) {
-            this.itemlist = itemList;
-
-            setLayout(new GridLayout(5, 5));
-            for (int i = 0; i < 25; i++) {
-                JButton button = new JButton("item " + (i+1));
-                boolean BtnPressed = false;
-                btnPressed[i] = BtnPressed;
-                add(button);
-                button.addActionListener(this);
-                button.setBorder(new RoundBtn(15));
-                button.setForeground(Color.GRAY);
-            }
+    public static void resetPanel() {
+        for (int i = 0; i < 25; i++) {
+            magazijnButton[i].setForeground(Color.GRAY);
         }
+    }
+
+    static JButton[] magazijnButton = new JButton[25];
+    static Boolean[] btnPressed = new Boolean[25];
+    private ItemList itemlist;
+
+    public MagazijnPaneel(ItemList itemList) {
+        this.itemlist = itemList;
+        setLayout(new GridLayout(5, 5));
+        for (int i = 0; i < 25; i++) {
+            JButton button = new JButton("item " + (i+1));
+            boolean BtnPressed = false;
+            btnPressed[i] = BtnPressed;
+            add(button);
+            button.addActionListener(this);
+            button.setBorder(new RoundBtn(15));
+            button.setForeground(Color.GRAY);
+        }
+    }
 
 
     @Override

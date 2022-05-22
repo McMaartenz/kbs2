@@ -4,14 +4,16 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class ItemList extends JPanel {
-    ArrayList<String> items = new ArrayList<>();
-
+    static ArrayList<String> items = new ArrayList<>();
     private JLabel itemLabel;
+
+    public static ArrayList<String> getItems() {
+        return items;
+    }
 
     ItemList(){
         items.add("items:");
         itemLabel = new JLabel(items.toString());
-
         add(itemLabel);
     }
 
