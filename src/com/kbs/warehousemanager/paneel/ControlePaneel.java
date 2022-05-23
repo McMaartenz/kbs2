@@ -29,13 +29,13 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	int aantalDozen = 23;
 
 	//define the different labels
-	JLabel header = new JLabel("Controleknoppen");
 	JLabel bppLabel = new JLabel("BPP-algoritme: " + bppSelected);
 	JLabel boxesLabel = new JLabel("Aantal dozen: " + aantalDozen);
 	JLabel tspLabel = new JLabel("TSP-algoritme: " + tspSelected);
 
 	public ControlePaneel() {
-		super.setLayout(new GridLayout(9, 1));
+		super.setBackground(Color.WHITE);
+		super.setLayout(new GridLayout(9,1, 5, 5));
 		super.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		StartButton.setBorder(new RoundBtn(15));
@@ -48,13 +48,20 @@ public class ControlePaneel extends JPanel implements ActionListener {
 		tspList.addActionListener(this);
 		bppList.addActionListener(this);
 
+		orderList.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		StartButton.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		StopButton.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		RepeatButton.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		bppLabel.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		boxesLabel.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		bppList.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		tspLabel.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		tspList.setFont(new Font("Rockwell", Font.PLAIN, 15));
+
 
 		String bppSelected = bppList.getSelectedItem().toString();
 		String tspSelected = tspList.getSelectedItem().toString();
 
-//		header.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//		header.setOpaque(true);
-//		header.setBackground(Color.PINK);
 
 
 		add(orderList);

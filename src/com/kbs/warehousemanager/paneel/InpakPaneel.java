@@ -12,6 +12,7 @@ public class InpakPaneel extends JPanel implements ActionListener
 	 */
 	public InpakPaneel()
 	{
+		setBackground(Color.WHITE);
 
 	}
 
