@@ -140,10 +140,19 @@ public class Serial
 		listening = false;
 		serialListenerThread = null;
 
+		boolean validCommPort = false;
 		SerialPort[] availablePorts = SerialPort.getCommPorts();
-		if (Arrays.stream(availablePorts).noneMatch(x -> x == port))
+		for (SerialPort serialPort : availablePorts)
 		{
-			System.err.println("Port is not available");
+			if (serialPort.getSystemPortName().equals(port.getSystemPortName()))
+			{
+				validCommPort = true;
+			}
+		}
+
+		if (!validCommPort)
+		{
+			System.err.println("Port not available");
 			return;
 		}
 
