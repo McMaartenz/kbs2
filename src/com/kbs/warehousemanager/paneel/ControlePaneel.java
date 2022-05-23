@@ -41,8 +41,13 @@ public class ControlePaneel extends JPanel implements ActionListener {
 		StartButton.setBorder(new RoundBtn(15));
 		StopButton.setBorder(new RoundBtn(15));
 		RepeatButton.setBorder(new RoundBtn(15));
-		bppList.addActionListener(this);
+
+		StartButton.addActionListener(this);
+		StopButton.addActionListener(this);
+		RepeatButton.addActionListener(this);
 		tspList.addActionListener(this);
+		bppList.addActionListener(this);
+
 
 		String bppSelected = bppList.getSelectedItem().toString();
 		String tspSelected = tspList.getSelectedItem().toString();
@@ -79,14 +84,12 @@ public class ControlePaneel extends JPanel implements ActionListener {
 
 			bppLabel.setText("BPP-algoritme: " + bppSelected);
 			tspLabel.setText("TSP-algoritme: " + tspSelected);
-
 		}
-		if (src instanceof JButton) {
-			JButton srcBtn = (JButton)src;
-			//if it's the start button, start the order with the selected items
+		if (src instanceof JButton srcBtn) {
 			if (srcBtn == StartButton) {
-				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan
-
+				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
+				//MagazijnPaneel.resetPanel();
+				System.out.println(ItemList.getItems());
 			}
 		}
 
