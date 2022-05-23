@@ -5,8 +5,8 @@ import javax.swing.*;
 
 public class OrderpickPaneel extends JPanel {
 
-	private ItemList itemList = new ItemList();
-	private MagazijnPaneel Magazijn = new MagazijnPaneel(itemList);
+	private final ItemList itemList = new ItemList();
+	private final MagazijnPaneel Magazijn = new MagazijnPaneel(itemList);
 
 	public OrderpickPaneel() {
 		super.setLayout(new GridLayout(2, 1));

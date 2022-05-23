@@ -7,8 +7,7 @@ import java.awt.event.ActionListener;
 
 public class MagazijnPaneel extends JPanel implements ActionListener {
 
-        static JButton[] magazijnButton = new JButton[25];
-        static Boolean[] btnPressed = new Boolean[25];
+    static Boolean[] btnPressed = new Boolean[25];
         private ItemList itemList;
 
         public MagazijnPaneel(ItemList itemList) {
@@ -16,7 +15,7 @@ public class MagazijnPaneel extends JPanel implements ActionListener {
 
             setLayout(new GridLayout(5, 5));
             for (int i = 0; i < 25; i++) {
-                JButton button = new JButton("item " + (i+1));
+                JButton button = new JButton("item " + (i + 1));
                 boolean BtnPressed = false;
                 btnPressed[i] = BtnPressed;
                 add(button);
@@ -24,27 +23,9 @@ public class MagazijnPaneel extends JPanel implements ActionListener {
                 button.setBorder(new RoundBtn(15));
                 button.setForeground(Color.BLACK);
             }
-
-            JButton[] magazijnButton = new JButton[25];
-            Boolean[] btnPressed = new Boolean[25];
-            ItemList itemlist;
-
-    public MagazijnPaneel(ItemList itemList) {
-        this.itemlist = itemList;
-        setLayout(new GridLayout(5, 5));
-        for (int i = 0; i < 25; i++) {
-            JButton button = new JButton("item " + (i+1));
-            boolean BtnPressed = false;
-            btnPressed[i] = BtnPressed;
-            add(button);
-            button.addActionListener(this);
-            button.setBorder(new RoundBtn(15));
-            button.setForeground(Color.GRAY);
         }
-    }
 
 
-    @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
         if(obj instanceof JButton ) {
