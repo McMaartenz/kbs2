@@ -4,17 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
 
 public class MagazijnPaneel extends JPanel implements ActionListener {
 
         static JButton[] magazijnButton = new JButton[25];
         static Boolean[] btnPressed = new Boolean[25];
-        private ItemList itemlist;
+        private ItemList itemList;
 
         public MagazijnPaneel(ItemList itemList) {
-            this.itemlist = itemList;
+            this.itemList = itemList;
 
             setLayout(new GridLayout(5, 5));
             for (int i = 0; i < 25; i++) {
@@ -24,7 +22,7 @@ public class MagazijnPaneel extends JPanel implements ActionListener {
                 add(button);
                 button.addActionListener(this);
                 button.setBorder(new RoundBtn(15));
-                button.setForeground(Color.GRAY);
+                button.setForeground(Color.BLACK);
             }
         }
 
@@ -38,15 +36,15 @@ public class MagazijnPaneel extends JPanel implements ActionListener {
             for (int i = 0; i < 25; i++) {
                 if(text.equals("item " + (i+1))){
                     if(!btnPressed[i]) {
-                        itemlist.addItem("item " + (i+1));
+                        itemList.addItem("item " + (i+1));
                         button.setForeground(Color.RED);
                         btnPressed[i] = true;
-                        itemlist.refresh();
+                        itemList.refresh();
                     } else {
-                        button.setForeground(Color.GRAY);
-                        itemlist.removeItem("item " + (i+1));
+                        button.setForeground(Color.BLACK);
+                        itemList.removeItem("item " + (i+1));
                         btnPressed[i] = false;
-                        itemlist.refresh();
+                        itemList.refresh();
                     }
                 }
             }

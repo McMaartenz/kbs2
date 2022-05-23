@@ -23,9 +23,9 @@ public class HoofdPaneel extends JFrame
 		inpakPaneel = new InpakPaneel();
 		controlePaneel = new ControlePaneel();
 
+		add(controlePaneel);
 		add(orderpickPaneel);
 		add(inpakPaneel);
-		add(controlePaneel);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(1280, 720);
