@@ -70,7 +70,7 @@ public class SerialManager
 			System.out.println("Connected to orderpick robot");
 			orderpickRobot.addSerialListener((in) ->
 			{
-				System.out.println("Received data: " + in);
+				System.out.println("Received data from orderpick: " + in);
 			});
 		}
 
@@ -79,7 +79,7 @@ public class SerialManager
 			System.out.println("Connected to inpak robot");
 			inpakRobot.addSerialListener((in) ->
 			{
-				System.out.println("Received data: " + in);
+				System.out.println("Received data from inpak: " + in);
 			});
 		}
 	}

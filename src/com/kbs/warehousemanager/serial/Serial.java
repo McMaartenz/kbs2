@@ -127,6 +127,8 @@ public class Serial
 					ioe.printStackTrace();
 				}
 			});
+
+			serialListenerThread.start();
 		}
 	}
 
