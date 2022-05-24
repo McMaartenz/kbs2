@@ -21,7 +21,6 @@ public class Main
 			serialManager = new SerialManager(Robot.ORDERPICK_ROBOT);
 			Serial orderpickRobot = serialManager.getRobot(Robot.ORDERPICK_ROBOT);
 			orderpickRobot.send("hello\n");
-			while (true);
 		}).start();
 
 		HoofdPaneel hoofdPaneel = new HoofdPaneel();
