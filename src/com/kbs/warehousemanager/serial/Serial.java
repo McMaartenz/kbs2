@@ -110,6 +110,7 @@ public class Serial
 		{
 			serialListenerThread = new Thread(() ->
 			{
+				Thread.currentThread().setName("Serial Listener @ " + arduino.getPortDescription());
 				arduino.getSerialPort().setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
 
 				try

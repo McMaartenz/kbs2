@@ -1,9 +1,7 @@
 package com.kbs.warehousemanager;
 
 import com.kbs.warehousemanager.paneel.HoofdPaneel;
-import com.kbs.warehousemanager.serial.Robot;
-import com.kbs.warehousemanager.serial.Serial;
-import com.kbs.warehousemanager.serial.SerialManager;
+import com.kbs.warehousemanager.serial.*;
 
 public class Main
 {
@@ -18,8 +16,11 @@ public class Main
 		// Do not block AWT GUI thread
 		new Thread(() ->
 		{
+			Thread.currentThread().setName("Serial Initialiser Thread");
 			serialManager = new SerialManager(Robot.ORDERPICK_ROBOT);
 			Serial orderpickRobot = serialManager.getRobot(Robot.ORDERPICK_ROBOT);
+
+			/// Example
 			if (orderpickRobot.good())
 			{
 				orderpickRobot.send("hello\n");
