@@ -1,3 +1,5 @@
+#include <Arduino.h>
+#line 1 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 #define PIN_X_DIRECTION 12
 #define PIN_X_PWM        3
 #define PIN_X_BRAKE      9
@@ -48,6 +50,69 @@
 
 int X_POS, Y_POS;
 
+#line 51 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void setup();
+#line 72 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void loop();
+#line 100 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void X_reset(bool direction);
+#line 117 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Y_reset();
+#line 129 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void X_naar(int pos);
+#line 160 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Y_naar(int pos);
+#line 185 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Z_duw();
+#line 196 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Z_reset();
+#line 203 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void track_X(int newpos);
+#line 206 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void track_Y(int newpos);
+#line 210 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void X_beweeg(int pwm, bool direction, int duratie);
+#line 217 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void X_beweeg(int pwm, bool direction);
+#line 225 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void X_set_pwm(int value);
+#line 230 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void X_set_direction(bool direction);
+#line 235 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void X_set_brake(bool enabled);
+#line 242 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Y_beweeg(int pwm, bool direction, int duratie);
+#line 249 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Y_beweeg(int pwm, bool direction);
+#line 257 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Y_set_pwm(int value);
+#line 262 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Y_set_direction(bool direction);
+#line 267 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Y_set_brake(bool enabled);
+#line 274 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Z_beweeg(int pwm, bool direction, int duratie);
+#line 281 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Z_beweeg(int pwm, bool direction);
+#line 288 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Z_set_pwm(int value);
+#line 293 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Z_set_direction(bool direction);
+#line 298 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void Z_set_brake();
+#line 306 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void SI_log(String msg);
+#line 313 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+int SI_send_packet(int reqid, const char* data);
+#line 319 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+void SI_recv_packets();
+#line 324 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+bool SI_packet_handshake(int packetid);
+#line 331 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+bool SI_packet_available(int packetid);
+#line 338 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+const char * SI_get_packet(int packetid);
+#line 51 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void setup()
 {
   pinMode(PIN_X_DIRECTION, OUTPUT);
@@ -341,3 +406,4 @@ const char* SI_get_packet(int packetid)
   const char* packet_data = "packetdata";
   return packet_data;
 }
+

@@ -1,65 +1,60 @@
-#define PIN_X_DIRECTION 12
-#define PIN_X_PWM        3
-#define PIN_X_BRAKE      9
-#define PIN_Y_DIRECTION 13
-#define PIN_Y_PWM       11
-#define PIN_Y_BRAKE      8
-#define PIN_Z_DIRECTION  4
-#define PIN_Z_PWM        5
-
-#define LINKS         true
-#define RECHTS       false
-#define OMHOOG        true
-#define OMLAAG       false
-#define VOORUIT       true
-#define ACHTERUIT    false
-#define MOTOR_PK       192
-#define MOTOR_PK_ONDER  48
-
-#define QUARTER_SECOND 250
-#define HALF_SECOND    500
-#define ONE_SECOND    1000
-
-#define X_BAAN_TIJD   1725
+# 1 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+# 24 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 // #define X_OFFSET       440 //x offset boven
-#define X_OFFSET       475
-
-#define Y_BAAN_TIJD   1525
-#define Y_INITIAL_DIST 550
-#define Y_OFFSET       600
-
-#define Z_BAAN_TIJD    500
-
-#define CALIBRATION    110
-
+# 35 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 // Stop de volgende lijn in comments om de serial niet te exploderen bij het pakkettensysteem
-#define DEBUG_LOG
+
 
 /*
- * Motor X - Geel & bruin
- * Motor X + Geel & wit
- * 
- * Motor Y - Blauw
- * Motor Y + Rood
- * 
- * Motor Z - Roze & bruin
- * Motor Z + Roze & wit
- */
 
+ * Motor X - Geel & bruin
+
+ * Motor X + Geel & wit
+
+ * 
+
+ * Motor Y - Blauw
+
+ * Motor Y + Rood
+
+ * 
+
+ * Motor Z - Roze & bruin
+
+ * Motor Z + Roze & wit
+
+ */
+# 49 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 int X_POS, Y_POS;
 
 void setup()
 {
-  pinMode(PIN_X_DIRECTION, OUTPUT);
-  pinMode(PIN_X_PWM,       OUTPUT);
-  pinMode(PIN_X_BRAKE,     OUTPUT);
-  pinMode(PIN_Y_DIRECTION, OUTPUT);
-  pinMode(PIN_Y_PWM,       OUTPUT);
-  pinMode(PIN_Y_BRAKE,     OUTPUT);
+  pinMode(12, 0x1);
+  pinMode(3, 0x1);
+  pinMode(9, 0x1);
+  pinMode(13, 0x1);
+  pinMode(11, 0x1);
+  pinMode(8, 0x1);
 
   Serial.begin(115200);
-  TCCR2B = TCCR2B & B11111000 | B00000001; // TCCR2B: 1 / 1
-  TCCR2A = TCCR2A & B11111000 | B00000001; // TCCR2A: 1 / 1
+  
+# 61 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino" 3
+ (*(volatile uint8_t *)(0xB1)) 
+# 61 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+        = 
+# 61 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino" 3
+          (*(volatile uint8_t *)(0xB1)) 
+# 61 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+                 & 248 | 1; // TCCR2B: 1 / 1
+  
+# 62 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino" 3
+ (*(volatile uint8_t *)(0xB0)) 
+# 62 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+        = 
+# 62 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino" 3
+          (*(volatile uint8_t *)(0xB0)) 
+# 62 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
+                 & 248 | 1; // TCCR2A: 1 / 1
 
   SI_log("Resetting Z & Y");
   Z_reset();
@@ -71,20 +66,20 @@ void setup()
 
 void loop()
 {
-  X_reset(LINKS);
+  X_reset(true);
   Y_reset();
 
   for(int i = 1; i <= 5; i++)
   {
     X_naar(i);
-    delay(QUARTER_SECOND);
+    delay(250);
 
     // Y_naar(5);
     for(int j = 1; j <= 5; j++)
     {
       SI_log("Going to X,Y " + String(i) + ", " + String(j));
       Y_naar(j);
-      delay(HALF_SECOND);
+      delay(500);
       Z_duw();
       SI_log(String(Y_POS));
     }
@@ -94,13 +89,17 @@ void loop()
 ////// POSITIE FUNCTIES ///////////////
 
 /**
+
  * @brief Reset X-baan
+
  * 
+
  */
+# 100 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void X_reset(bool direction)
 {
-  X_beweeg(MOTOR_PK, direction, X_BAAN_TIJD * 1.2);
-  if (direction == RECHTS)
+  X_beweeg(192, direction, 1725 * 1.2);
+  if (direction == false)
   {
     track_X(5);
   }
@@ -111,52 +110,66 @@ void X_reset(bool direction)
 }
 
 /**
+
  * @brief Reset Y-baan
+
  * 
+
  */
+# 117 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void Y_reset()
 {
-  Y_beweeg(MOTOR_PK, OMLAAG, Y_BAAN_TIJD * 1.2);
-  Y_beweeg(MOTOR_PK, OMHOOG, Y_INITIAL_DIST);
+  Y_beweeg(192, false, 1525 * 1.2);
+  Y_beweeg(192, true, 550);
   track_Y(1);
 }
 
 /**
+
  * @brief Beweeg naar X-positie
+
  * 
+
  * @param pos 1 - 5
+
  */
+# 129 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void X_naar(int pos)
 {
   if (pos == 1)
   {
-    X_reset(LINKS);
+    X_reset(true);
     track_X(1);
     return;
   }
   if (pos == 5)
   {
-    X_reset(RECHTS);
+    X_reset(false);
     track_X(5);
     return;
   }
   int relpos = pos - X_POS;
   if (relpos < 0)
   {
-    X_beweeg(MOTOR_PK, LINKS, X_OFFSET * (0 - relpos));
+    X_beweeg(192, true, 475 * (0 - relpos));
   }
   else
   {
-    X_beweeg(MOTOR_PK, RECHTS, X_OFFSET * (relpos));
+    X_beweeg(192, false, 475 * (relpos));
   }
   track_X(pos);
 }
 
 /**
+
  * @brief Beweeg naar Y-positie
+
  * 
+
  * @param pos 1 - 5
+
  */
+# 160 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void Y_naar(int pos)
 {
   if (pos == 1)
@@ -168,34 +181,42 @@ void Y_naar(int pos)
   int relpos = pos - Y_POS;
   if (relpos < 0)
   {
-    Y_beweeg(MOTOR_PK, OMLAAG, Y_OFFSET * (0 - relpos));
-    Y_beweeg(150, OMHOOG, 50);
+    Y_beweeg(192, false, 600 * (0 - relpos));
+    Y_beweeg(150, true, 50);
   }
   else
   {
-    Y_beweeg(MOTOR_PK, OMHOOG, Y_OFFSET * relpos);
+    Y_beweeg(192, true, 600 * relpos);
   }
   track_Y(pos);
 }
 
 /**
+
  * @brief Geef een duw aan product
+
  * 
+
  */
+# 185 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void Z_duw()
 {
-  Z_beweeg(MOTOR_PK, VOORUIT, Z_BAAN_TIJD);
-  delay(QUARTER_SECOND);
+  Z_beweeg(192, true, 500);
+  delay(250);
   Z_reset();
 }
 
 /**
+
  * @brief Reset de Z-motor naar achteren
+
  * 
+
  */
+# 196 "c:\\Users\\mcmaa\\src\\kbs2\\src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 void Z_reset()
 {
-  Z_beweeg(MOTOR_PK, ACHTERUIT, Z_BAAN_TIJD);
+  Z_beweeg(192, false, 500);
 }
 
 ////// MOTOR X-axis ///////////////////
@@ -224,17 +245,17 @@ void X_beweeg(int pwm, bool direction)
 
 void X_set_pwm(int value)
 {
-  analogWrite(PIN_X_PWM, value);
+  analogWrite(3, value);
 }
 
 void X_set_direction(bool direction)
 {
-  digitalWrite(PIN_X_DIRECTION, direction);
+  digitalWrite(12, direction);
 }
 
 void X_set_brake(bool enabled)
 {
-  digitalWrite(PIN_X_BRAKE, enabled);
+  digitalWrite(9, enabled);
 }
 
 ////// MOTOR Y-axis ///////////////////
@@ -256,17 +277,17 @@ void Y_beweeg(int pwm, bool direction)
 
 void Y_set_pwm(int value)
 {
-  analogWrite(PIN_Y_PWM, value);
+  analogWrite(11, value);
 }
 
 void Y_set_direction(bool direction)
 {
-  digitalWrite(PIN_Y_DIRECTION, direction);
+  digitalWrite(13, direction);
 }
 
 void Y_set_brake(bool enabled)
 {
-  digitalWrite(PIN_Y_BRAKE, enabled);
+  digitalWrite(8, enabled);
 }
 
 ////// MOTOR Y-axis ///////////////////
@@ -287,12 +308,12 @@ void Z_beweeg(int pwm, bool direction)
 
 void Z_set_pwm(int value)
 {
-  analogWrite(PIN_Z_PWM, value);
+  analogWrite(5, value);
 }
 
 void Z_set_direction(bool direction)
 {
-  digitalWrite(PIN_Z_DIRECTION, direction);
+  digitalWrite(4, direction);
 }
 
 void Z_set_brake()
@@ -305,9 +326,9 @@ void Z_set_brake()
 
 void SI_log(String msg)
 {
-#ifdef DEBUG_LOG
+
   Serial.println(msg);
-#endif
+
 }
 
 int SI_send_packet(int reqid, const char* data)

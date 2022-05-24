@@ -1,0 +1,12 @@
+De structuur van serial packets als volgt in bytes:
+reqid | packetid | packetdata (str) met \0 (Unix-like string)
+0x01 0x02 0x03 0x04 0x00
+
+Packet proces
+(A) Arduino
+(C) Computer
+
+C -> A Stuur packet
+A -> C Laten weten dat packet overgekomen is
+A verwerkt packet
+A -> C Packet terug
