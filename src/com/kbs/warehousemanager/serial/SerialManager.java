@@ -14,20 +14,10 @@ public class SerialManager
 	{
 		if (robot == Robot.ORDERPICK_ROBOT)
 		{
-			if (!orderpickRobotAvailable)
-			{
-				throw new IllegalStateException("Not yet connected");
-			}
-
 			return orderpickRobot;
 		}
 		else if (robot == Robot.INPAK_ROBOT)
 		{
-			if (!inpakRobotAvailable)
-			{
-				throw new IllegalStateException("Not yet connected");
-			}
-
 			return inpakRobot;
 		}
 
