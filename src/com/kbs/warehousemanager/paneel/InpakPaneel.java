@@ -6,13 +6,16 @@ import javax.swing.*;
 
 public class InpakPaneel extends JPanel implements ActionListener
 {
+
 	/**
 	 * De inpak paneel
 	 * Dit bevat de dozen met progress, en inhoud
 	 */
 	public InpakPaneel()
 	{
-		setBackground(Color.WHITE);
+		super.setBackground(Color.WHITE);
+		super.setLayout(new GridLayout(2,1));
+
 
 	}
 
