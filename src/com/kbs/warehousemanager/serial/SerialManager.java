@@ -2,7 +2,6 @@ package com.kbs.warehousemanager.serial;
 
 import com.fazecast.jSerialComm.SerialPort;
 
-// TODO: receive
 public class SerialManager
 {
 	private Serial orderpickRobot;
@@ -10,6 +9,30 @@ public class SerialManager
 
 	private boolean orderpickRobotAvailable;
 	private boolean inpakRobotAvailable;
+
+	public Serial getRobot(Robot robot)
+	{
+		if (robot == Robot.ORDERPICK_ROBOT)
+		{
+			if (!orderpickRobotAvailable)
+			{
+				throw new IllegalStateException("Not yet connected");
+			}
+
+			return orderpickRobot;
+		}
+		else if (robot == Robot.INPAK_ROBOT)
+		{
+			if (!inpakRobotAvailable)
+			{
+				throw new IllegalStateException("Not yet connected");
+			}
+
+			return inpakRobot;
+		}
+
+		throw new IllegalArgumentException("Unknown robot");
+	}
 
 	/**
 	 * Instantiate a new serial manager
