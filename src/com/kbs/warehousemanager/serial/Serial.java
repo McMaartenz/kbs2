@@ -24,18 +24,25 @@ public class Serial
 	}
 
 	/**
-	 * Connect to the first port available
+	 * Create a new serial that has no connection
 	 */
 	public Serial()
+	{
+		OK = false;
+	}
+
+	/**
+	 * Connect to the first port available
+	 */
+	public static SerialPort[] getAvailableSerialPorts() throws IOException
 	{
 		SerialPort[] availablePorts = SerialPort.getCommPorts();
 		if (availablePorts.length == 0)
 		{
-			System.err.println("There are no ports available");
-			return;
+			throw new IOException("There are no ports to connect to");
 		}
 
-		connectTo(availablePorts[0]);
+		return availablePorts;
 	}
 
 	/**

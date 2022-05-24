@@ -20,7 +20,10 @@ public class Main
 		{
 			serialManager = new SerialManager(Robot.ORDERPICK_ROBOT);
 			Serial orderpickRobot = serialManager.getRobot(Robot.ORDERPICK_ROBOT);
-			orderpickRobot.send("hello\n");
+			if (orderpickRobot.good())
+			{
+				orderpickRobot.send("hello\n");
+			}
 		}).start();
 
 		HoofdPaneel hoofdPaneel = new HoofdPaneel();
