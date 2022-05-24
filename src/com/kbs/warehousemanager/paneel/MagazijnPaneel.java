@@ -7,7 +7,15 @@ import java.awt.event.ActionListener;
 
 public class MagazijnPaneel extends JPanel implements ActionListener {
 
+    public static void resetPanel() {
+        for (int i = 0; i<25; i++) {
+            buttonArray[i].setForeground(Color.BLACK);
+            btnPressed[i] = false;
+        }
+    }
+
     static Boolean[] btnPressed = new Boolean[25];
+    static JButton[] buttonArray = new JButton[25];
         private ItemList itemList;
 
         public MagazijnPaneel(ItemList itemList){
@@ -21,6 +29,7 @@ public class MagazijnPaneel extends JPanel implements ActionListener {
                 JButton button = new JButton("item " + (i + 1));
                 boolean BtnPressed = false;
                 btnPressed[i] = BtnPressed;
+                buttonArray[i] = button;
                 button.setFont(new Font("Rockwell", Font.PLAIN, 15));
                 add(button);
                 button.addActionListener(this);

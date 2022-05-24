@@ -6,10 +6,14 @@ import java.util.ArrayList;
 
 public class ItemList extends JPanel {
     static ArrayList<String> items = new ArrayList<>();
-    DefaultListModel<String> itemList = new DefaultListModel<>();
+    static DefaultListModel<String> itemList = new DefaultListModel<>();
 
     public static ArrayList<String> getItems(){
         return items;
+    }
+
+    public static void clearList() {
+        itemList.clear();
     }
 
     ItemList(){

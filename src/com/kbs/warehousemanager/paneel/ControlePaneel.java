@@ -10,6 +10,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	 * De controle paneel
 	 * Dit bevat de knoppen om het programma te sturen
 	 */
+
 	//define the buttons
 	private final JButton StartButton = new JButton("Start");
 	private final JButton StopButton = new JButton("Stop");
@@ -95,8 +96,10 @@ public class ControlePaneel extends JPanel implements ActionListener {
 		if (src instanceof JButton srcBtn) {
 			if (srcBtn == StartButton) {
 				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
-				//MagazijnPaneel.resetPanel();
+				MagazijnPaneel.resetPanel();
 				System.out.println(ItemList.getItems());
+				ItemList.clearList();
+
 			}
 		}
 
