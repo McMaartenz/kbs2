@@ -51,6 +51,5 @@ public class ItemList extends JPanel {
         items.remove(name);
         itemList.removeElement(name);
     }
-
 }
 
