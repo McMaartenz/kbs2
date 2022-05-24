@@ -96,8 +96,8 @@ public class ControlePaneel extends JPanel implements ActionListener {
 		if (src instanceof JButton srcBtn) {
 			if (srcBtn == StartButton) {
 				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
-				MagazijnPaneel.resetPanel();
 				System.out.println(ItemList.getItems());
+				MagazijnPaneel.resetPanel();
 				ItemList.clearList();
 
 			}
