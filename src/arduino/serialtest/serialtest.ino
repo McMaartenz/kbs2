@@ -22,6 +22,21 @@ bool hasPrefix(const char* str, const char* pre)
 }
 
 /**
+ * @brief Sleep for ms, handle packets in the background
+ *
+ * @param ms Milliseconds to sleep
+ */
+void sleep(unsigned long ms)
+{
+    ms = millis() + ms;
+    while (ms < (millis() - 250))
+    {
+        handlePacket();
+    }
+    while (ms < millis());
+}
+
+/**
  *  @brief Handle a single packet coming in
  */
 void handlePacket()
