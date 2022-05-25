@@ -3,6 +3,9 @@ package com.kbs.warehousemanager;
 import com.kbs.warehousemanager.paneel.HoofdPaneel;
 import com.kbs.warehousemanager.serial.*;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
 public class Main
 {
 	static SerialManager serialManager;
@@ -18,20 +21,13 @@ public class Main
 		{
 			Thread.currentThread().setName("Serial Initialiser Thread");
 			serialManager = new SerialManager(Robot.ORDERPICK_ROBOT);
-			Serial orderpickRobot = serialManager.getRobot(Robot.ORDERPICK_ROBOT);
-			Serial inpakRobot = serialManager.getRobot(Robot.INPAK_ROBOT);
 
 			// Example
-			if (orderpickRobot.good())
+			if (serialManager.good(Robot.INPAK_ROBOT))
 			{
-				orderpickRobot.send("hello\n");
-				orderpickRobot.send("status\n");
-			}
+				String response = serialManager.sendPacket("ping\n", Robot.INPAK_ROBOT);
 
-			if (inpakRobot.good())
-			{
-				inpakRobot.send("hello\n");
-				inpakRobot.send("status\n");
+				System.out.println("The response to ping is: " + response);
 			}
 		}).start();
 

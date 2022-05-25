@@ -38,8 +38,10 @@ void handlePacket()
     {
         Serial.println("Ye");
     }
-    else
+    
+    eql = strcmp(buffer, "ping") == 0;
+    if (eql)
     {
-        Serial.println("No");
+        Serial.println("Pong!");
     }
 }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.concurrent.*;
+import java.util.concurrent.locks.Lock;
 import java.util.function.Consumer;
 
 public class Serial
@@ -15,6 +16,8 @@ public class Serial
 	private boolean listening;
 	private Thread serialListenerThread;
 	private boolean OK;
+
+	public final Object lock = new Object();
 
 	/**
 	 * Connect to a specific port
@@ -68,7 +71,7 @@ public class Serial
 		}
 
 		// Synchronised: Do not allow port access when busy (causes deadlock)
-		synchronized (arduino.getSerialPort())
+		synchronized (lock)
 		{
 			arduino.serialWrite(string);
 		}
@@ -131,7 +134,7 @@ public class Serial
 						String in;
 
 						// Synchronised: Do not allow port access when busy (causes deadlock)
-						synchronized (arduino.getSerialPort())
+						synchronized (lock)
 						{
 							in = arduino.serialRead();
 						}

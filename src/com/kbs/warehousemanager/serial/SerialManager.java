@@ -3,11 +3,19 @@ package com.kbs.warehousemanager.serial;
 import com.fazecast.jSerialComm.SerialPort;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.util.concurrent.*;
 
 public class SerialManager
 {
 	private static final String CONNECTION_ERROR = "Failed to connect";
 	private static final String NOT_ENOUGH_PORTS = "There were not enough ports for two robots";
+
+	private String[] orderpickRobotBuffer = new String[0];
+	private String[] inpakRobotBuffer = new String[0];
+
+	public final Object orderpickRobotBufferLock = new Object();
+	public final Object inpakRobotBufferLock = new Object();
 
 	private Serial orderpickRobot;
 	private Serial inpakRobot;
@@ -70,7 +78,10 @@ public class SerialManager
 			System.out.println("Connected to orderpick robot");
 			orderpickRobot.addSerialListener((in) ->
 			{
-				System.out.println("Received data from orderpick: " + in);
+				synchronized(orderpickRobotBufferLock)
+				{
+					orderpickRobotBuffer = in.split("\n");
+				}
 			});
 		}
 		else
@@ -83,12 +94,110 @@ public class SerialManager
 			System.out.println("Connected to inpak robot");
 			inpakRobot.addSerialListener((in) ->
 			{
-				System.out.println("Received data from inpak: " + in);
+				synchronized(inpakRobotBufferLock)
+				{
+					inpakRobotBuffer = in.split("\n");
+				}
 			});
 		}
 		else
 		{
 			System.err.println(CONNECTION_ERROR + " to inpak robot");
+		}
+	}
+
+	/**
+	 * Same as Serial
+	 * @param robot Robot om te checken
+	 * @return is good
+	 * @see com.kbs.warehousemanager.serial.Serial#good()
+	 */
+	public boolean good(Robot robot)
+	{
+		return getRobot(robot).good();
+	}
+
+	private Object getLockOf(Robot robot)
+	{
+		if (robot == Robot.ORDERPICK_ROBOT)
+		{
+			return orderpickRobotBufferLock;
+		}
+		else if (robot == Robot.INPAK_ROBOT)
+		{
+			return inpakRobotBufferLock;
+		}
+		throw new IllegalArgumentException("No such robot");
+	}
+
+	private String[] getBufferOf(Robot robot)
+	{
+		if (robot == Robot.ORDERPICK_ROBOT)
+		{
+			return orderpickRobotBuffer;
+		}
+		else if (robot == Robot.INPAK_ROBOT)
+		{
+			return inpakRobotBuffer;
+		}
+		throw new IllegalArgumentException("No such robot");
+	}
+
+	/**
+	 * Receive data from robot with a timeout of 500ms
+	 * @param robot Robot to receive from
+	 * @return response string or NoResponse if timeout triggered
+	 */
+	public String receiveFrom(Robot robot)
+	{
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+
+		final Future<String> response = executor.submit(() ->
+		{
+			while (true)
+			{
+				if (getBufferOf(robot).length != 0)
+				{
+					synchronized (getLockOf(robot))
+					{
+						return getBufferOf(robot)[0];
+					}
+				}
+				Thread.onSpinWait();
+			}
+		});
+
+		try
+		{
+			return response.get(500, TimeUnit.MILLISECONDS);
+		}
+		catch (InterruptedException | ExecutionException | TimeoutException e)
+		{
+			System.err.println("Packet timed out");
+		}
+
+		return "NoResponse";
+	}
+
+	/**
+	 * Sends a packet and receives a response
+	 * @param s Packet data
+	 * @param robot Robot to send to
+	 * @return String -> NoResponse when no response given in 500ms, SerialFault when port closed, or just the response
+	 */
+	public String sendPacket(String s, Robot robot)
+	{
+		if (good(robot))
+		{
+			Serial serial = getRobot(robot);
+
+			serial.send(s);
+
+			return receiveFrom(robot);
+		}
+		else
+		{
+			return "SerialFault";
 		}
 	}
 }
