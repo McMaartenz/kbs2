@@ -4,7 +4,9 @@ import com.fazecast.jSerialComm.SerialPort;
 import arduino.Arduino;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Arrays;
+import java.util.concurrent.*;
 import java.util.function.Consumer;
 
 public class Serial
@@ -65,7 +67,11 @@ public class Serial
 			throw new IllegalStateException("Not yet initialised");
 		}
 
-		arduino.serialWrite(string);
+		// Synchronised: Do not allow port access when busy (causes deadlock)
+		synchronized (arduino.getSerialPort())
+		{
+			arduino.serialWrite(string);
+		}
 	}
 
 	/**
@@ -111,7 +117,6 @@ public class Serial
 			serialListenerThread = new Thread(() ->
 			{
 				Thread.currentThread().setName("Serial Listener @ " + arduino.getPortDescription());
-				arduino.getSerialPort().setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
 
 				try
 				{
@@ -120,10 +125,17 @@ public class Serial
 					{
 						if (!arduino.getSerialPort().isOpen())
 						{
-							throw new IOException("Serial port closed the connection");
+							throw new IOException(arduino.getPortDescription() + ": Serial port closed the connection");
 						}
 
-						String in = arduino.serialRead();
+						String in;
+
+						// Synchronised: Do not allow port access when busy (causes deadlock)
+						synchronized (arduino.getSerialPort())
+						{
+							in = arduino.serialRead();
+						}
+
 						if (!in.isEmpty())
 						{
 							eventHandler.accept(in);
@@ -162,7 +174,7 @@ public class Serial
 
 		if (!validCommPort)
 		{
-			System.err.println("Port not available");
+			System.err.println(port.getSystemPortName() + ": Port not available");
 			return;
 		}
 
@@ -170,7 +182,7 @@ public class Serial
 		arduino = new Arduino(portStr, 9600);
 		if (!arduino.openConnection())
 		{
-			System.err.println("Port is busy, cannot connect");
+			System.err.println(portStr + ": Port is busy, cannot connect");
 			return;
 		}
 

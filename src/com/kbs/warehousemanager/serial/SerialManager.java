@@ -6,6 +6,9 @@ import java.io.IOException;
 
 public class SerialManager
 {
+	private static final String CONNECTION_ERROR = "Failed to connect";
+	private static final String NOT_ENOUGH_PORTS = "There were not enough ports for two robots";
+
 	private Serial orderpickRobot;
 	private Serial inpakRobot;
 
@@ -39,7 +42,7 @@ public class SerialManager
 		}
 		catch (IOException ioe)
 		{
-			System.err.println("Unable to connect to any comm ports");
+			System.err.println(CONNECTION_ERROR + " to any comm ports");
 			return;
 		}
 
@@ -47,12 +50,12 @@ public class SerialManager
 		{
 			if (preferredRobot == Robot.ORDERPICK_ROBOT)
 			{
-				System.err.println("There were not enough comm ports, connecting to orderpick robot");
+				System.err.println(NOT_ENOUGH_PORTS + ", connecting to orderpick robot");
 				orderpickRobot = new Serial(availablePorts[0]);
 			}
 			else if (preferredRobot == Robot.INPAK_ROBOT)
 			{
-				System.err.println("There were not enough comm ports, connecting to inpak robot");
+				System.err.println(NOT_ENOUGH_PORTS + ", connecting to inpak robot");
 				inpakRobot = new Serial(availablePorts[0]);
 			}
 		}
@@ -72,7 +75,7 @@ public class SerialManager
 		}
 		else
 		{
-			System.err.println("Could not connect to orderpick robot");
+			System.err.println(CONNECTION_ERROR + " to orderpick robot");
 		}
 
 		if (inpakRobot.good())
@@ -85,7 +88,7 @@ public class SerialManager
 		}
 		else
 		{
-			System.err.println("Could not connect to inpak robot");
+			System.err.println(CONNECTION_ERROR + " to inpak robot");
 		}
 	}
 }

@@ -19,11 +19,19 @@ public class Main
 			Thread.currentThread().setName("Serial Initialiser Thread");
 			serialManager = new SerialManager(Robot.ORDERPICK_ROBOT);
 			Serial orderpickRobot = serialManager.getRobot(Robot.ORDERPICK_ROBOT);
+			Serial inpakRobot = serialManager.getRobot(Robot.INPAK_ROBOT);
 
-			/// Example
+			// Example
 			if (orderpickRobot.good())
 			{
 				orderpickRobot.send("hello\n");
+				orderpickRobot.send("status\n");
+			}
+
+			if (inpakRobot.good())
+			{
+				inpakRobot.send("hello\n");
+				inpakRobot.send("status\n");
 			}
 		}).start();
 
