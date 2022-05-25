@@ -3,9 +3,6 @@ package com.kbs.warehousemanager;
 import com.kbs.warehousemanager.paneel.HoofdPaneel;
 import com.kbs.warehousemanager.serial.*;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-
 public class Main
 {
 	static SerialManager serialManager;
