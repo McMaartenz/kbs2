@@ -16,7 +16,7 @@ public class MagazijnPaneel extends JPanel implements ActionListener {
 
     static Boolean[] btnPressed = new Boolean[25];
     static JButton[] buttonArray = new JButton[25];
-        private ItemList itemList;
+        private final ItemList itemList;
 
         public MagazijnPaneel(ItemList itemList){
             this.itemList = itemList;

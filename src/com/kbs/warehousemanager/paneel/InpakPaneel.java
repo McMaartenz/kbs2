@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class InpakPaneel extends JPanel implements ActionListener
 {
-	private final DozenTabel dozenTabel = new DozenTabel();
+	private DozenTabel dozenTabel = new DozenTabel();
 
 	/**
 	 * De inpak paneel

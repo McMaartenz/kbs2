@@ -18,6 +18,7 @@ public class ItemList extends JPanel {
     }
 
     ItemList(){
+        items.add("testitem");
         setLayout(new BorderLayout());
         JList<String> list = new JList<>(itemList);
         list.setLayoutOrientation(JList.VERTICAL);

@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class RoundBtn implements Border
 {
-    private int r;
+    private final int r;
     RoundBtn(int r) {
         this.r = r;
     }
