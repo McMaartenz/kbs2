@@ -16,7 +16,7 @@ public class DozenTabel extends JPanel {
         JTable tabel;
         for(int i = 0; i < 4; i++){
             String[] column = {"Doos " + (i+1)};
-            if(ItemList.items.isEmpty()) {
+            if(!ItemList.items.isEmpty()) {
                 tabel = new JTable(dozen, column);
             } else {
                 tabel = new JTable(placeholderData, column);
