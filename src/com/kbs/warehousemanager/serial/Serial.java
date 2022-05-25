@@ -4,10 +4,6 @@ import com.fazecast.jSerialComm.SerialPort;
 import arduino.Arduino;
 
 import java.io.IOException;
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.concurrent.*;
-import java.util.concurrent.locks.Lock;
 import java.util.function.Consumer;
 
 public class Serial
