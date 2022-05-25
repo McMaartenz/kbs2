@@ -10,6 +10,18 @@ void loop()
 }
 
 /**
+ * @brief Whether the string has a certain prefix
+ * 
+ * @param str String to test
+ * @param pre Prefix to use
+ * @return String starting with the prefix
+ */
+bool hasPrefix(const char* str, const char* pre)
+{
+    return strncmp(pre, str, strlen(pre)) == 0;
+}
+
+/**
  *  @brief Handle a single packet coming in
  */
 void handlePacket()
@@ -33,15 +45,16 @@ void handlePacket()
         buffer[i] = currentChar;
     }
 
-    bool eql = strcmp(buffer, "status") == 0;
-    if (eql)
+    if (hasPrefix(buffer, "status"))
     {
-        Serial.println("Ye");
+        Serial.println("OK");
     }
-    
-    eql = strcmp(buffer, "ping") == 0;
-    if (eql)
+    else if (hasPrefix(buffer, "ping"))
     {
         Serial.println("Pong!");
+    }
+    else
+    {
+        Serial.println("InaudibleGarbage");
     }
 }

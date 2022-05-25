@@ -183,9 +183,13 @@ public class SerialManager
 	 * Sends a packet and receives a response
 	 * @param s Packet data
 	 * @param robot Robot to send to
-	 * @return String -> NoResponse when no response given in 500ms, SerialFault when port closed, or just the response
+	 * @param expectResponse Should we wait for a response?
+	 * @return NoResponse in case of timeout (500ms),
+	 *         SerialFault when port is closed or I/O exception is thrown,
+	 *         NotExpected when <b>expectResponse</b> is false,
+	 *         response of packet
 	 */
-	public String sendPacket(String s, Robot robot)
+	public String sendPacket(String s, Robot robot, boolean expectResponse)
 	{
 		if (good(robot))
 		{
@@ -193,7 +197,7 @@ public class SerialManager
 
 			serial.send(s);
 
-			return receiveFrom(robot);
+			return expectResponse ? receiveFrom(robot) : "NotExpected";
 		}
 		else
 		{

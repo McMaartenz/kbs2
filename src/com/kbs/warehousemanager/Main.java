@@ -25,7 +25,7 @@ public class Main
 			// Example
 			if (serialManager.good(Robot.INPAK_ROBOT))
 			{
-				String response = serialManager.sendPacket("ping\n", Robot.INPAK_ROBOT);
+				String response = serialManager.sendPacket("ping\n", Robot.INPAK_ROBOT, true);
 
 				System.out.println("The response to ping is: " + response);
 			}
