@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
+import com.kbs.warehousemanager.algoritmes.*;
 
 public class ControlePaneel extends JPanel implements ActionListener {
 	/**
@@ -98,11 +99,16 @@ public class ControlePaneel extends JPanel implements ActionListener {
 				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
 				DozenTabel.voegToe(5);
 				MagazijnPaneel.resetPanel();
-//				System.out.println(ItemList.getItems());
 				ItemList.clearList();
+				//get the correct bpp agorithm
+				String bpp = bppList.getSelectedItem().toString();
+				if (bpp.equals("First Fit")) {
+					//BppAlgoritmes.firstFit();
+				}
 
 			}
 		}
+
 
 	}
 }
