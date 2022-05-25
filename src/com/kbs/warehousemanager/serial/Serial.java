@@ -123,7 +123,6 @@ public class Serial
 
 				try
 				{
-
 					while (listening)
 					{
 						if (!arduino.getSerialPort().isOpen())
