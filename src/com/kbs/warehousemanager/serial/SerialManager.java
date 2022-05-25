@@ -3,7 +3,6 @@ package com.kbs.warehousemanager.serial;
 import com.fazecast.jSerialComm.SerialPort;
 
 import java.io.IOException;
-import java.sql.Time;
 import java.util.concurrent.*;
 
 public class SerialManager
