@@ -69,7 +69,7 @@ public class SerialManager
 		}
 		else
 		{
-			orderpickRobot = new Serial(availablePorts[0]);
+			//orderpickRobot = new Serial(availablePorts[0]);
 			inpakRobot = new Serial(availablePorts[1]);
 		}
 
@@ -243,6 +243,7 @@ public class SerialManager
 			sb.append(point.x);
 			sb.append(point.y);
 		}
+		sb.append('\n');
 
 		return sendPacket(sb.toString(), robot, expectResponse);
 	}

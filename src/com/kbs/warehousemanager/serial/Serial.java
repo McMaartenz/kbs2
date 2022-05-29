@@ -4,6 +4,7 @@ import com.fazecast.jSerialComm.SerialPort;
 import arduino.Arduino;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.function.Consumer;
 
 public class Serial
@@ -66,11 +67,19 @@ public class Serial
 			throw new IllegalStateException("Not yet initialised");
 		}
 
+		if (string.charAt(string.length()-1) != '\n')
+		{
+			System.err.println("String sent to Arduino did NOT contain a LF!");
+		}
+
+
 		// Synchronised: Do not allow port access when busy (causes deadlock)
+		System.out.println("Send time: " + System.currentTimeMillis());
 		synchronized (lock)
 		{
 			arduino.serialWrite(string);
 		}
+		System.out.println("Send time finish: " + System.currentTimeMillis());
 	}
 
 	/**

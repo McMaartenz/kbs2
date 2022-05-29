@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 void setup()
 {
     Serial.begin(9600);
@@ -71,9 +73,14 @@ void handlePacket()
     else if (hasPrefix(buffer, "pos!"))
     {
         // Start reading points array
-        
+        char* lengthBuff = new char[3];
+        lengthBuff[0] = buffer[4];
+        lengthBuff[1] = buffer[5];
+        lengthBuff[2] = '\0';
 
-        Serial.println("OK");
+        int pointAmount = atoi(lengthBuff);
+
+        Serial.println("OK: " + String(pointAmount));
     }
     else
     {
