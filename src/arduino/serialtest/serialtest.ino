@@ -68,6 +68,13 @@ void handlePacket()
     {
         Serial.println("Pong!");
     }
+    else if (hasPrefix(buffer, "pos!"))
+    {
+        // Start reading points array
+        
+
+        Serial.println("OK");
+    }
     else
     {
         Serial.println("InaudibleGarbage");

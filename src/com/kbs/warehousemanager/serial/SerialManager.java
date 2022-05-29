@@ -235,6 +235,9 @@ public class SerialManager
 	public String sendPointsPacket(Point[] points, Robot robot, boolean expectResponse)
 	{
 		StringBuilder sb = new StringBuilder("pos!");
+
+		// Format string with a single leading zero (02d: decimal with leading zero of max length 2)
+		sb.append(String.format("%02d", points.length));
 		for (Point point : points)
 		{
 			sb.append(point.x);
