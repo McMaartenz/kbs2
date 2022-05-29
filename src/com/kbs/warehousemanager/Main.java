@@ -25,17 +25,17 @@ public class Main
 			// Example
 			if (serialManager.good(Robot.INPAK_ROBOT))
 			{
-				String response = serialManager.sendPacket("ping1\n", Robot.INPAK_ROBOT, true);
+				String response = serialManager.sendPacket("status\n", Robot.INPAK_ROBOT, true);
 
-				System.out.println(System.currentTimeMillis() + "The response to ping1 is: " + response);
+				System.out.println("The response to status is: " + response);
 
-				response = serialManager.sendPacket("ping2\n", Robot.INPAK_ROBOT, true);
+				response = serialManager.sendPacket("ping\n", Robot.INPAK_ROBOT, true);
 
-				System.out.println(System.currentTimeMillis() + "The response to ping2 is: " + response);
+				System.out.println("The response to ping2 is: " + response);
 
-				response = serialManager.sendPacket("ping3\n", Robot.INPAK_ROBOT, true);
+				response = serialManager.sendPacket("ping\n", Robot.INPAK_ROBOT, true);
 
-				System.out.println(System.currentTimeMillis() + "The response to ping3 is: " + response);
+				System.out.println("The response to ping3 is: " + response);
 
 				Point[] points = new Point[5];
 				for (int i = 0; i < 5; i++)
@@ -44,7 +44,7 @@ public class Main
 				}
 
 				response = serialManager.sendPointsPacket(points, Robot.INPAK_ROBOT, true);
-				System.out.println(System.currentTimeMillis() + "Response: " + response);
+				System.out.println("Response: " + response);
 			}
 		}).start();
 

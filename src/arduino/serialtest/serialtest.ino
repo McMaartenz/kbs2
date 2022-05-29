@@ -48,8 +48,12 @@ void handlePacket()
         return;
     }
 
-    char buffer[12]; // Pakket max-lengte 12
-    for (int i = 0; i < 12; i++)
+    char buffer[32]; // Pakket max-lengte 32
+    for (int i = 0; i < 32; i++)
+    {
+        buffer[i] = '\0';
+    }
+    for (int i = 0; i < 32; i++)
     {
         while (!Serial.available());
         char currentChar = Serial.read();
@@ -80,7 +84,7 @@ void handlePacket()
 
         int pointAmount = atoi(lengthBuff);
 
-        Serial.println("OK: " + String(pointAmount));
+        Serial.println("OK:" + String(pointAmount));
     }
     else
     {

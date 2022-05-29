@@ -4,6 +4,8 @@ import com.fazecast.jSerialComm.SerialPort;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.concurrent.*;
 
 public class SerialManager
@@ -11,8 +13,8 @@ public class SerialManager
 	private static final String CONNECTION_ERROR = "Failed to connect";
 	private static final String NOT_ENOUGH_PORTS = "There were not enough ports for two robots";
 
-	private String[] orderpickRobotBuffer = new String[0];
-	private String[] inpakRobotBuffer = new String[0];
+	private Queue<String> orderpickRobotBuffer = new LinkedList<>();
+	private Queue<String> inpakRobotBuffer = new LinkedList<>();
 
 	public final Object orderpickRobotBufferLock = new Object();
 	public final Object inpakRobotBufferLock = new Object();
@@ -80,7 +82,11 @@ public class SerialManager
 			{
 				synchronized(orderpickRobotBufferLock)
 				{
-					orderpickRobotBuffer = in.split("\n");
+					String[] incomingBuffer = in.split("\n");
+					for (String line : incomingBuffer)
+					{
+						orderpickRobotBuffer.add(line);
+					}
 				}
 			});
 		}
@@ -96,7 +102,11 @@ public class SerialManager
 			{
 				synchronized(inpakRobotBufferLock)
 				{
-					inpakRobotBuffer = in.split("\n");
+					String[] incomingBuffer = in.split("\n");
+					for (String line : incomingBuffer)
+					{
+						inpakRobotBuffer.add(line);
+					}
 				}
 			});
 		}
@@ -150,7 +160,7 @@ public class SerialManager
 		throw new IllegalArgumentException("No such robot");
 	}
 
-	private String[] getBufferOf(Robot robot)
+	private Queue<String> getBufferOf(Robot robot)
 	{
 		if (robot == Robot.ORDERPICK_ROBOT)
 		{
@@ -176,11 +186,11 @@ public class SerialManager
 		{
 			while (true)
 			{
-				if (getBufferOf(robot).length != 0)
+				if (!getBufferOf(robot).isEmpty())
 				{
 					synchronized (getLockOf(robot))
 					{
-						return getBufferOf(robot)[0];
+						return getBufferOf(robot).poll();
 					}
 				}
 				Thread.onSpinWait();

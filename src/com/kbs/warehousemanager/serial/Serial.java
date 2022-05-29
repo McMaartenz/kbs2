@@ -72,15 +72,11 @@ public class Serial
 			System.err.println("String sent to Arduino did NOT contain a LF!");
 		}
 
-
 		// Synchronised: Do not allow port access when busy (causes deadlock)
-		System.out.println("Send time: " + System.currentTimeMillis());
 		synchronized (lock)
 		{
-			System.out.println("Lock acquired: " + System.currentTimeMillis());
 			arduino.serialWrite(string);
 		}
-		System.out.println("Send time finish: " + System.currentTimeMillis());
 	}
 
 	/**
