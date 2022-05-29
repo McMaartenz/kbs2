@@ -1,7 +1,5 @@
 {
     "board": "arduino:avr:uno",
-    "programmer": "arduino:avrisp",
-    "sketch": "src\\arduino\\orderpickrobot\\orderpickrobot.ino",
-    "output": "out\\arduino",
-    "port": "COM3"
+    "port": "COM3",
+    "sketch": "src\\arduino\\orderpickrobot\\orderpickrobot.ino"
 }

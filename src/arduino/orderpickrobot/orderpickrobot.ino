@@ -91,6 +91,19 @@ void loop()
   }
 }
 
+// Slaap
+
+void slaap(int ms)
+{
+    ms = millis() + ms;
+    while (ms < (millis() - 250))
+    {
+        handle_packet();
+    }
+
+    while (ms < millis());
+}
+
 ////// POSITIE FUNCTIES ///////////////
 
 /**
@@ -210,7 +223,7 @@ void track_Y(int newpos) {
 void X_beweeg(int pwm, bool direction, int duratie)
 {
   X_beweeg(pwm, direction);
-  delay(duratie);
+  slaap(duratie);
   X_beweeg(0, false);
 }
 
@@ -242,7 +255,7 @@ void X_set_brake(bool enabled)
 void Y_beweeg(int pwm, bool direction, int duratie)
 {
   Y_beweeg(pwm, direction);
-  delay(duratie);
+  slaap(duratie);
   Y_beweeg(0, false);
 }
 
@@ -274,7 +287,7 @@ void Y_set_brake(bool enabled)
 void Z_beweeg(int pwm, bool direction, int duratie)
 {
   Z_beweeg(pwm, direction);
-  delay(duratie);
+  slaap(duratie);
   Z_beweeg(0, false);
 }
 
