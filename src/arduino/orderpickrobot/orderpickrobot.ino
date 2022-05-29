@@ -71,6 +71,7 @@ void setup()
 
 void loop()
 {
+	handlePacket();
   X_reset(LINKS);
   Y_reset();
 
@@ -89,19 +90,6 @@ void loop()
       SI_log(String(Y_POS));
     }
   }
-}
-
-// Slaap
-
-void slaap(int ms)
-{
-    ms = millis() + ms;
-    while (ms < (millis() - 250))
-    {
-        handle_packet();
-    }
-
-    while (ms < millis());
 }
 
 ////// POSITIE FUNCTIES ///////////////
@@ -223,7 +211,7 @@ void track_Y(int newpos) {
 void X_beweeg(int pwm, bool direction, int duratie)
 {
   X_beweeg(pwm, direction);
-  slaap(duratie);
+  sleep(duratie);
   X_beweeg(0, false);
 }
 
@@ -255,7 +243,7 @@ void X_set_brake(bool enabled)
 void Y_beweeg(int pwm, bool direction, int duratie)
 {
   Y_beweeg(pwm, direction);
-  slaap(duratie);
+  sleep(duratie);
   Y_beweeg(0, false);
 }
 
@@ -287,7 +275,7 @@ void Y_set_brake(bool enabled)
 void Z_beweeg(int pwm, bool direction, int duratie)
 {
   Z_beweeg(pwm, direction);
-  slaap(duratie);
+  sleep(duratie);
   Z_beweeg(0, false);
 }
 
@@ -316,41 +304,87 @@ void Z_set_brake()
 
 ////// SERIAL INTERFACE ///////////////
 
-void SI_log(String msg)
+
+/**
+ * @brief Whether the string has a certain prefix
+ * 
+ * @param str String to test
+ * @param pre Prefix to use
+ * @return String starting with the prefix
+ */
+bool hasPrefix(const char* str, const char* pre)
 {
-#ifdef DEBUG_LOG
-  Serial.println(msg);
-#endif
+    return strncmp(pre, str, strlen(pre)) == 0;
 }
 
-int SI_send_packet(int reqid, const char* data)
+/**
+ * @brief Sleep for ms, handle packets in the background
+ *
+ * @param ms Milliseconds to sleep
+ */
+void sleep(unsigned long ms)
 {
-  int packetid = 0;
-  return packetid;
+    ms = millis() + ms;
+    while (ms < (millis() - 250))
+    {
+        handlePacket();
+    }
+    while (ms < millis());
 }
 
-void SI_recv_packets()
+/**
+ *  @brief Handle a single packet coming in
+ */
+void handlePacket()
 {
-  // Put packets into buffer
+    if (!Serial.available())
+    {
+        return;
+    }
+
+    char buffer[12]; // Pakket max-lengte 12
+    for (int i = 0; i < 12; i++)
+    {
+        while (!Serial.available());
+        char currentChar = Serial.read();
+        if (currentChar == '\n')
+        {
+            buffer[i] = 0;
+            break;
+        }
+
+        buffer[i] = currentChar;
+    }
+
+    if (hasPrefix(buffer, "status"))
+    {
+        Serial.println("OK");
+    }
+    else if (hasPrefix(buffer, "ping"))
+    {
+        Serial.println("Pong!");
+    }
+    else if (hasPrefix(buffer, "pos!"))
+    {
+        // Start reading points array
+        char* lengthBuff = new char[3];
+        lengthBuff[0] = buffer[4];
+        lengthBuff[1] = buffer[5];
+        lengthBuff[2] = '\0';
+
+        int pointAmount = atoi(lengthBuff);
+
+        Serial.println("OK: " + String(pointAmount));
+    }
+    else
+    {
+        Serial.println("InaudibleGarbage");
+    }
 }
 
-bool SI_packet_handshake(int packetid)
+void SI_log(String s)
 {
-  // Whether packet handshake was successful
-  bool packet_handshake = false;
-  return packet_handshake;
-}
-
-bool SI_packet_available(int packetid)
-{
-  // Whether packet has been 
-  bool packet_available = false;
-  return packet_available;
-}
-
-const char* SI_get_packet(int packetid)
-{
-  // Return last packet data or null if none was received
-  const char* packet_data = "packetdata";
-  return packet_data;
+  #ifdef DEBUG_LOG
+  Serial.println(s);
+  #endif
 }
