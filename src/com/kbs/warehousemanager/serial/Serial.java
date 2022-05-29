@@ -77,6 +77,7 @@ public class Serial
 		System.out.println("Send time: " + System.currentTimeMillis());
 		synchronized (lock)
 		{
+			System.out.println("Lock acquired: " + System.currentTimeMillis());
 			arduino.serialWrite(string);
 		}
 		System.out.println("Send time finish: " + System.currentTimeMillis());
