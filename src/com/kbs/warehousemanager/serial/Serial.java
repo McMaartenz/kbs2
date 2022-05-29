@@ -148,6 +148,18 @@ public class Serial
 						{
 							eventHandler.accept(in);
 						}
+						else
+						{
+							// Prevent constant locking of the port, to also allow writing to it *very important*
+							try
+							{
+								Thread.sleep(5);
+							}
+							catch (InterruptedException ie)
+							{
+								ie.printStackTrace();
+							}
+						}
 					}
 				}
 				catch (IOException ioe)
