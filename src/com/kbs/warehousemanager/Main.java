@@ -2,6 +2,9 @@ package com.kbs.warehousemanager;
 
 import com.kbs.warehousemanager.paneel.HoofdPaneel;
 import com.kbs.warehousemanager.serial.*;
+import com.kbs.warehousemanager.serial.Robot;
+
+import java.awt.*;
 
 public class Main
 {
@@ -25,9 +28,18 @@ public class Main
 				String response = serialManager.sendPacket("ping\n", Robot.INPAK_ROBOT, true);
 
 				System.out.println("The response to ping is: " + response);
+
+				Point[] points = new Point[5];
+				for (int i = 0; i < 5; i++)
+				{
+					points[i] = new Point(i, i);
+				}
+
+				response = serialManager.sendPointsPacket(points, Robot.INPAK_ROBOT, true);
 			}
 		}).start();
 
 		HoofdPaneel hoofdPaneel = new HoofdPaneel();
+		SerialManager.close(serialManager);
 	}
 }

@@ -2,6 +2,7 @@ package com.kbs.warehousemanager.serial;
 
 import com.fazecast.jSerialComm.SerialPort;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.concurrent.*;
 
@@ -116,6 +117,26 @@ public class SerialManager
 		return getRobot(robot).good();
 	}
 
+	/**
+	 * Close serial manager & resources
+	 * @param sm object
+	 */
+	public static void close(SerialManager sm)
+	{
+		if (sm != null)
+		{
+			if (sm.good(Robot.INPAK_ROBOT))
+			{
+				sm.getRobot(Robot.INPAK_ROBOT).close();
+			}
+
+			if (sm.good(Robot.ORDERPICK_ROBOT))
+			{
+				sm.getRobot(Robot.ORDERPICK_ROBOT).close();
+			}
+		}
+	}
+
 	private Object getLockOf(Robot robot)
 	{
 		if (robot == Robot.ORDERPICK_ROBOT)
@@ -202,5 +223,24 @@ public class SerialManager
 		{
 			return "SerialFault";
 		}
+	}
+
+	/**
+	 * Send a packet of points
+	 * @param points Point data / path
+	 * @param robot Robot to send to
+	 * @param expectResponse Should we wait for a response?
+	 * @return See {@link #sendPacket}'s return
+	 */
+	public String sendPointsPacket(Point[] points, Robot robot, boolean expectResponse)
+	{
+		StringBuilder sb = new StringBuilder("pos!");
+		for (Point point : points)
+		{
+			sb.append(point.x);
+			sb.append(point.y);
+		}
+
+		return sendPacket(sb.toString(), robot, expectResponse);
 	}
 }
