@@ -48,12 +48,12 @@ void handlePacket()
         return;
     }
 
-    char buffer[32]; // Pakket max-lengte 32
-    for (int i = 0; i < 32; i++)
+    char buffer[64]; // Pakket max-lengte 64
+    for (int i = 0; i < 64; i++)
     {
         buffer[i] = '\0';
     }
-    for (int i = 0; i < 32; i++)
+    for (int i = 0; i < 64; i++)
     {
         while (!Serial.available());
         char currentChar = Serial.read();
