@@ -4,6 +4,7 @@ import com.fazecast.jSerialComm.SerialPort;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.*;
@@ -21,6 +22,8 @@ public class SerialManager
 
 	private Serial orderpickRobot;
 	private Serial inpakRobot;
+
+	public volatile boolean uitgetikt;
 
 	public Serial getRobot(Robot robot)
 	{
@@ -71,8 +74,8 @@ public class SerialManager
 		}
 		else
 		{
-			//orderpickRobot = new Serial(availablePorts[0]);
-			inpakRobot = new Serial(availablePorts[1]);
+			orderpickRobot = new Serial(availablePorts[1]);
+			inpakRobot = new Serial(availablePorts[0]);
 		}
 
 		if (orderpickRobot.good())
@@ -85,6 +88,11 @@ public class SerialManager
 					String[] incomingBuffer = in.split("\n");
 					for (String line : incomingBuffer)
 					{
+						if (line.startsWith("uitgetikt"))
+						{
+							uitgetikt = true;
+							continue;
+						}
 						orderpickRobotBuffer.add(line);
 					}
 				}
@@ -103,10 +111,7 @@ public class SerialManager
 				synchronized(inpakRobotBufferLock)
 				{
 					String[] incomingBuffer = in.split("\n");
-					for (String line : incomingBuffer)
-					{
-						inpakRobotBuffer.add(line);
-					}
+					inpakRobotBuffer.addAll(Arrays.asList(incomingBuffer));
 				}
 			});
 		}
@@ -176,7 +181,7 @@ public class SerialManager
 	/**
 	 * Receive data from robot with a timeout of 500ms
 	 * @param robot Robot to receive from
-	 * @return response string or NoResponse if timeout triggered
+	 * @return response string or ErrorNoResponse if timeout triggered
 	 */
 	public String receiveFrom(Robot robot)
 	{
@@ -206,7 +211,7 @@ public class SerialManager
 			System.err.println("Packet timed out");
 		}
 
-		return "NoResponse";
+		return "ErrorNoResponse";
 	}
 
 	/**
@@ -214,9 +219,9 @@ public class SerialManager
 	 * @param s Packet data
 	 * @param robot Robot to send to
 	 * @param expectResponse Should we wait for a response?
-	 * @return NoResponse in case of timeout (500ms),
-	 *         SerialFault when port is closed or I/O exception is thrown,
-	 *         NotExpected when <b>expectResponse</b> is false,
+	 * @return ErrorNoResponse in case of timeout (500ms),
+	 *         ErrorSerialFault when port is closed or I/O exception is thrown,
+	 *         ErrorNotExpected when <b>expectResponse</b> is false,
 	 *         response of packet
 	 */
 	public String sendPacket(String s, Robot robot, boolean expectResponse)
@@ -227,11 +232,11 @@ public class SerialManager
 
 			serial.send(s);
 
-			return expectResponse ? receiveFrom(robot) : "NotExpected";
+			return expectResponse ? receiveFrom(robot) : "ErrorNotExpected";
 		}
 		else
 		{
-			return "SerialFault";
+			return "ErrorSerialFault";
 		}
 	}
 
@@ -256,5 +261,86 @@ public class SerialManager
 		sb.append('\n');
 
 		return sendPacket(sb.toString(), robot, expectResponse);
+	}
+
+	/**
+	 * Perform the path on the order pick robot
+	 * @param points points to visit, sorted
+	 * @return true on success, or false on fail
+	 */
+	public boolean performPath(Point[] points)
+	{
+		if (good(Robot.ORDERPICK_ROBOT))
+		{
+			String response;
+			int attemptCount = 0;
+			do
+			{
+				response = sendPointsPacket(points, Robot.ORDERPICK_ROBOT, true);
+
+				System.out.println("Sent points packet - response: " + response);
+				if (response.startsWith("Error"))
+				{
+					if (response.startsWith("ErrorPacketTooLong"))
+					{
+						System.err.println("Irrecoverable issue: packet too long");
+						return false;
+					}
+
+					if (++attemptCount > 5)
+					{
+						System.err.println("Failed to communicate with orderpick robot");
+						return false;
+					}
+
+					try
+					{
+						Thread.sleep(500);
+					}
+					catch (InterruptedException ie)
+					{
+						ie.printStackTrace();
+					}
+				}
+			}
+			while (!response.startsWith("OK"));
+
+			for (int currentPoint = 0; currentPoint < points.length; currentPoint++)
+			{
+				Point currentPointObj = points[currentPoint];
+				System.out.format("Robot going to point id %d, at (%d, %d)\n", currentPoint, currentPointObj.x, currentPointObj.y);
+
+				uitgetikt = false;
+				response = sendPacket("step\n", Robot.ORDERPICK_ROBOT, true);
+				if (!response.startsWith("OK"))
+				{
+					System.err.println("Error: " + response);
+					return false;
+				}
+				if (response.startsWith("OKEndPoint") && currentPoint != (points.length - 1))
+				{
+					System.err.println("Error mismatch: expected OKEndPoint, but received OK");
+					return false;
+				}
+
+				long timeoutDate = System.currentTimeMillis() + 7500;
+				while (!uitgetikt)
+				{
+					Thread.onSpinWait();
+					if (timeoutDate > System.currentTimeMillis())
+					{
+						System.err.println("Timeout reached for step packet");
+						return false;
+					}
+				}
+			}
+		}
+		else
+		{
+			System.err.println("Error: Orderpick robot is not available");
+			return false;
+		}
+
+		return true;
 	}
 }

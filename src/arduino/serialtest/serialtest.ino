@@ -2,6 +2,10 @@
 
 #define PAKKET_MAX_LENGTE 64
 
+int** punten_arr = NULL;
+int punten_aantal = 0;
+int huidig_punt = 0;
+
 void setup()
 {
     Serial.begin(9600);
@@ -76,6 +80,38 @@ void handlePacket()
     {
         Serial.println("Pong!");
     }
+    else if (hasPrefix(buffer, "step"))
+    {
+        if (punten_aantal <= 0)
+        {
+            Serial.println("ErrorNoPoints");
+            return;
+        }
+        if (punten_arr == NULL || huidig_punt >= punten_aantal)
+        {
+            Serial.println("ErrorIllegalState");
+            return;
+        }
+
+        int requested_x, requested_y;
+        requested_x = punten_arr[huidig_punt][0];
+        requested_y = punten_arr[huidig_punt][1];
+
+        huidig_punt++;
+        if (huidig_punt == punten_aantal)
+        {
+            Serial.println("OKEndPoint");
+        }
+        else
+        {
+            Serial.println("OK");
+        }
+        // ga naar X,Y
+        // duw
+
+        // zodra klaar
+        Serial.println("uitgetikt");
+    }
     else if (hasPrefix(buffer, "pos!"))
     {
         // Start reading points array
@@ -84,8 +120,6 @@ void handlePacket()
         lengthBuff[1] = buffer[5];
         lengthBuff[2] = '\0';
         int pointAmount = atoi(lengthBuff);
-
-        Serial.println("POINT AMOUNT: " + String(pointAmount));
 
         int** punten = new int*[pointAmount];
         for (int i = 0; i < pointAmount; i++)
@@ -105,10 +139,13 @@ void handlePacket()
             punten[i] = new int[2];
             punten[i][0] = buffer[j] - '0';
             punten[i][1] = buffer[j + 1] - '0';
-            Serial.println(String(punten[i][0]) + ", " + String(punten[i][1]));
         }
 
-        Serial.println("OK:" + String(pointAmount));
+        punten_arr = punten;
+        punten_aantal = pointAmount;
+        huidig_punt = 0;
+
+        Serial.println("OK");
     }
     else
     {

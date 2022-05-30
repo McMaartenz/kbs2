@@ -23,25 +23,14 @@ public class Main
 			serialManager = new SerialManager(Robot.ORDERPICK_ROBOT);
 
 			// Example
-			if (serialManager.good(Robot.INPAK_ROBOT))
+			Point[] points = new Point[5];
+			for (int i = 0; i < 5; i++)
 			{
-				String response = serialManager.sendPacket("status\n", Robot.INPAK_ROBOT, true);
-
-				System.out.println("The response to status is: " + response);
-
-				response = serialManager.sendPacket("ping\n", Robot.INPAK_ROBOT, true);
-
-				System.out.println("The response to ping is: " + response);
-
-				Point[] points = new Point[5];
-				for (int i = 0; i < 5; i++)
-				{
-					points[i] = new Point(i, i);
-				}
-
-				response = serialManager.sendPointsPacket(points, Robot.INPAK_ROBOT, true);
-				System.out.println("Response: " + response);
+				points[i] = new Point(i, i);
 			}
+
+			boolean ok = serialManager.performPath(points);
+			System.out.println("Perform path successful? " + ok);
 		}).start();
 
 		HoofdPaneel hoofdPaneel = new HoofdPaneel();
