@@ -31,11 +31,7 @@ public class Main
 
 				response = serialManager.sendPacket("ping\n", Robot.INPAK_ROBOT, true);
 
-				System.out.println("The response to ping2 is: " + response);
-
-				response = serialManager.sendPacket("ping\n", Robot.INPAK_ROBOT, true);
-
-				System.out.println("The response to ping3 is: " + response);
+				System.out.println("The response to ping is: " + response);
 
 				Point[] points = new Point[5];
 				for (int i = 0; i < 5; i++)

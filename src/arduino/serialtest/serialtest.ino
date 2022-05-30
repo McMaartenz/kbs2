@@ -91,10 +91,14 @@ void handlePacket()
         for (int i = 0; i < pointAmount; i++)
         {
             int j = 6 + i * 2;
-            Serial.println("J=" + String(j));
-            if ((j + 1) > PAKKET_MAX_LENGTE || buffer[j] == '\0' || buffer[j + 1] == '\0')
+            if ((j + 1) > PAKKET_MAX_LENGTE)
             {
                 Serial.println("ErrorPacketTooLong");
+                return;
+            }
+            else if (buffer[j] == '\0' || buffer[j + 1] == '\0')
+            {
+                Serial.println("ErrorSizeMismatch");
                 return;
             }
 
