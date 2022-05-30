@@ -1,5 +1,7 @@
 #include <stdlib.h>
 
+#define PAKKET_MAX_LENGTE 64
+
 void setup()
 {
     Serial.begin(9600);
@@ -48,12 +50,12 @@ void handlePacket()
         return;
     }
 
-    char buffer[64]; // Pakket max-lengte 64
-    for (int i = 0; i < 64; i++)
+    char buffer[PAKKET_MAX_LENGTE]; // Pakket max-lengte 64
+    for (int i = 0; i < PAKKET_MAX_LENGTE; i++)
     {
         buffer[i] = '\0';
     }
-    for (int i = 0; i < 64; i++)
+    for (int i = 0; i < PAKKET_MAX_LENGTE; i++)
     {
         while (!Serial.available());
         char currentChar = Serial.read();
@@ -81,8 +83,26 @@ void handlePacket()
         lengthBuff[0] = buffer[4];
         lengthBuff[1] = buffer[5];
         lengthBuff[2] = '\0';
-
         int pointAmount = atoi(lengthBuff);
+
+        Serial.println("POINT AMOUNT: " + String(pointAmount));
+
+        int** punten = new int*[pointAmount];
+        for (int i = 0; i < pointAmount; i++)
+        {
+            int j = 6 + i * 2;
+            Serial.println("J=" + String(j));
+            if ((j + 1) > PAKKET_MAX_LENGTE || buffer[j] == '\0' || buffer[j + 1] == '\0')
+            {
+                Serial.println("ErrorPacketTooLong");
+                return;
+            }
+
+            punten[i] = new int[2];
+            punten[i][0] = buffer[j] - '0';
+            punten[i][1] = buffer[j + 1] - '0';
+            Serial.println(String(punten[i][0]) + ", " + String(punten[i][1]));
+        }
 
         Serial.println("OK:" + String(pointAmount));
     }
