@@ -4,7 +4,6 @@ package com.kbs.warehousemanager.paneel;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.Arrays;
 
 public class DozenTabel extends JPanel {
 
@@ -27,27 +26,26 @@ public class DozenTabel extends JPanel {
             setVisible(true);
         }
     }
-        public static void voegToe(int maxDoosItems){
-            for (int doosnr = 1; doosnr <= 4; doosnr++) {
-                dozen[doosnr - 1] = new String[maxDoosItems];
-                for (int i = (doosnr - 1) * maxDoosItems, j = 0; i < Math.min(maxDoosItems * doosnr, ItemList.items.size()); i++, j++) {
-                    dozen[doosnr - 1][j] = ItemList.items.get(i);
+        
+    public static void voegToe(int maxDoosItems){
+        for (int doosnr = 1; doosnr <= 4; doosnr++) {
+            dozen[doosnr - 1] = new String[maxDoosItems];
+            for (int i = (doosnr - 1) * maxDoosItems, j = 0; i < Math.min(maxDoosItems * doosnr, ItemList.items.size()); i++, j++) {
+                dozen[doosnr - 1][j] = ItemList.items.get(i);
+            }
+            if(dozen[doosnr - 1] == null) {
+                assert dozen[doosnr - 1] != null;
+                for (String item : dozen[doosnr - 1]) {
+                    tabelModellen[doosnr - 1].addRow(new String[]{item});
                 }
-                if(dozen[doosnr - 1] == null) {
-                    assert dozen[doosnr - 1] != null;
-                    for (String item : dozen[doosnr - 1]) {
-                        tabelModellen[doosnr - 1].addRow(new String[]{item});
-                    }
-                } else {
-                    tabelModellen[doosnr - 1].setRowCount(0);
-                    for (String item : dozen[doosnr - 1]) {
-                        tabelModellen[doosnr - 1].addRow(new String[]{item});
-                }
-
+            } else {
+                tabelModellen[doosnr - 1].setRowCount(0);
+                for (String item : dozen[doosnr - 1]) {
+                    tabelModellen[doosnr - 1].addRow(new String[]{item});
                 }
             }
-
         }
     }
+}
 
 
