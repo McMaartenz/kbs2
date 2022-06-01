@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class InpakPaneel extends JPanel implements ActionListener
 {
+	private DozenTabel dozenTabel = new DozenTabel();
 
 	/**
 	 * De inpak paneel
@@ -15,8 +16,7 @@ public class InpakPaneel extends JPanel implements ActionListener
 	{
 		super.setBackground(Color.WHITE);
 		super.setLayout(new GridLayout(2,1));
-
-
+		add(dozenTabel);
 	}
 
 	/**

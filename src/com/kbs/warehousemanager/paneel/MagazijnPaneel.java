@@ -4,32 +4,36 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class MagazijnPaneel extends JPanel implements ActionListener {
 
     public static void resetPanel() {
-        for (int i = 0; i<25; i++) {
-            buttonArray[i].setForeground(Color.BLACK);
-            btnPressed[i] = false;
+        for (int i = 5; i > 0; i--) {
+            for (int j = 1; j <= 5; j++) {
+                buttonArray[(i*j)-1].setForeground(Color.BLACK);
+                btnPressed[(i*j)-1] = false;
+            }
         }
     }
 
     static Boolean[] btnPressed = new Boolean[25];
     static JButton[] buttonArray = new JButton[25];
-        private ItemList itemList;
+    private final ItemList itemList;
 
-        public MagazijnPaneel(ItemList itemList){
-            this.itemList = itemList;
-            setBackground(Color.WHITE);
+    public MagazijnPaneel(ItemList itemList) {
+        this.itemList = itemList;
+        setBackground(Color.WHITE);
 
-            //Layout Magazijn
-            setLayout(new GridLayout(5, 5, 2, 2));
-            //"for"-loop voor alle knoppen toevoegen
-            for (int i = 0; i < 25; i++) {
-                JButton button = new JButton("item " + (i + 1));
+        //Layout Magazijn
+        setLayout(new GridLayout(5, 5, 2, 2));
+        //"for"-loop voor alle knoppen toevoegen
+        for (int i = 5; i > 0; i--) {
+            for (int j = 1; j <= 5; j++) {
+                JButton button = new JButton("item " + j + "." + i);
                 boolean BtnPressed = false;
-                btnPressed[i] = BtnPressed;
-                buttonArray[i] = button;
+                btnPressed[(j*i) - 1] = BtnPressed;
+                buttonArray[(j*i) - 1] = button;
                 button.setFont(new Font("Rockwell", Font.PLAIN, 15));
                 add(button);
                 button.addActionListener(this);
@@ -37,23 +41,26 @@ public class MagazijnPaneel extends JPanel implements ActionListener {
                 button.setForeground(Color.BLACK);
             }
         }
+    }
 
     // Functionaliteit MagazijnKnoppen
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
-        if(obj instanceof JButton ) {
+        if (obj instanceof JButton) {
             JButton button = ((JButton) e.getSource());
             String text = button.getText();
-            for (int i = 0; i < 25; i++) {
-                if(text.equals("item " + (i+1))){
-                    if(!btnPressed[i]) {
-                        itemList.addItem("item " + (i+1));
-                        button.setForeground(Color.RED);
-                        btnPressed[i] = true;
-                    } else {
-                        button.setForeground(Color.BLACK);
-                        itemList.removeItem("item " + (i+1));
-                        btnPressed[i] = false;
+            for (int i = 5; i > 0; i--) {
+                for (int j = 1; j <= 5; j++) {
+                    if (text.equals("item " + j + "." + i)) {
+                        if (!btnPressed[(i*j)-1]) {
+                            itemList.addItem("item " + j + "." + i);
+                            button.setForeground(Color.RED);
+                            btnPressed[(i*j)-1] = true;
+                        } else {
+                            button.setForeground(Color.BLACK);
+                            itemList.removeItem("item " + j + "." + i);
+                            btnPressed[(i*j)-1] = false;
+                        }
                     }
                 }
             }

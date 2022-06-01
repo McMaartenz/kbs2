@@ -4,5 +4,4 @@ import javax.swing.*;
 
 public class ProcesBalk extends JPanel {
 
-
 }

@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
+import com.kbs.warehousemanager.algoritmes.*;
 
 public class ControlePaneel extends JPanel implements ActionListener {
 	/**
@@ -17,12 +18,12 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	private final JButton RepeatButton = new JButton("Herhaal Pickronde");
 
 	//define the comboBoxes and their respective options
-	private String[] orderOptions = {"voorbeeldOrder 1", "voorbeeldOrder 2", "voorbeeldOrder 3"};
-	private JComboBox<String> orderList = new JComboBox<>(orderOptions);
-	private String[] tspOptions = {"Brute-force", "Branch-and-Bound", "Nearest Neighbour"};
-	private JComboBox<String> tspList = new JComboBox<>(tspOptions);
-	private String[] bppOptions = {"First Fit", "Next Fit", "Best Fit", "Worst Fit", "First-Fit-Decreasing", "Next-Fit-Decreasing", "Worst-Fit-Decreasing"};
-	private JComboBox<String> bppList = new JComboBox<>(bppOptions);
+	private final String[] orderOptions = {"voorbeeldOrder 1", "voorbeeldOrder 2", "voorbeeldOrder 3"};
+	private final JComboBox<String> orderList = new JComboBox<>(orderOptions);
+	private final String[] tspOptions = {"Brute-force", "Branch-and-Bound", "Nearest Neighbour"};
+	private final JComboBox<String> tspList = new JComboBox<>(tspOptions);
+	private final String[] bppOptions = {"First Fit", "Next Fit", "Best Fit", "Worst Fit", "First-Fit-Decreasing", "Next-Fit-Decreasing", "Worst-Fit-Decreasing"};
+	private final JComboBox<String> bppList = new JComboBox<>(bppOptions);
 
 	//define the labels for the currently selected algorithms, as well as the estimated boxes for the order
 	private String bppSelected = bppList.getSelectedItem().toString();
@@ -96,12 +97,20 @@ public class ControlePaneel extends JPanel implements ActionListener {
 		if (src instanceof JButton srcBtn) {
 			if (srcBtn == StartButton) {
 				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
+				DozenTabel.voegToe(5);
 				MagazijnPaneel.resetPanel();
-				System.out.println(ItemList.getItems());
 				ItemList.clearList();
+				System.out.println(Arrays.toString(MagazijnPaneel.buttonArray));
+				//get the correct bpp agorithm
+				String bpp = bppList.getSelectedItem().toString();
+				if (bpp.equals("First Fit")) {
+					//BppAlgoritmes.firstFit();
+				}
 
 			}
 		}
 
+
 	}
+
 }

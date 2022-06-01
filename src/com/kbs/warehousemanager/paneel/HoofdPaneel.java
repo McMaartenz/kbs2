@@ -7,9 +7,9 @@ import java.io.IOException;
 
 public class HoofdPaneel extends JFrame
 {
-	private OrderpickPaneel orderpickPaneel;
-	private InpakPaneel inpakPaneel;
-	private ControlePaneel controlePaneel;
+	private final OrderpickPaneel orderpickPaneel;
+	private final InpakPaneel inpakPaneel;
+	private final ControlePaneel controlePaneel;
 
 	/**
 	 * De hoofd paneel

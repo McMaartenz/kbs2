@@ -13,6 +13,7 @@ public class ItemList extends JPanel {
     }
 
     public static void clearList() {
+        items.clear();
         itemList.clear();
     }
 
