@@ -100,6 +100,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 				DozenTabel.voegToe(5);
 				MagazijnPaneel.resetPanel();
 				ItemList.clearList();
+				System.out.println(Arrays.toString(MagazijnPaneel.buttonArray));
 				//get the correct bpp agorithm
 				String bpp = bppList.getSelectedItem().toString();
 				if (bpp.equals("First Fit")) {
