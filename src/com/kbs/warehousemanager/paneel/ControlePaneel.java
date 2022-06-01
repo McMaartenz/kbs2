@@ -3,8 +3,9 @@ package com.kbs.warehousemanager.paneel;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.util.*;
-import com.kbs.warehousemanager.algoritmes.*;
+import java.sql.*;
 
 public class ControlePaneel extends JPanel implements ActionListener {
 	/**
@@ -18,8 +19,8 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	private final JButton RepeatButton = new JButton("Herhaal Pickronde");
 
 	//define the comboBoxes and their respective options
-	private final String[] orderOptions = {"voorbeeldOrder 1", "voorbeeldOrder 2", "voorbeeldOrder 3"};
-	private final JComboBox<String> orderList = new JComboBox<>(orderOptions);
+	static ArrayList<String> orderOptions = new ArrayList<>();
+	private final JComboBox<String> orderList = new JComboBox();
 	private final String[] tspOptions = {"Brute-force", "Branch-and-Bound", "Nearest Neighbour"};
 	private final JComboBox<String> tspList = new JComboBox<>(tspOptions);
 	private final String[] bppOptions = {"First Fit", "Next Fit", "Best Fit", "Worst Fit", "First-Fit-Decreasing", "Next-Fit-Decreasing", "Worst-Fit-Decreasing"};
@@ -36,6 +37,13 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	JLabel tspLabel = new JLabel("TSP-algoritme: " + tspSelected);
 
 	public ControlePaneel() {
+		DatabaseConnection.Connect();
+		System.out.println(orderOptions);
+
+		for(String s : orderOptions){
+			orderList.addItem("Order " + s);
+		}
+
 		super.setBackground(Color.WHITE);
 		super.setLayout(new GridLayout(9,1, 5, 5));
 		super.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -98,12 +106,11 @@ public class ControlePaneel extends JPanel implements ActionListener {
 			if (srcBtn == StartButton) {
 				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
 				DozenTabel.voegToe(5);
-				MagazijnPaneel.resetPanel();
+//				MagazijnPaneel.resetPanel();
 				ItemList.clearList();
-				System.out.println(Arrays.toString(MagazijnPaneel.buttonArray));
+				System.out.println(Arrays.deepToString(MagazijnPaneel.buttonArray));
 				//get the correct bpp agorithm
-				String bpp = bppList.getSelectedItem().toString();
-				if (bpp.equals("First Fit")) {
+				if (bppSelected.equals("First Fit")) {
 					//BppAlgoritmes.firstFit();
 				}
 

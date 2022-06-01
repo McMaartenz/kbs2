@@ -5,6 +5,7 @@ import com.kbs.warehousemanager.serial.*;
 import com.kbs.warehousemanager.serial.Robot;
 
 import java.awt.*;
+import java.sql.SQLException;
 
 public class Main
 {
@@ -34,6 +35,8 @@ public class Main
 		}).start();
 
 		HoofdPaneel hoofdPaneel = new HoofdPaneel();
+
+
 		SerialManager.close(serialManager);
 	}
 }
