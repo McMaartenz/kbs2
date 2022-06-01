@@ -16,8 +16,8 @@
 #define OMLAAG       false
 #define VOORUIT       true
 #define ACHTERUIT    false
-#define MOTOR_PK       192
-#define MOTOR_PK_ONDER  48
+#define MOTOR_PK       170
+#define MOTOR_PK_ONDER 150
 
 /*
  * Motor X - Geel & bruin
@@ -30,12 +30,12 @@
  * Motor Z + Roze & wit
  */
 
-#define X_BAAN_TIJD   1725
-#define X_OFFSET       100
+#define X_BAAN_TIJD   4000
+#define X_OFFSET       875
 
-#define Y_BAAN_TIJD   1525
-#define Y_INITIAL_DIST 550
-#define Y_OFFSET       100
+#define Y_BAAN_TIJD    2000
+#define Y_INITIAL_DIST 1000
+#define Y_OFFSET       975
 
 #define Z_BAAN_TIJD    500
 int X_POS, Y_POS;
@@ -151,9 +151,10 @@ void handlePacket()
             return;
         }
 
+        // PULL NEXT COORDINATE
         int requested_x, requested_y;
-        requested_x = punten_arr[huidig_punt][0]+1;
-        requested_y = punten_arr[huidig_punt][1]+1;
+        requested_x = punten_arr[huidig_punt][0];
+        requested_y = punten_arr[huidig_punt][1];
 
         huidig_punt++;
         if (huidig_punt == punten_aantal)
@@ -164,8 +165,7 @@ void handlePacket()
         {
             Serial.println("OK");
         }
-        // ga naar X,Y
-        // duw
+        ////// MOVEMENT ///////////////
 
         X_naar(requested_x);
         delay(250);
@@ -255,6 +255,9 @@ void Y_reset()
  */
 void X_naar(int pos)
 {
+  if (pos == X_POS) {
+    return;
+  }
   if (pos == 1)
   {
     X_reset(LINKS);
@@ -287,6 +290,9 @@ void X_naar(int pos)
  */
 void Y_naar(int pos)
 {
+    if (pos == Y_POS) {
+    return;
+  }
   if (pos == 1)
   {
     Y_reset();

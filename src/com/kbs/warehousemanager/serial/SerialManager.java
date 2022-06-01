@@ -13,6 +13,7 @@ public class SerialManager
 {
 	private static final String CONNECTION_ERROR = "Failed to connect";
 	private static final String NOT_ENOUGH_PORTS = "There were not enough ports for two robots";
+	private static final int timeoutTime = 15000;
 
 	private Queue<String> orderpickRobotBuffer = new LinkedList<>();
 	private Queue<String> inpakRobotBuffer = new LinkedList<>();
@@ -93,10 +94,22 @@ public class SerialManager
 							uitgetikt = true;
 							continue;
 						}
+						System.err.println("Orderpick recv: \"" + line + "\"");
 						orderpickRobotBuffer.add(line);
 					}
 				}
 			});
+			boolean startupDone = false;
+			for (int i = 0; i < 10; i++) {
+				String startupCheck = sendPacket("ping\n", Robot.ORDERPICK_ROBOT, true);
+				if (startupCheck.startsWith("Pong")) {
+					startupDone = true;
+					break;
+				}
+			}
+			if (!startupDone) {
+				throw new IllegalStateException("Orderpick robot is not responding");
+			}
 		}
 		else
 		{
@@ -114,17 +127,6 @@ public class SerialManager
 					inpakRobotBuffer.addAll(Arrays.asList(incomingBuffer));
 				}
 			});
-			boolean startupDone = false;
-			for (int i = 0; i < 10; i++) {
-				String startupCheck = sendPacket("ping\n", Robot.ORDERPICK_ROBOT, true);
-				if (startupCheck.startsWith("Pong")) {
-					startupDone = true;
-					break;
-				}
-			}
-			if (!startupDone) {
-				throw new IllegalStateException("Orderpick robot is not responding");
-			}
 		}
 		else
 		{
@@ -200,7 +202,7 @@ public class SerialManager
 
 		final Future<String> response = executor.submit(() ->
 		{
-			while (true)
+			while (!Thread.currentThread().isInterrupted())
 			{
 				if (!getBufferOf(robot).isEmpty())
 				{
@@ -209,8 +211,8 @@ public class SerialManager
 						return getBufferOf(robot).poll();
 					}
 				}
-				Thread.onSpinWait();
 			}
+			return "ThreadInterrupt";
 		});
 
 		try
@@ -219,6 +221,7 @@ public class SerialManager
 		}
 		catch (InterruptedException | ExecutionException | TimeoutException e)
 		{
+			response.cancel(true);
 			System.err.println("Packet timed out");
 		}
 
@@ -334,7 +337,7 @@ public class SerialManager
 					return false;
 				}
 
-				long timeoutDate = System.currentTimeMillis() + 7500;
+				long timeoutDate = System.currentTimeMillis() + timeoutTime;
 				while (!uitgetikt)
 				{
 					Thread.onSpinWait();
