@@ -2,12 +2,14 @@ package com.kbs.warehousemanager.paneel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class HoofdPaneel extends JFrame
 {
-	private OrderpickPaneel orderpickPaneel;
-	private InpakPaneel inpakPaneel;
-	private ControlePaneel controlePaneel;
+	private final OrderpickPaneel orderpickPaneel;
+	private final InpakPaneel inpakPaneel;
+	private final ControlePaneel controlePaneel;
 
 	/**
 	 * De hoofd paneel
@@ -16,16 +18,16 @@ public class HoofdPaneel extends JFrame
 	 * @see InpakPaneel
 	 * @see ControlePaneel
 	 */
-	public HoofdPaneel()
-	{
+
+	public HoofdPaneel() {
 		setLayout(new GridLayout(1, 3));
 		orderpickPaneel = new OrderpickPaneel();
 		inpakPaneel = new InpakPaneel();
 		controlePaneel = new ControlePaneel();
 
+		add(controlePaneel);
 		add(orderpickPaneel);
 		add(inpakPaneel);
-		add(controlePaneel);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(1280, 720);

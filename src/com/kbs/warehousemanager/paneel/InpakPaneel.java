@@ -6,13 +6,17 @@ import javax.swing.*;
 
 public class InpakPaneel extends JPanel implements ActionListener
 {
+	private DozenTabel dozenTabel = new DozenTabel();
+
 	/**
 	 * De inpak paneel
 	 * Dit bevat de dozen met progress, en inhoud
 	 */
 	public InpakPaneel()
 	{
-
+		super.setBackground(Color.WHITE);
+		super.setLayout(new GridLayout(2,1));
+		add(dozenTabel);
 	}
 
 	/**
