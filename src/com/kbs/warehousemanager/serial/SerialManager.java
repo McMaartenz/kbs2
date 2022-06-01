@@ -13,6 +13,7 @@ public class SerialManager
 {
 	private static final String CONNECTION_ERROR = "Failed to connect";
 	private static final String NOT_ENOUGH_PORTS = "There were not enough ports for two robots";
+	private static int timeoutTime = 15000;
 
 	private Queue<String> orderpickRobotBuffer = new LinkedList<>();
 	private Queue<String> inpakRobotBuffer = new LinkedList<>();
@@ -321,7 +322,7 @@ public class SerialManager
 			for (int currentPoint = 0; currentPoint < points.length; currentPoint++)
 			{
 				Point currentPointObj = points[currentPoint];
-				System.out.format("Robot going to point id %d, at (%d, %d)\n", currentPoint, currentPointObj.x + 1, currentPointObj.y + 1);
+				System.out.format("Robot going to point id %d, at (%d, %d)\n", currentPoint, currentPointObj.x, currentPointObj.y);
 
 				uitgetikt = false;
 				response = sendPacket("step\n", Robot.ORDERPICK_ROBOT, true);
@@ -336,7 +337,7 @@ public class SerialManager
 					return false;
 				}
 
-				long timeoutDate = System.currentTimeMillis() + 7500;
+				long timeoutDate = System.currentTimeMillis() + timeoutTime;
 				while (!uitgetikt)
 				{
 					Thread.onSpinWait();
