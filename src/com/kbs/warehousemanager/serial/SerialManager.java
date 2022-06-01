@@ -93,10 +93,22 @@ public class SerialManager
 							uitgetikt = true;
 							continue;
 						}
+						System.err.println("Orderpick recv: \"" + line + "\"");
 						orderpickRobotBuffer.add(line);
 					}
 				}
 			});
+			boolean startupDone = false;
+			for (int i = 0; i < 10; i++) {
+				String startupCheck = sendPacket("ping\n", Robot.ORDERPICK_ROBOT, true);
+				if (startupCheck.startsWith("Pong")) {
+					startupDone = true;
+					break;
+				}
+			}
+			if (!startupDone) {
+				throw new IllegalStateException("Orderpick robot is not responding");
+			}
 		}
 		else
 		{
@@ -114,17 +126,6 @@ public class SerialManager
 					inpakRobotBuffer.addAll(Arrays.asList(incomingBuffer));
 				}
 			});
-			boolean startupDone = false;
-			for (int i = 0; i < 10; i++) {
-				String startupCheck = sendPacket("ping\n", Robot.ORDERPICK_ROBOT, true);
-				if (startupCheck.startsWith("Pong")) {
-					startupDone = true;
-					break;
-				}
-			}
-			if (!startupDone) {
-				throw new IllegalStateException("Orderpick robot is not responding");
-			}
 		}
 		else
 		{
@@ -200,7 +201,7 @@ public class SerialManager
 
 		final Future<String> response = executor.submit(() ->
 		{
-			while (true)
+			while (!Thread.currentThread().isInterrupted())
 			{
 				if (!getBufferOf(robot).isEmpty())
 				{
@@ -209,8 +210,8 @@ public class SerialManager
 						return getBufferOf(robot).poll();
 					}
 				}
-				Thread.onSpinWait();
 			}
+			return "ThreadInterrupt";
 		});
 
 		try
@@ -219,6 +220,7 @@ public class SerialManager
 		}
 		catch (InterruptedException | ExecutionException | TimeoutException e)
 		{
+			response.cancel(true);
 			System.err.println("Packet timed out");
 		}
 
@@ -319,7 +321,7 @@ public class SerialManager
 			for (int currentPoint = 0; currentPoint < points.length; currentPoint++)
 			{
 				Point currentPointObj = points[currentPoint];
-				System.out.format("Robot going to point id %d, at (%d, %d)\n", currentPoint, currentPointObj.x, currentPointObj.y);
+				System.out.format("Robot going to point id %d, at (%d, %d)\n", currentPoint, currentPointObj.x + 1, currentPointObj.y + 1);
 
 				uitgetikt = false;
 				response = sendPacket("step\n", Robot.ORDERPICK_ROBOT, true);

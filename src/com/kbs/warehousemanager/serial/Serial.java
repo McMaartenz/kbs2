@@ -143,7 +143,6 @@ public class Serial
 						if (!in.isEmpty())
 						{
 							eventHandler.accept(in);
-							System.err.println("DEBUG RECEIVE: " + in);
 						}
 						else
 						{

@@ -16,8 +16,8 @@
 #define OMLAAG       false
 #define VOORUIT       true
 #define ACHTERUIT    false
-#define MOTOR_PK       192
-#define MOTOR_PK_ONDER  48
+#define MOTOR_PK       170
+#define MOTOR_PK_ONDER 150
 
 /*
  * Motor X - Geel & bruin
@@ -31,11 +31,11 @@
  */
 
 #define X_BAAN_TIJD   1725
-#define X_OFFSET       100
+#define X_OFFSET       500
 
-#define Y_BAAN_TIJD   1525
-#define Y_INITIAL_DIST 550
-#define Y_OFFSET       100
+#define Y_BAAN_TIJD    1525
+#define Y_INITIAL_DIST 1000
+#define Y_OFFSET       500
 
 #define Z_BAAN_TIJD    500
 int X_POS, Y_POS;
