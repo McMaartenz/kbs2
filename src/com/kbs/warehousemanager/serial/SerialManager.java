@@ -114,6 +114,17 @@ public class SerialManager
 					inpakRobotBuffer.addAll(Arrays.asList(incomingBuffer));
 				}
 			});
+			boolean startupDone = false;
+			for (int i = 0; i < 10; i++) {
+				String startupCheck = sendPacket("ping\n", Robot.ORDERPICK_ROBOT, true);
+				if (startupCheck.startsWith("Pong")) {
+					startupDone = true;
+					break;
+				}
+			}
+			if (!startupDone) {
+				throw new IllegalStateException("Orderpick robot is not responding");
+			}
 		}
 		else
 		{
@@ -204,7 +215,7 @@ public class SerialManager
 
 		try
 		{
-			return response.get(500, TimeUnit.MILLISECONDS);
+			return response.get(2000, TimeUnit.MILLISECONDS);
 		}
 		catch (InterruptedException | ExecutionException | TimeoutException e)
 		{
@@ -327,7 +338,7 @@ public class SerialManager
 				while (!uitgetikt)
 				{
 					Thread.onSpinWait();
-					if (timeoutDate > System.currentTimeMillis())
+					if (timeoutDate < System.currentTimeMillis())
 					{
 						System.err.println("Timeout reached for step packet");
 						return false;
