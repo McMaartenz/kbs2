@@ -233,7 +233,7 @@ public class SerialManager
 	 * @param s Packet data
 	 * @param robot Robot to send to
 	 * @param expectResponse Should we wait for a response?
-	 * @return ErrorNoResponse in case of timeout (500ms),
+	 * @return ErrorNoResponse in case of timeout (2000ms),
 	 *         ErrorSerialFault when port is closed or I/O exception is thrown,
 	 *         ErrorNotExpected when <b>expectResponse</b> is false,
 	 *         response of packet
