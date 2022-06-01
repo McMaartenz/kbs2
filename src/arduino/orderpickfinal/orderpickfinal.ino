@@ -1,3 +1,6 @@
+#include <stdlib.h>
+
+// movement variables
 #define PIN_X_DIRECTION 12
 #define PIN_X_PWM        3
 #define PIN_X_BRAKE      9
@@ -16,25 +19,6 @@
 #define MOTOR_PK       192
 #define MOTOR_PK_ONDER  48
 
-#define QUARTER_SECOND 250
-#define HALF_SECOND    500
-#define ONE_SECOND    1000
-
-#define X_BAAN_TIJD   1725
-// #define X_OFFSET       440 //x offset boven
-#define X_OFFSET       475
-
-#define Y_BAAN_TIJD   1525
-#define Y_INITIAL_DIST 550
-#define Y_OFFSET       600
-
-#define Z_BAAN_TIJD    500
-
-#define CALIBRATION    110
-
-// Stop de volgende lijn in comments om de serial niet te exploderen bij het pakkettensysteem
-#define DEBUG_LOG
-
 /*
  * Motor X - Geel & bruin
  * Motor X + Geel & wit
@@ -46,54 +30,195 @@
  * Motor Z + Roze & wit
  */
 
+#define X_BAAN_TIJD   1725
+#define X_OFFSET       100
+
+#define Y_BAAN_TIJD   1525
+#define Y_INITIAL_DIST 550
+#define Y_OFFSET       100
+
+#define Z_BAAN_TIJD    500
 int X_POS, Y_POS;
+
+// packet variables
+#define PAKKET_MAX_LENGTE 64
+
+int** punten_arr = NULL;
+int punten_aantal = 0;
+int huidig_punt = 0;
 
 void setup()
 {
+  // initialize movement code
   pinMode(PIN_X_DIRECTION, OUTPUT);
   pinMode(PIN_X_PWM,       OUTPUT);
   pinMode(PIN_X_BRAKE,     OUTPUT);
   pinMode(PIN_Y_DIRECTION, OUTPUT);
   pinMode(PIN_Y_PWM,       OUTPUT);
   pinMode(PIN_Y_BRAKE,     OUTPUT);
-
-  Serial.begin(115200);
   TCCR2B = TCCR2B & B11111000 | B00000001; // TCCR2B: 1 / 1
   TCCR2A = TCCR2A & B11111000 | B00000001; // TCCR2A: 1 / 1
-
-  SI_log("Resetting Z & Y");
-  Z_reset();
-  Y_reset();
-
   X_POS = 1;
   Y_POS = 1;
+
+  Z_reset();
+  Y_reset();
+  X_reset(LINKS);
+
+  Serial.begin(9600);
+  while (!Serial);
 }
 
 void loop()
 {
-	handlePacket();
-  X_reset(LINKS);
-  Y_reset();
+    handlePacket();
+}
 
-  for(int i = 1; i <= 5; i++)
-  {
-    X_naar(i);
-    delay(QUARTER_SECOND);
+/**
+ * @brief Whether the string has a certain prefix
+ * 
+ * @param str String to test
+ * @param pre Prefix to use
+ * @return String starting with the prefix
+ */
+bool hasPrefix(const char* str, const char* pre)
+{
+    return strncmp(pre, str, strlen(pre)) == 0;
+}
 
-    // Y_naar(5);
-    for(int j = 1; j <= 5; j++)
+/**
+ * @brief Sleep for ms, handle packets in the background
+ *
+ * @param ms Milliseconds to sleep
+ */
+void sleep(unsigned long ms)
+{
+    ms = millis() + ms;
+    while (ms > (millis() - 250))
     {
-      SI_log("Going to X,Y " + String(i) + ", " + String(j));
-      Y_naar(j);
-      delay(HALF_SECOND);
-      Z_duw();
-      SI_log(String(Y_POS));
+        handlePacket();
     }
-  }
+    while (ms > millis());
+}
+
+////// PACKAGES ///////////////
+/**
+ *  @brief Handle a single packet coming in
+ */
+void handlePacket()
+{
+    if (!Serial.available())
+    {
+        return;
+    }
+
+    char buffer[PAKKET_MAX_LENGTE]; // Pakket max-lengte 64
+    for (int i = 0; i < PAKKET_MAX_LENGTE; i++)
+    {
+        buffer[i] = '\0';
+    }
+    for (int i = 0; i < PAKKET_MAX_LENGTE; i++)
+    {
+        while (!Serial.available());
+        char currentChar = Serial.read();
+        if (currentChar == '\n')
+        {
+            buffer[i] = 0;
+            break;
+        }
+
+        buffer[i] = currentChar;
+    }
+
+    if (hasPrefix(buffer, "status"))
+    {
+        Serial.println("OK");
+    }
+    else if (hasPrefix(buffer, "ping"))
+    {
+        Serial.println("Pong!");
+    }
+    else if (hasPrefix(buffer, "step"))
+    {
+        if (punten_aantal <= 0)
+        {
+            Serial.println("ErrorNoPoints");
+            return;
+        }
+        if (punten_arr == NULL || huidig_punt >= punten_aantal)
+        {
+            Serial.println("ErrorIllegalState");
+            return;
+        }
+
+        int requested_x, requested_y;
+        requested_x = punten_arr[huidig_punt][0]+1;
+        requested_y = punten_arr[huidig_punt][1]+1;
+
+        huidig_punt++;
+        if (huidig_punt == punten_aantal)
+        {
+            Serial.println("OKEndPoint");
+        }
+        else
+        {
+            Serial.println("OK");
+        }
+        // ga naar X,Y
+        // duw
+
+        X_naar(requested_x);
+        delay(250);
+        Y_naar(requested_y);
+        delay(250);
+        // Z_duw();
+
+        // zodra klaar
+        Serial.println("uitgetikt");
+    }
+    else if (hasPrefix(buffer, "pos!"))
+    {
+        // Start reading points array
+        char* lengthBuff = new char[3];
+        lengthBuff[0] = buffer[4];
+        lengthBuff[1] = buffer[5];
+        lengthBuff[2] = '\0';
+        int pointAmount = atoi(lengthBuff);
+
+        int** punten = new int*[pointAmount];
+        for (int i = 0; i < pointAmount; i++)
+        {
+            int j = 6 + i * 2;
+            if ((j + 1) > PAKKET_MAX_LENGTE)
+            {
+                Serial.println("ErrorPacketTooLong");
+                return;
+            }
+            else if (buffer[j] == '\0' || buffer[j + 1] == '\0')
+            {
+                Serial.println("ErrorSizeMismatch");
+                return;
+            }
+
+            punten[i] = new int[2];
+            punten[i][0] = buffer[j] - '0';
+            punten[i][1] = buffer[j + 1] - '0';
+        }
+
+        punten_arr = punten;
+        punten_aantal = pointAmount;
+        huidig_punt = 0;
+
+        Serial.println("OK");
+    }
+    else
+    {
+        Serial.println("InaudibleGarbage");
+    }
 }
 
 ////// POSITIE FUNCTIES ///////////////
-
+////// RESETS ///////////////
 /**
  * @brief Reset X-baan
  * 
@@ -122,6 +247,7 @@ void Y_reset()
   track_Y(1);
 }
 
+////// X MOVE ///////////////
 /**
  * @brief Beweeg naar X-positie
  * 
@@ -153,6 +279,7 @@ void X_naar(int pos)
   track_X(pos);
 }
 
+////// Y MOVE ///////////////
 /**
  * @brief Beweeg naar Y-positie
  * 
@@ -179,6 +306,7 @@ void Y_naar(int pos)
   track_Y(pos);
 }
 
+////// Z MOVE ///////////////
 /**
  * @brief Geef een duw aan product
  * 
@@ -186,7 +314,7 @@ void Y_naar(int pos)
 void Z_duw()
 {
   Z_beweeg(MOTOR_PK, VOORUIT, Z_BAAN_TIJD);
-  delay(QUARTER_SECOND);
+  delay(250);
   Z_reset();
 }
 
@@ -199,6 +327,7 @@ void Z_reset()
   Z_beweeg(MOTOR_PK, ACHTERUIT, Z_BAAN_TIJD);
 }
 
+////////////////////////////////////////
 ////// MOTOR X-axis ///////////////////
 
 void track_X(int newpos) {
@@ -270,7 +399,7 @@ void Y_set_brake(bool enabled)
   digitalWrite(PIN_Y_BRAKE, enabled);
 }
 
-////// MOTOR Y-axis ///////////////////
+////// MOTOR Z-axis ///////////////////
 
 void Z_beweeg(int pwm, bool direction, int duratie)
 {
@@ -299,92 +428,4 @@ void Z_set_direction(bool direction)
 void Z_set_brake()
 {
   Z_set_pwm(0);
-}
-
-
-////// SERIAL INTERFACE ///////////////
-
-
-/**
- * @brief Whether the string has a certain prefix
- * 
- * @param str String to test
- * @param pre Prefix to use
- * @return String starting with the prefix
- */
-bool hasPrefix(const char* str, const char* pre)
-{
-    return strncmp(pre, str, strlen(pre)) == 0;
-}
-
-/**
- * @brief Sleep for ms, handle packets in the background
- *
- * @param ms Milliseconds to sleep
- */
-void sleep(unsigned long ms)
-{
-    ms = millis() + ms;
-    while (ms < (millis() - 250))
-    {
-        handlePacket();
-    }
-    while (ms < millis());
-}
-
-/**
- *  @brief Handle a single packet coming in
- */
-void handlePacket()
-{
-    if (!Serial.available())
-    {
-        return;
-    }
-
-    char buffer[12]; // Pakket max-lengte 12
-    for (int i = 0; i < 12; i++)
-    {
-        while (!Serial.available());
-        char currentChar = Serial.read();
-        if (currentChar == '\n')
-        {
-            buffer[i] = 0;
-            break;
-        }
-
-        buffer[i] = currentChar;
-    }
-
-    if (hasPrefix(buffer, "status"))
-    {
-        Serial.println("OK");
-    }
-    else if (hasPrefix(buffer, "ping"))
-    {
-        Serial.println("Pong!");
-    }
-    else if (hasPrefix(buffer, "pos!"))
-    {
-        // Start reading points array
-        char* lengthBuff = new char[3];
-        lengthBuff[0] = buffer[4];
-        lengthBuff[1] = buffer[5];
-        lengthBuff[2] = '\0';
-
-        int pointAmount = atoi(lengthBuff);
-
-        Serial.println("OK: " + String(pointAmount));
-    }
-    else
-    {
-        Serial.println("InaudibleGarbage");
-    }
-}
-
-void SI_log(String s)
-{
-  #ifdef DEBUG_LOG
-  Serial.println(s);
-  #endif
 }
