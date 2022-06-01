@@ -13,7 +13,7 @@ public class SerialManager
 {
 	private static final String CONNECTION_ERROR = "Failed to connect";
 	private static final String NOT_ENOUGH_PORTS = "There were not enough ports for two robots";
-	private static int timeoutTime = 15000;
+	private static final int timeoutTime = 15000;
 
 	private Queue<String> orderpickRobotBuffer = new LinkedList<>();
 	private Queue<String> inpakRobotBuffer = new LinkedList<>();
