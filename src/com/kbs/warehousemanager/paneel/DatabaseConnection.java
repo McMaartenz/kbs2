@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 class DatabaseConnection{
     static ResultSet orderlines;
+    static ResultSet producten;
 
     static HashMap<Integer, ArrayList<Integer>> orderLineArray = new HashMap<>();
 
@@ -16,7 +17,12 @@ class DatabaseConnection{
             Connection con=DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/nerdytest","root","");
             Statement stmt1 = con.createStatement();
+            Statement stmt2 = con.createStatement();
             orderlines = stmt1.executeQuery("SELECT * FROM orderlines ORDER BY orderID ASC");
+            producten = stmt2.executeQuery("SELECT * FROM product ORDER BY orderID ASC");
+            while(producten.next()){
+                System.out.println(producten.getInt(1) + " " + producten.getInt(2) + " " + producten.getInt(3) + " " + producten.getInt(4));
+            }
             while(orderlines.next()) {
                 int OrderID = orderlines.getInt(1);
                 int ProductID = orderlines.getInt(3);
