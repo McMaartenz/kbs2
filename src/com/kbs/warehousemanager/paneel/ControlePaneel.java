@@ -322,6 +322,14 @@ public class ControlePaneel extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(this, ok ? "Order is successvol uitgevoerd" : "Order heeft een probleem ondervonden", "Uitvoeren pad resultaat", JOptionPane.INFORMATION_MESSAGE);
 				System.out.println("Success of path is: "+ ok);
 			}
+			else if (srcBtn == RepeatButton)
+			{
+				serialManager.resetRobot(Robot.ORDERPICK_ROBOT);
+				boolean ok = serialManager.repeatLast();
+
+				JOptionPane.showMessageDialog(this, ok ? "Order is successvol uitgevoerd" : "Order heeft een probleem ondervonden", "Uitvoeren pad resultaat", JOptionPane.INFORMATION_MESSAGE);
+				System.out.println("Success of path is: "+ ok);
+			}
 		}
 	}
 }

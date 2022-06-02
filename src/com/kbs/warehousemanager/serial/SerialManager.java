@@ -21,6 +21,8 @@ public class SerialManager
 	public final Object orderpickRobotBufferLock = new Object();
 	public final Object inpakRobotBufferLock = new Object();
 
+	private Point[] lastPickRound;
+
 	private Serial orderpickRobot;
 	private Serial inpakRobot;
 
@@ -312,12 +314,27 @@ public class SerialManager
 	}
 
 	/**
+	 * Repeat last order pick round
+	 * @return on success
+	 */
+	public boolean repeatLast()
+	{
+		if (lastPickRound == null)
+		{
+			return false;
+		}
+
+		return performPath(lastPickRound);
+	}
+
+	/**
 	 * Perform the path on the order pick robot
 	 * @param points points to visit, sorted
 	 * @return true on success, or false on fail
 	 */
 	public boolean performPath(Point[] points)
 	{
+		lastPickRound = points;
 		if (good(Robot.ORDERPICK_ROBOT))
 		{
 			String response;
