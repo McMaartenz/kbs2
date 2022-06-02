@@ -2,17 +2,14 @@ package com.kbs.warehousemanager.paneel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 public class MagazijnPaneel extends JPanel {
 
-
+    //Buttons definiëren en boolean aanmaken voor deze buttons
     static Boolean[] btnPressed = new Boolean[25];
     static JButton[] buttonArray = new JButton[25];
-    private final ItemList itemList;
 
+    //De magazijnTabel leegmaken
     public static void resetPanel() {
         for (int i = 0; i < 25; i++) {
                 buttonArray[i].setBackground(UIManager.getColor("Button.background"));
@@ -21,12 +18,10 @@ public class MagazijnPaneel extends JPanel {
     }
 
     public MagazijnPaneel(ItemList itemList) {
-        System.out.println(DatabaseConnection.orderLineArray);
-        this.itemList = itemList;
+        //itemList definiëren
         setBackground(Color.WHITE);
-
-        //Layout Magazijn
         setLayout(new GridLayout(5, 5, 2, 2));
+
         //"for"-loop voor alle knoppen toevoegen
         for (int i = 0; i < 25; i++) {
                 JButton button = new JButton("Product " + (i+1));
@@ -40,7 +35,4 @@ public class MagazijnPaneel extends JPanel {
                 button.setEnabled(false);
         }
     }
-
 }
-//poopybutthole
-// TODO ^^ haal dit weg voor de demo jongens

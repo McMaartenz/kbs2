@@ -44,8 +44,8 @@ public class ControlePaneel extends JPanel implements ActionListener {
 
 
 	public ControlePaneel() {
-		System.out.println(orderOptions);
 
+		//Orders toevoegen aan JComboBox
 		for(String s : orderOptions){
 			orderList.addItem("Order " + s);
 		}
@@ -106,13 +106,16 @@ public class ControlePaneel extends JPanel implements ActionListener {
 			bppSelected = bppList.getSelectedItem().toString();
 			tspSelected = tspList.getSelectedItem().toString();
 
+			//Resetten magazijnTabel en ItemList zodat er een nieuwe getoond kan worden
 			MagazijnPaneel.resetPanel();
 			ItemList.clearList();
+
+			//De geselecteerde order definiëren als 'selectedOrder'
 			if(orderList.getSelectedItem() != null) {
 				selectedOrder = orderList.getSelectedItem().toString();
 			}
-			System.out.println(extractNumber.extract(selectedOrder));
 
+			//Items uit de Database
 			ArrayList<Integer> items = (DatabaseConnection.orderLineArray.get(extractNumber.extract(selectedOrder)));
 			Collections.sort(items);
 			for(int i : items){
