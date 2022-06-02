@@ -138,6 +138,14 @@ void handlePacket()
     {
         Serial.println("Pong!");
     }
+    else if (hasPrefix(buffer, "reset"))
+    {
+      Serial.println("resetOK");
+      Z_reset();
+      Y_reset();
+      X_reset(LINKS);
+      Serial.println("resetdone");
+    }
     else if (hasPrefix(buffer, "step"))
     {
         if (punten_aantal <= 0)

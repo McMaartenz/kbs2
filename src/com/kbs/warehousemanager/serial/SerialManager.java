@@ -25,6 +25,7 @@ public class SerialManager
 	private Serial inpakRobot;
 
 	public volatile boolean uitgetikt;
+	public volatile boolean resetDone;
 
 	public Serial getRobot(Robot robot)
 	{
@@ -92,6 +93,11 @@ public class SerialManager
 						if (line.startsWith("uitgetikt"))
 						{
 							uitgetikt = true;
+							continue;
+						}
+						if (line.startsWith("resetdone"))
+						{
+							resetDone = true;
 							continue;
 						}
 						System.err.println("Orderpick recv: \"" + line + "\"");
@@ -324,13 +330,37 @@ public class SerialManager
 				Point currentPointObj = points[currentPoint];
 				System.out.format("Robot going to point id %d, at (%d, %d)\n", currentPoint, currentPointObj.x, currentPointObj.y);
 
-				uitgetikt = false;
-				response = sendPacket("step\n", Robot.ORDERPICK_ROBOT, true);
-				if (!response.startsWith("OK"))
+				do
 				{
-					System.err.println("Error: " + response);
-					return false;
+					uitgetikt = false;
+					response = sendPacket("step\n", Robot.ORDERPICK_ROBOT, true);
+					if (!response.startsWith("OK"))
+					{
+						System.err.println("Error: " + response);
+						resetDone = false;
+						String resetResponse = sendPacket("reset\n", Robot.ORDERPICK_ROBOT, true);
+						if (!resetResponse.startsWith("resetOK"))
+						{
+							System.err.println("Unable to reset robot: " + resetResponse);
+							return false;
+						}
+
+						long timeoutDate = System.currentTimeMillis() + timeoutTime;
+						while (!resetDone)
+						{
+							Thread.onSpinWait();
+							if (timeoutDate < System.currentTimeMillis())
+							{
+								System.err.println("Timeout reached for reset packet");
+								return false;
+							}
+						}
+
+
+					}
 				}
+				while (!response.startsWith("OK"));
+
 				if (response.startsWith("OKEndPoint") && currentPoint != (points.length - 1))
 				{
 					System.err.println("Error mismatch: expected OKEndPoint, but received OK");
