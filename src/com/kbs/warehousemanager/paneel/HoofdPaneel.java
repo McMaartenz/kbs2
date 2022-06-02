@@ -26,6 +26,7 @@ public class HoofdPaneel extends JFrame
 		orderpickPaneel = new OrderpickPaneel();
 		inpakPaneel = new InpakPaneel();
 		controlePaneel = new ControlePaneel();
+		System.out.println(DatabaseConnection.coordinates);
 
 		add(controlePaneel);
 		add(orderpickPaneel);

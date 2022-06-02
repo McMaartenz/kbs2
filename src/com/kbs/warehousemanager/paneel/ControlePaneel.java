@@ -114,24 +114,18 @@ public class ControlePaneel extends JPanel implements ActionListener {
 			System.out.println(extractNumber.extract(selectedOrder));
 
 			ArrayList<Integer> items = (DatabaseConnection.orderLineArray.get(extractNumber.extract(selectedOrder)));
+			Collections.sort(items);
 			for(int i : items){
 				ItemList.addItem("Item " + i);
 				MagazijnPaneel.buttonArray[(i-1)].setBackground(Color.GREEN);
 				}
 			}
-
-
-
-
-
-
 			bppLabel.setText("BPP-algoritme: " + bppSelected);
 			tspLabel.setText("TSP-algoritme: " + tspSelected);
 		if (src instanceof JButton srcBtn) {
 			if (srcBtn == StartButton) {
 				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
 				DozenTabel.voegToe(5);
-//				MagazijnPaneel.resetPanel();
 				ItemList.clearList();
 				System.out.println(Arrays.deepToString(MagazijnPaneel.buttonArray));
 				//get the correct bpp agorithm
@@ -329,8 +323,6 @@ public class ControlePaneel extends JPanel implements ActionListener {
 				System.out.println("Success of path is: "+ ok);
 			}
 		}
-
-
 	}
-
 }
+
