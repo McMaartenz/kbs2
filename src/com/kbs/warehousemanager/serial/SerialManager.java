@@ -28,7 +28,7 @@ public class SerialManager
 
 	public volatile boolean uitgetikt;
 	public volatile boolean resetDone;
-	public boolean shouldStop;
+	public boolean shouldPause;
 
 	public Serial getRobot(Robot robot)
 	{
@@ -336,7 +336,7 @@ public class SerialManager
 	 */
 	public boolean performPath(Point[] points)
 	{
-		shouldStop = false;
+		shouldPause = false;
 		lastPickRound = points;
 		if (good(Robot.ORDERPICK_ROBOT))
 		{
@@ -378,10 +378,9 @@ public class SerialManager
 				Point currentPointObj = points[currentPoint];
 				System.out.format("Robot going to point id %d, at (%d, %d)\n", currentPoint, currentPointObj.x, currentPointObj.y);
 
-				if (shouldStop)
+				while (shouldPause)
 				{
-					System.err.println("Told to stop");
-					return false;
+					Thread.onSpinWait();
 				}
 				do
 				{

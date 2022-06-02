@@ -1,7 +1,7 @@
 package com.kbs.warehousemanager.paneel;
 
+import com.kbs.warehousemanager.Main;
 import com.kbs.warehousemanager.algoritmes.NearestNeighbour;
-import com.kbs.warehousemanager.algoritmes.Order;
 import com.kbs.warehousemanager.serial.Robot;
 
 import java.awt.*;
@@ -19,7 +19,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 
 	//define the buttons
 	private final JButton StartButton = new JButton("Start");
-	private final JButton StopButton = new JButton("Stop");
+	private final JButton pauzeKnop = new JButton("Pause");
 	private final JButton RepeatButton = new JButton("Herhaal Pickronde");
 
 	//define the comboBoxes and their respective options
@@ -56,19 +56,19 @@ public class ControlePaneel extends JPanel implements ActionListener {
 		super.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		StartButton.setBorder(new RoundBtn(15));
-		StopButton.setBorder(new RoundBtn(15));
+		pauzeKnop.setBorder(new RoundBtn(15));
 		RepeatButton.setBorder(new RoundBtn(15));
 
 		orderList.addActionListener(this);
 		StartButton.addActionListener(this);
-		StopButton.addActionListener(this);
+		pauzeKnop.addActionListener(this);
 		RepeatButton.addActionListener(this);
 		tspList.addActionListener(this);
 		bppList.addActionListener(this);
 
 		orderList.setFont(new Font("Rockwell", Font.PLAIN, 15));
 		StartButton.setFont(new Font("Rockwell", Font.PLAIN, 15));
-		StopButton.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		pauzeKnop.setFont(new Font("Rockwell", Font.PLAIN, 15));
 		RepeatButton.setFont(new Font("Rockwell", Font.PLAIN, 15));
 		bppLabel.setFont(new Font("Rockwell", Font.PLAIN, 15));
 		boxesLabel.setFont(new Font("Rockwell", Font.PLAIN, 15));
@@ -83,7 +83,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 
 		add(orderList);
 		add(StartButton);
-		add(StopButton);
+		add(pauzeKnop);
 		add(RepeatButton);
 
 		add(bppLabel);
@@ -123,12 +123,29 @@ public class ControlePaneel extends JPanel implements ActionListener {
 			bppLabel.setText("BPP-algoritme: " + bppSelected);
 			tspLabel.setText("TSP-algoritme: " + tspSelected);
 		if (src instanceof JButton srcBtn) {
-			if (srcBtn == StartButton) {
-				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
-				DozenTabel.voegToe(5);
-				ItemList.clearList();
-				System.out.println(Arrays.deepToString(MagazijnPaneel.buttonArray));
-				//get the correct bpp agorithm
+			new Thread(() ->
+			{
+				Thread.currentThread().setName("Path Performer Thread");
+				if (srcBtn == pauzeKnop)
+				{
+					Main.serialManager.shouldPause = !serialManager.shouldPause;
+					if (Main.serialManager.shouldPause)
+					{
+						pauzeKnop.setText("Unpause");
+					}
+					else
+					{
+						pauzeKnop.setText("Pause");
+					}
+				}
+				else if (srcBtn == StartButton)
+				{
+					pauzeKnop.setText("Pause");
+					//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
+					DozenTabel.voegToe(5);
+					ItemList.clearList();
+					System.out.println(Arrays.deepToString(MagazijnPaneel.buttonArray));
+					//get the correct bpp agorithm
 				/*	int inhoudContainer = 10;
 					int alleContainers = ;
 					if (bppSelected.equals("First Fit")) {
@@ -291,45 +308,45 @@ public class ControlePaneel extends JPanel implements ActionListener {
 										}
 				}*/
 
-				ArrayList<Point> points = new ArrayList<>();
-				for (int productId: DatabaseConnection.orderLineArray.get(extractNumber.extract(selectedOrder)))
+					ArrayList<Point> points = new ArrayList<>();
+					for (int productId : DatabaseConnection.orderLineArray.get(extractNumber.extract(selectedOrder)))
+					{
+						points.add(DatabaseConnection.coordinates.get(productId));
+					}
+
+					ArrayList<Point> gesorteerd = null;
+					if (tspSelected.equals("Nearest Neighbour"))
+					{
+						NearestNeighbour nb = new NearestNeighbour();
+						gesorteerd = nb.generatePath(points);
+					}
+
+					if (gesorteerd == null)
+					{
+						System.err.println("No such algorithm");
+						return;
+					}
+					Point[] pointsToSend = gesorteerd.toArray(Point[]::new);
+
+					System.out.print("Going to ");
+					for (Point point : pointsToSend)
+					{
+						System.out.format("(%d, %d) ", point.x, point.y);
+					}
+
+					serialManager.resetRobot(Robot.ORDERPICK_ROBOT);
+					boolean ok = serialManager.performPath(pointsToSend);
+					JOptionPane.showMessageDialog(this, ok ? "Order is successvol uitgevoerd" : "Order heeft een probleem ondervonden", "Uitvoeren pad resultaat", JOptionPane.INFORMATION_MESSAGE);
+					System.out.println("Success of path is: " + ok);
+				} else if (srcBtn == RepeatButton)
 				{
-					points.add(DatabaseConnection.coordinates.get(productId));
+					serialManager.resetRobot(Robot.ORDERPICK_ROBOT);
+					boolean ok = serialManager.repeatLast();
+
+					JOptionPane.showMessageDialog(this, ok ? "Order is successvol uitgevoerd" : "Order heeft een probleem ondervonden", "Uitvoeren pad resultaat", JOptionPane.INFORMATION_MESSAGE);
+					System.out.println("Success of path is: " + ok);
 				}
-
-				ArrayList<Point> gesorteerd = null;
-				if (tspSelected.equals("Nearest Neighbour"))
-				{
-					NearestNeighbour nb = new NearestNeighbour();
-					gesorteerd = nb.generatePath(points);
-				}
-
-				if (gesorteerd == null)
-				{
-					System.err.println("No such algorithm");
-					return;
-				}
-				Point[] pointsToSend = gesorteerd.toArray(Point[]::new);
-
-				System.out.print("Going to ");
-				for (Point point : pointsToSend)
-				{
-					System.out.format("(%d, %d) ", point.x, point.y);
-				}
-
-				serialManager.resetRobot(Robot.ORDERPICK_ROBOT);
-				boolean ok = serialManager.performPath(pointsToSend);
-				JOptionPane.showMessageDialog(this, ok ? "Order is successvol uitgevoerd" : "Order heeft een probleem ondervonden", "Uitvoeren pad resultaat", JOptionPane.INFORMATION_MESSAGE);
-				System.out.println("Success of path is: "+ ok);
-			}
-			else if (srcBtn == RepeatButton)
-			{
-				serialManager.resetRobot(Robot.ORDERPICK_ROBOT);
-				boolean ok = serialManager.repeatLast();
-
-				JOptionPane.showMessageDialog(this, ok ? "Order is successvol uitgevoerd" : "Order heeft een probleem ondervonden", "Uitvoeren pad resultaat", JOptionPane.INFORMATION_MESSAGE);
-				System.out.println("Success of path is: "+ ok);
-			}
+			}).start();
 		}
 	}
 }
