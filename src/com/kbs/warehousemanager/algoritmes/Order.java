@@ -16,16 +16,16 @@ public class Order
 		orderList = new ArrayList<>();
 	}
 
+	ThreadLocalRandom lclRnd = ThreadLocalRandom.current();
+	int pointCount = lclRnd.nextInt(3, 26);
 	/**
 	 * Clear order list and populate with random values (Testing purposes)
 	 */
+	
 	public void populate()
 	{
-		ThreadLocalRandom lclRnd = ThreadLocalRandom.current();
 
 		orderList.clear();
-
-		int pointCount = lclRnd.nextInt(3, 26);
 		for (int i = 0; i < pointCount; i++)
 		{
 			int x, y;
