@@ -90,7 +90,7 @@ public class SerialManager
 					String[] incomingBuffer = in.split("\n");
 					for (String line : incomingBuffer)
 					{
-						if (line.startsWith("uitgetikt"))
+						if (line.startsWith("utg"))
 						{
 							uitgetikt = true;
 							continue;

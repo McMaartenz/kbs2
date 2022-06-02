@@ -17,7 +17,7 @@
 #define VOORUIT       true
 #define ACHTERUIT    false
 #define MOTOR_PK       170
-#define MOTOR_PK_ONDER 150
+#define MOTOR_PK_ONDER 140
 
 /*
  * Motor X - Geel & bruin
@@ -30,12 +30,22 @@
  * Motor Z + Roze & wit
  */
 
-#define X_BAAN_TIJD   4000
-#define X_OFFSET       875
+// path distance variables
+#define X_BAAN_TIJD     3500
+#define X_OFFSET        900
+#define X_OFFSET2       1900
+#define X_OFFSET3       2900
 
-#define Y_BAAN_TIJD    2000
-#define Y_INITIAL_DIST 1000
-#define Y_OFFSET       975
+#define Y_BAAN_TIJD     2000
+#define Y_INITIAL_DIST  1000
+#define Y_OFFSET        850
+#define Y_OFFSET2       1800
+#define Y_OFFSET3       2800
+#define Y_OFFSET4       3800
+
+#define Y_OFFSETDOWN        1050
+#define Y_OFFSETDOWN2       1250
+#define Y_OFFSETDOWN3       2025
 
 #define Z_BAAN_TIJD    500
 int X_POS, Y_POS;
@@ -64,6 +74,22 @@ void setup()
   Z_reset();
   Y_reset();
   X_reset(LINKS);
+
+  // Y_naar(3);
+  // delay(500);
+  // Y_naar(5);
+  // delay(500);
+  // Y_naar(2);
+  // delay(500);
+  // Y_naar(1);
+  // delay(500);
+  // Y_naar(4);
+  // delay(500);
+  // Y_naar(1);
+  // delay(500);
+  // Y_naar(5);
+  // delay(500);
+
 
   Serial.begin(9600);
   while (!Serial);
@@ -182,7 +208,7 @@ void handlePacket()
         // Z_duw();
 
         // zodra klaar
-        Serial.println("uitgetikt");
+        Serial.println("utg");
     }
     else if (hasPrefix(buffer, "pos!"))
     {
@@ -279,13 +305,15 @@ void X_naar(int pos)
     return;
   }
   int relpos = pos - X_POS;
-  if (relpos < 0)
-  {
-    X_beweeg(MOTOR_PK, LINKS, X_OFFSET * (0 - relpos));
+  if (relpos < 0) {
+    if (relpos == -1) { X_beweeg(MOTOR_PK, LINKS, X_OFFSET); }
+    if (relpos == -2) { X_beweeg(MOTOR_PK, LINKS, X_OFFSET2); }
+    if (relpos == -3) { X_beweeg(MOTOR_PK, LINKS, X_OFFSET3); }
   }
-  else
-  {
-    X_beweeg(MOTOR_PK, RECHTS, X_OFFSET * (relpos));
+  else {
+    if (relpos == 1) { X_beweeg(MOTOR_PK, RECHTS, X_OFFSET); }
+    if (relpos == 2) { X_beweeg(MOTOR_PK, RECHTS, X_OFFSET2); }
+    if (relpos == 3) { X_beweeg(MOTOR_PK, RECHTS, X_OFFSET3); }
   }
   track_X(pos);
 }
@@ -308,14 +336,16 @@ void Y_naar(int pos)
     return;
   }
   int relpos = pos - Y_POS;
-  if (relpos < 0)
-  {
-    Y_beweeg(MOTOR_PK, OMLAAG, Y_OFFSET * (0 - relpos));
-    Y_beweeg(150, OMHOOG, 50);
+  if (relpos < 0) {
+    if (relpos == -1) { Y_beweeg(MOTOR_PK_ONDER, OMLAAG, Y_OFFSETDOWN); Y_brake(); }
+    if (relpos == -2) { Y_beweeg(MOTOR_PK_ONDER, OMLAAG, Y_OFFSETDOWN2); Y_brake(); }
+    if (relpos == -3) { Y_beweeg(MOTOR_PK_ONDER, OMLAAG, Y_OFFSETDOWN3); Y_brake(); }
   }
-  else
-  {
-    Y_beweeg(MOTOR_PK, OMHOOG, Y_OFFSET * relpos);
+  else {
+    if (relpos == 1) { Y_beweeg(MOTOR_PK, OMHOOG, Y_OFFSET); }
+    if (relpos == 2) { Y_beweeg(MOTOR_PK, OMHOOG, Y_OFFSET2); }
+    if (relpos == 3) { Y_beweeg(MOTOR_PK, OMHOOG, Y_OFFSET3); }
+    if (relpos == 4) { Y_beweeg(MOTOR_PK, OMHOOG, Y_OFFSET4);}
   }
   track_Y(pos);
 }
@@ -411,6 +441,13 @@ void Y_set_direction(bool direction)
 void Y_set_brake(bool enabled)
 {
   digitalWrite(PIN_Y_BRAKE, enabled);
+}
+
+void Y_brake()
+{
+  digitalWrite(PIN_Y_DIRECTION, true);
+  analogWrite(PIN_Y_PWM, 100);
+  sleep(400);
 }
 
 ////// MOTOR Z-axis ///////////////////
