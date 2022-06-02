@@ -28,6 +28,7 @@ public class SerialManager
 
 	public volatile boolean uitgetikt;
 	public volatile boolean resetDone;
+	public boolean shouldStop;
 
 	public Serial getRobot(Robot robot)
 	{
@@ -286,7 +287,8 @@ public class SerialManager
 	}
 
 	/**
-	 *
+	 * Reset robot to their origin coordinates (1, 1)
+	 * @param robot robot to reset
 	 */
 	public void resetRobot(Robot robot)
 	{
@@ -334,6 +336,7 @@ public class SerialManager
 	 */
 	public boolean performPath(Point[] points)
 	{
+		shouldStop = false;
 		lastPickRound = points;
 		if (good(Robot.ORDERPICK_ROBOT))
 		{
@@ -375,6 +378,11 @@ public class SerialManager
 				Point currentPointObj = points[currentPoint];
 				System.out.format("Robot going to point id %d, at (%d, %d)\n", currentPoint, currentPointObj.x, currentPointObj.y);
 
+				if (shouldStop)
+				{
+					System.err.println("Told to stop");
+					return false;
+				}
 				do
 				{
 					uitgetikt = false;
