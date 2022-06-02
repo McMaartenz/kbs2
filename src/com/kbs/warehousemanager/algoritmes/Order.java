@@ -21,10 +21,10 @@ public class Order
 	/**
 	 * Clear order list and populate with random values (Testing purposes)
 	 */
-	ThreadLocalRandom lclRnd = ThreadLocalRandom.current();
-	int pointCount = lclRnd.nextInt(3, 26);
+	
 	public void populate()
 	{
+
 		orderList.clear();
 		for (int i = 0; i < pointCount; i++)
 		{
