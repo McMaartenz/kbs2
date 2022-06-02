@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Order
 {
 	private ArrayList<Point> orderList;
+	private ArrayList<Integer> producten;
 
 	/**
 	 * New order
@@ -21,7 +22,7 @@ public class Order
 	/**
 	 * Clear order list and populate with random values (Testing purposes)
 	 */
-	
+
 	public void populate()
 	{
 
@@ -36,6 +37,14 @@ public class Order
 			orderList.add(point);
 		}
 
+	}
+
+	public void InpakOrder(){
+		for(int i = 0; i < pointCount; i++){
+			int product = lclRnd.nextInt(1, 11);
+			producten.add(product);
+			System.out.println(product);
+		}
 	}
 
 	/**

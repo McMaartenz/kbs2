@@ -120,172 +120,171 @@ public class ControlePaneel extends JPanel implements ActionListener {
 			if (srcBtn == StartButton) {
 				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
 				DozenTabel.voegToe(5);
-//				MagazijnPaneel.resetPanel();
 				ItemList.clearList();
 				System.out.println(Arrays.deepToString(MagazijnPaneel.buttonArray));
 				//get the correct bpp agorithm
-//					int inhoudContainer = 10;
-//					int alleContainers;
-//					if (bppSelected.equals("First Fit")) {
-//										public static int firstFit(int[] productLijst) {
-//											int[] productlijst = productLijst;
-//											// Initialize result (Count of bins)
-//											int result = 0;
-//											int[] bin_rem = new int[alleContainers];
-//
-//											// Place items one by one
-//											for (int i = 0; i < alleContainers; i++) {
-//												int j;
-//												for (j = 0; j < result; j++) {
-//													if (bin_rem[j] >= productlijst[i]) {
-//														bin_rem[j] = bin_rem[j] - productlijst[i];
-//														break;
-//													}
-//												}
-//
-//												if (j == result) {
-//													bin_rem[result] = inhoudContainer - productlijst[i];
-//													result++;
-//												}
-//											}
-//											return result;
-//										}
-//									}
-//									if(bppSelected.equals("Next Fit")) {
-//										public static int nextFit(int[] productlijst) {
-//
-//											// Initialize result (Count of bins) and remaining
-//											// capacity in current bin.
-//											int res = 0, bin_rem = inhoudContainer;
-//
-//											// Place items one by one
-//											for (int i = 0; i < alleContainers; i++) {
-//												// If this item can't fit in current bin
-//												if (productlijst[i] > bin_rem) {
-//													res++; // Use a new bin
-//													bin_rem = inhoudContainer - productlijst[i];
-//												} else
-//													bin_rem -= productlijst[i];
-//											}
-//											return res;
-//										}
-//									}
-//									if (bppSelected.equals("Best Fit")) {
-//										public static int bestFit(int[] productlijst) {
-//											int res = 0;
-//											int[] bin_rem = new int[alleContainers];
-//
-//											for (int i = 0; i < alleContainers; i++) {
-//												int j;
-//												int min = inhoudContainer + 1, bi = 0;
-//												for (j = 0; j < res; j++) {
-//													if (bin_rem[j] >= productlijst[i] &&
-//															bin_rem[j] - productlijst[i] < min) {
-//														bi = j;
-//														min = bin_rem[j] - productlijst[i];
-//													}
-//												}
-//												if (min == inhoudContainer + 1) {
-//													bin_rem[res] = inhoudContainer - productlijst[i];
-//													res++;
-//												} else
-//													bin_rem[bi] -= productlijst[i];
-//											}
-//											return res;
-//										}
-//									}
-//									if (bppSelected.equals("Worst Fit")) {
-//
-//										// Initialize result (Count of bins)
-//										int res = 0;
-//
-//										// Create an array to store remaining space in bins
-//										// there can be at most n bins
-//										int bin_rem[] = new int[alleContainers];
-//
-//										// Place items one by one
-//										for (int i = 0; i < alleContainers; i++) {
-//
-//											// Find the best bin that ca\n accommodate
-//											// weight[i]
-//											int j;
-//
-//											// Initialize maximum space left and index
-//											// of worst bin
-//											int mx = -1, wi = 0;
-//
-//											for (j = 0; j < res; j++) {
-//												if (bin_rem[j] >= product[i] && bin_rem[j] - product[i] > mx) {
-//													wi = j;
-//													mx = bin_rem[j] - product[i];
-//												}
-//											}
-//
-//											// If no bin could accommodate weight[i],
-//											// create a new bin
-//											if (mx == -1) {
-//												bin_rem[res] = inhoudContainer - product[i];
-//												res++;
-//											} else // Assign the item to best bin
-//												bin_rem[wi] -= product[i];
-//										}
-//										return res;
-//									}
-//									if (bppSelected.equals("First-Fit-Decreasing")) {
-//										public static int firstFitDec() {
-//											List<Integer> list = new ArrayList<>();
-//											for (int i : product) {
-//												list.add(i);
-//											}
-//											Integer[] array = list.toArray(new Integer[0]);
-//											// First sort all weights in decreasing order
-//											Arrays.sort(array, Collections.reverseOrder());
-//											// Now call first fit for sorted items
-//											int i;
-//											int[] sortProduct = new int[array.length];
-//											for (i = 0; i < array.length; i++) {
-//												sortProduct[i] = array[i];
-//											}
-//											return firstFit(sortProduct);
-//										}
-//									}
-//									if (bppSelected.equals("Next-Fit-Decreasing")) {
-//										public static int nextFitDec() {
-//											List<Integer> list = new ArrayList<>();
-//											for (int i : product) {
-//												list.add(i);
-//											}
-//											Integer[] array = list.toArray(new Integer[0]);
-//											// First sort all weights in decreasing order
-//											Arrays.sort(array, Collections.reverseOrder());
-//											// Now call first fit for sorted items
-//											int i;
-//											int[] sortProduct = new int[array.length];
-//											for (i = 0; i < array.length; i++) {
-//												sortProduct[i] = array[i];
-//											}
-//											return nextFit(sortProduct);
-//										}
-//									}
-//									if (bppSelected.equals("Worst-Fit-Decreasing")) {
-//										public static int bestFitDec() {
-//											List<Integer> list = new ArrayList<>();
-//											for (int i : product) {
-//												list.add(i);
-//											}
-//											Integer[] array = list.toArray(new Integer[0]);
-//											// First sort all weights in decreasing order
-//											Arrays.sort(array, Collections.reverseOrder());
-//											// Now call first fit for sorted items
-//											int i;
-//											int[] sortProduct = new int[array.length];
-//											for (i = 0; i < array.length; i++) {
-//												sortProduct[i] = array[i];
-//											}
-//											return bestFit(sortProduct);
-//										}
-			}
+				/*	int inhoudContainer = 10;
+					int alleContainers = ;
+					if (bppSelected.equals("First Fit")) {
+										public static int firstFit(int[] productLijst) {
+											int[] productlijst = productLijst;
+											// Initialize result (Count of bins)
+											int result = 0;
+											int[] bin_rem = new int[alleContainers];
 
+											// Place items one by one
+											for (int i = 0; i < alleContainers; i++) {
+												int j;
+												for (j = 0; j < result; j++) {
+													if (bin_rem[j] >= productlijst[i]) {
+														bin_rem[j] = bin_rem[j] - productlijst[i];
+														break;
+													}
+												}
+
+												if (j == result) {
+													bin_rem[result] = inhoudContainer - productlijst[i];
+													result++;
+												}
+											}
+											return result;
+										}
+									}
+									if(bppSelected.equals("Next Fit")) {
+										public static int nextFit(int[] productlijst) {
+
+											// Initialize result (Count of bins) and remaining
+											// capacity in current bin.
+											int res = 0, bin_rem = inhoudContainer;
+
+											// Place items one by one
+											for (int i = 0; i < alleContainers; i++) {
+												// If this item can't fit in current bin
+												if (productlijst[i] > bin_rem) {
+													res++; // Use a new bin
+													bin_rem = inhoudContainer - productlijst[i];
+												} else
+													bin_rem -= productlijst[i];
+											}
+											return res;
+										}
+									}
+									if (bppSelected.equals("Best Fit")) {
+										public static int bestFit(int[] productlijst) {
+											int res = 0;
+											int[] bin_rem = new int[alleContainers];
+
+											for (int i = 0; i < alleContainers; i++) {
+												int j;
+												int min = inhoudContainer + 1, bi = 0;
+												for (j = 0; j < res; j++) {
+													if (bin_rem[j] >= productlijst[i] &&
+															bin_rem[j] - productlijst[i] < min) {
+														bi = j;
+														min = bin_rem[j] - productlijst[i];
+													}
+												}
+												if (min == inhoudContainer + 1) {
+													bin_rem[res] = inhoudContainer - productlijst[i];
+													res++;
+												} else
+													bin_rem[bi] -= productlijst[i];
+											}
+											return res;
+										}
+									}
+									if (bppSelected.equals("Worst Fit")) {
+
+										// Initialize result (Count of bins)
+										int res = 0;
+
+										// Create an array to store remaining space in bins
+										// there can be at most n bins
+										int bin_rem[] = new int[alleContainers];
+
+										// Place items one by one
+										for (int i = 0; i < alleContainers; i++) {
+
+											// Find the best bin that ca\n accommodate
+											// weight[i]
+											int j;
+
+											// Initialize maximum space left and index
+											// of worst bin
+											int mx = -1, wi = 0;
+
+											for (j = 0; j < res; j++) {
+												if (bin_rem[j] >= product[i] && bin_rem[j] - product[i] > mx) {
+													wi = j;
+													mx = bin_rem[j] - product[i];
+												}
+											}
+
+											// If no bin could accommodate weight[i],
+											// create a new bin
+											if (mx == -1) {
+												bin_rem[res] = inhoudContainer - product[i];
+												res++;
+											} else // Assign the item to best bin
+												bin_rem[wi] -= product[i];
+										}
+										return res;
+									}
+									if (bppSelected.equals("First-Fit-Decreasing")) {
+										public static int firstFitDec() {
+											List<Integer> list = new ArrayList<>();
+											for (int i : product) {
+												list.add(i);
+											}
+											Integer[] array = list.toArray(new Integer[0]);
+											// First sort all weights in decreasing order
+											Arrays.sort(array, Collections.reverseOrder());
+											// Now call first fit for sorted items
+											int i;
+											int[] sortProduct = new int[array.length];
+											for (i = 0; i < array.length; i++) {
+												sortProduct[i] = array[i];
+											}
+											return firstFit(sortProduct);
+										}
+									}
+									if (bppSelected.equals("Next-Fit-Decreasing")) {
+										public static int nextFitDec() {
+											List<Integer> list = new ArrayList<>();
+											for (int i : product) {
+												list.add(i);
+											}
+											Integer[] array = list.toArray(new Integer[0]);
+											// First sort all weights in decreasing order
+											Arrays.sort(array, Collections.reverseOrder());
+											// Now call first fit for sorted items
+											int i;
+											int[] sortProduct = new int[array.length];
+											for (i = 0; i < array.length; i++) {
+												sortProduct[i] = array[i];
+											}
+											return nextFit(sortProduct);
+										}
+									}
+									if (bppSelected.equals("Worst-Fit-Decreasing")) {
+										public static int bestFitDec() {
+											List<Integer> list = new ArrayList<>();
+											for (int i : product) {
+												list.add(i);
+											}
+											Integer[] array = list.toArray(new Integer[0]);
+											// First sort all weights in decreasing order
+											Arrays.sort(array, Collections.reverseOrder());
+											// Now call first fit for sorted items
+											int i;
+											int[] sortProduct = new int[array.length];
+											for (i = 0; i < array.length; i++) {
+												sortProduct[i] = array[i];
+											}
+											return bestFit(sortProduct);
+										}
+				}*/
+			}
 		}
 	}
 }

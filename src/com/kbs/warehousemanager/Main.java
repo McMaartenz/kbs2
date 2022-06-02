@@ -28,6 +28,7 @@ public class Main
 			// Example
 			Order order1 = new Order();
 			order1.populate();
+			order1.InpakOrder();
 			NearestNeighbour nb1 = new NearestNeighbour();
 			Point[] points = nb1.generatePath(order1.getOrderList()).toArray(Point[]::new);
 
@@ -39,6 +40,9 @@ public class Main
 
 			boolean ok = serialManager.performPath(points);
 			System.out.println("Perform path successful? " + ok);
+
+			
+
 		}).start();
 
 		HoofdPaneel hoofdPaneel = new HoofdPaneel();
