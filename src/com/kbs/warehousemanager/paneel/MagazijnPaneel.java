@@ -45,8 +45,6 @@ public class MagazijnPaneel extends JPanel {
         }
     }
 
-    // Functionaliteit MagazijnKnoppen
-
 }
 //poopybutthole
 // TODO ^^ haal dit weg voor de demo jongens

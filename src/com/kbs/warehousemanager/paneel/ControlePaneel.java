@@ -3,9 +3,7 @@ package com.kbs.warehousemanager.paneel;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.util.*;
-import java.sql.*;
 
 public class ControlePaneel extends JPanel implements ActionListener {
 	/**
@@ -101,10 +99,20 @@ public class ControlePaneel extends JPanel implements ActionListener {
 		if (src instanceof JComboBox) {
 			bppSelected = bppList.getSelectedItem().toString();
 			tspSelected = tspList.getSelectedItem().toString();
+
+			ItemList.clearList();
 			if(orderList.getSelectedItem() != null) {
 				selectedOrder = orderList.getSelectedItem().toString();
 			}
-			System.out.println(selectedOrder);
+			System.out.println(extractNumber.extract(selectedOrder));
+
+			ArrayList<Integer> items = (DatabaseConnection.orderLineArray.get(extractNumber.extract(selectedOrder)));
+			for(int i : items){
+				ItemList.addItem("Item " + i);
+			}
+
+
+
 
 
 			bppLabel.setText("BPP-algoritme: " + bppSelected);

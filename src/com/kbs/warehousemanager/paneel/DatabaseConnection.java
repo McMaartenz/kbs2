@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 class DatabaseConnection{
     static ResultSet orderlines;
-    static ResultSet orders;
 
     static HashMap<Integer, ArrayList<Integer>> orderLineArray = new HashMap<>();
 
