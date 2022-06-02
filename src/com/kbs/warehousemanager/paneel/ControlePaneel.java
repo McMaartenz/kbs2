@@ -29,6 +29,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	//define the labels for the currently selected algorithms, as well as the estimated boxes for the order
 	private String bppSelected = bppList.getSelectedItem().toString();
 	private String tspSelected = tspList.getSelectedItem().toString();
+	private String selectedOrder;
 	int aantalDozen = 23;
 
 	//define the different labels
@@ -36,13 +37,15 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	JLabel boxesLabel = new JLabel("Aantal dozen: " + aantalDozen);
 	JLabel tspLabel = new JLabel("TSP-algoritme: " + tspSelected);
 
+
+
 	public ControlePaneel() {
-		DatabaseConnection.Connect();
 		System.out.println(orderOptions);
 
 		for(String s : orderOptions){
 			orderList.addItem("Order " + s);
 		}
+
 
 		super.setBackground(Color.WHITE);
 		super.setLayout(new GridLayout(9,1, 5, 5));
@@ -52,6 +55,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 		StopButton.setBorder(new RoundBtn(15));
 		RepeatButton.setBorder(new RoundBtn(15));
 
+		orderList.addActionListener(this);
 		StartButton.addActionListener(this);
 		StopButton.addActionListener(this);
 		RepeatButton.addActionListener(this);
@@ -71,7 +75,6 @@ public class ControlePaneel extends JPanel implements ActionListener {
 
 		String bppSelected = bppList.getSelectedItem().toString();
 		String tspSelected = tspList.getSelectedItem().toString();
-
 
 
 		add(orderList);
@@ -98,6 +101,11 @@ public class ControlePaneel extends JPanel implements ActionListener {
 		if (src instanceof JComboBox) {
 			bppSelected = bppList.getSelectedItem().toString();
 			tspSelected = tspList.getSelectedItem().toString();
+			if(orderList.getSelectedItem() != null) {
+				selectedOrder = orderList.getSelectedItem().toString();
+			}
+			System.out.println(selectedOrder);
+
 
 			bppLabel.setText("BPP-algoritme: " + bppSelected);
 			tspLabel.setText("TSP-algoritme: " + tspSelected);

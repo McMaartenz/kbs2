@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
-public class MagazijnPaneel extends JPanel implements ActionListener {
+public class MagazijnPaneel extends JPanel {
 
 
     static Boolean[][] btnPressed = new Boolean[5][5];
@@ -23,6 +23,7 @@ public class MagazijnPaneel extends JPanel implements ActionListener {
     }
 
     public MagazijnPaneel(ItemList itemList) {
+        System.out.println(DatabaseConnection.orderLineArray);
         this.itemList = itemList;
         setBackground(Color.WHITE);
 
@@ -35,36 +36,17 @@ public class MagazijnPaneel extends JPanel implements ActionListener {
                 boolean BtnPressed = false;
                 btnPressed[i-1][j-1] = BtnPressed;
                 buttonArray[i-1][j-1] = button;
-                button.setFont(new Font("Rockwell", Font.PLAIN, 15));
+                button.setFont(new Font("Rockwell", Font.PLAIN, 12));
                 add(button);
-                button.addActionListener(this);
                 button.setBorder(new RoundBtn(15));
                 button.setForeground(Color.BLACK);
+                button.setEnabled(false);
             }
         }
     }
 
     // Functionaliteit MagazijnKnoppen
-    public void actionPerformed(ActionEvent e) {
-        Object obj = e.getSource();
-        if (obj instanceof JButton) {
-            JButton button = ((JButton) e.getSource());
-            String text = button.getText();
-            for (int i = 5; i > 0; i--) {
-                for (int j = 1; j <= 5; j++) {
-                    if (text.equals("item " + j + "." + i)) {
-                        if (!btnPressed[i-1][j-1]) {
-                            itemList.addItem("item " + j + "." + i);
-                            btnPressed[i-1][j-1] = true;
-                        } else {
-                            itemList.removeItem("item " + j + "." + i);
-                            btnPressed[i-1][j-1] = false;
-                        }
-                    }
-                }
-            }
-        }
-    }
+
 }
 //poopybutthole
 // TODO ^^ haal dit weg voor de demo jongens

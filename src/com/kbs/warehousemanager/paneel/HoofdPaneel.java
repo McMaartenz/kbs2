@@ -21,6 +21,7 @@ public class HoofdPaneel extends JFrame
 	 */
 
 	public HoofdPaneel() {
+		DatabaseConnection.Connect();
 		setLayout(new GridLayout(1, 3));
 		orderpickPaneel = new OrderpickPaneel();
 		inpakPaneel = new InpakPaneel();
