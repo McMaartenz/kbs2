@@ -67,3 +67,4 @@ public class MagazijnPaneel extends JPanel implements ActionListener {
     }
 }
 //poopybutthole
+// TODO ^^ haal dit weg voor de demo jongens

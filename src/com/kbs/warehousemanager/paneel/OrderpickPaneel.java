@@ -15,14 +15,3 @@ public class OrderpickPaneel extends JPanel {
 		add(itemList);
 	}
 }
-
-
-
-
-		/**
-		 * Verwerk een event
-		 *
-		 * @param ae Action event: de event dat binnenkomt
-		 */
-
-
