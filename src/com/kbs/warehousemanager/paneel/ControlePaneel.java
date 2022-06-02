@@ -297,10 +297,10 @@ public class ControlePaneel extends JPanel implements ActionListener {
 				}*/
 
 				ArrayList<Point> points = new ArrayList<>();
-				for (Integer : )
+				for (int productId: DatabaseConnection.orderLineArray.get(extractNumber.extract(selectedOrder)))
 				{
-
-				}(DatabaseConnection.orderLineArray.get(extractNumber.extract(selectedOrder)));
+					points.add(DatabaseConnection.coordinates.get(productId));
+				}
 
 				ArrayList<Point> gesorteerd = null;
 				if (tspSelected.equals("Nearest Neighbour"))
