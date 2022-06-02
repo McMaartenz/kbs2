@@ -43,12 +43,12 @@ public class ItemList extends JPanel {
         };
     }
 
-    public void addItem(String name) {
+    public static void addItem(String name) {
         items.add(name);
         itemList.addElement(name);
     }
 
-    public void removeItem(String name) {
+    public static void removeItem(String name) {
         items.remove(name);
         itemList.removeElement(name);
     }
