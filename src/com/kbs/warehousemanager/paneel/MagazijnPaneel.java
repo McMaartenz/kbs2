@@ -9,16 +9,14 @@ import java.util.Arrays;
 public class MagazijnPaneel extends JPanel {
 
 
-    static Boolean[][] btnPressed = new Boolean[5][5];
-    static JButton[][] buttonArray = new JButton[5][5];
+    static Boolean[] btnPressed = new Boolean[25];
+    static JButton[] buttonArray = new JButton[25];
     private final ItemList itemList;
 
     public static void resetPanel() {
-        for (int i = 5; i > 0; i--) {
-            for (int j = 1; j <= 5; j++) {
-                buttonArray[i-1][j-1].setForeground(Color.BLACK);
-                btnPressed[i-1][j-1] = false;
-            }
+        for (int i = 0; i < 25; i++) {
+                buttonArray[i].setBackground(UIManager.getColor("Button.background"));
+                btnPressed[i] = false;
         }
     }
 
@@ -30,18 +28,16 @@ public class MagazijnPaneel extends JPanel {
         //Layout Magazijn
         setLayout(new GridLayout(5, 5, 2, 2));
         //"for"-loop voor alle knoppen toevoegen
-        for (int i = 5; i > 0; i--) {
-            for (int j = 1; j <= 5; j++) {
-                JButton button = new JButton("item " + j + "." + i);
+        for (int i = 0; i < 25; i++) {
+                JButton button = new JButton("Product " + (i+1));
                 boolean BtnPressed = false;
-                btnPressed[i-1][j-1] = BtnPressed;
-                buttonArray[i-1][j-1] = button;
-                button.setFont(new Font("Rockwell", Font.PLAIN, 12));
+                btnPressed[i] = BtnPressed;
+                buttonArray[i] = button;
+                button.setFont(new Font("Rockwell", Font.PLAIN, 10));
                 add(button);
                 button.setBorder(new RoundBtn(15));
                 button.setForeground(Color.BLACK);
                 button.setEnabled(false);
-            }
         }
     }
 

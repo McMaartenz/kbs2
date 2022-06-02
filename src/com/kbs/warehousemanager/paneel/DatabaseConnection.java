@@ -1,6 +1,7 @@
 package com.kbs.warehousemanager.paneel;
 
 
+import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ class DatabaseConnection{
 
     static HashMap<Integer, ArrayList<Integer>> orderLineArray = new HashMap<>();
     static ArrayList<Integer> gewichten = new ArrayList<>();
+    static HashMap<Integer, Point> coordinates = new HashMap<>();
 
     public static void Connect(){
         try{
@@ -22,8 +24,12 @@ class DatabaseConnection{
             orderlines = stmt1.executeQuery("SELECT * FROM orderlines ORDER BY orderID ASC");
             producten = stmt2.executeQuery("SELECT * FROM product ORDER BY ProductID ASC");
             while(producten.next()) {
-                System.out.println(producten.getInt(1) + " " + producten.getInt(2) + " " + producten.getInt(3) + " " + producten.getInt(4));
-                gewichten.add(producten.getInt(2));
+                int ProductID = producten.getInt(1);
+                int weight = producten.getInt(2);
+                int x_coordinate = producten.getInt(3);
+                int y_coordinate = producten.getInt(4);
+                gewichten.add(weight);
+                coordinates.put(ProductID, new Point(x_coordinate, y_coordinate));
             }
             while(orderlines.next()) {
                 int OrderID = orderlines.getInt(1);
