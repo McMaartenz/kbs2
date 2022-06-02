@@ -129,7 +129,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 				ItemList.clearList();
 				System.out.println(Arrays.deepToString(MagazijnPaneel.buttonArray));
 				//get the correct bpp agorithm
-					int inhoudContainer = 10;
+				/*	int inhoudContainer = 10;
 					int alleContainers = ;
 					if (bppSelected.equals("First Fit")) {
 										public static int firstFit(int[] productLijst) {
@@ -289,7 +289,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 											}
 											return bestFit(sortProduct);
 										}
-				}
+				}*/
 
 			}
 		}
