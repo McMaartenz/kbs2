@@ -100,6 +100,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 			bppSelected = bppList.getSelectedItem().toString();
 			tspSelected = tspList.getSelectedItem().toString();
 
+			MagazijnPaneel.resetPanel();
 			ItemList.clearList();
 			if(orderList.getSelectedItem() != null) {
 				selectedOrder = orderList.getSelectedItem().toString();
@@ -109,7 +110,10 @@ public class ControlePaneel extends JPanel implements ActionListener {
 			ArrayList<Integer> items = (DatabaseConnection.orderLineArray.get(extractNumber.extract(selectedOrder)));
 			for(int i : items){
 				ItemList.addItem("Item " + i);
+				MagazijnPaneel.buttonArray[(i-1)].setBackground(Color.GREEN);
+				}
 			}
+
 
 
 
@@ -117,7 +121,6 @@ public class ControlePaneel extends JPanel implements ActionListener {
 
 			bppLabel.setText("BPP-algoritme: " + bppSelected);
 			tspLabel.setText("TSP-algoritme: " + tspSelected);
-		}
 		if (src instanceof JButton srcBtn) {
 			if (srcBtn == StartButton) {
 				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
