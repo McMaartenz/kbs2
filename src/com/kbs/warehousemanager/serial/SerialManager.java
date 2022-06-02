@@ -284,6 +284,34 @@ public class SerialManager
 	}
 
 	/**
+	 *
+	 */
+	public void resetRobot(Robot robot)
+	{
+		if (good(robot))
+		{
+			resetDone = false;
+			String response = sendPacket("reset\n", robot, true);
+			if (!response.startsWith("resetOK"))
+			{
+				System.err.println("Cannot reset "+ robot);
+				return;
+			}
+
+			long time = System.currentTimeMillis() + timeoutTime;
+			while (!resetDone)
+			{
+				Thread.onSpinWait();
+				if (time < System.currentTimeMillis())
+				{
+					System.err.println("Timeout reached for waiting on reset package");
+					return;
+				}
+			}
+		}
+	}
+
+	/**
 	 * Perform the path on the order pick robot
 	 * @param points points to visit, sorted
 	 * @return true on success, or false on fail

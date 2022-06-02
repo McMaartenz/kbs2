@@ -2,6 +2,7 @@ package com.kbs.warehousemanager.paneel;
 
 import com.kbs.warehousemanager.algoritmes.NearestNeighbour;
 import com.kbs.warehousemanager.algoritmes.Order;
+import com.kbs.warehousemanager.serial.Robot;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -321,7 +322,10 @@ public class ControlePaneel extends JPanel implements ActionListener {
 				{
 					System.out.format("(%d, %d) ", point.x, point.y);
 				}
+
+				serialManager.resetRobot(Robot.ORDERPICK_ROBOT);
 				boolean ok = serialManager.performPath(pointsToSend);
+				JOptionPane.showMessageDialog(this, ok ? "Order is successvol uitgevoerd" : "Order heeft een probleem ondervonden", "Uitvoeren pad resultaat", JOptionPane.INFORMATION_MESSAGE);
 				System.out.println("Success of path is: "+ ok);
 			}
 		}
