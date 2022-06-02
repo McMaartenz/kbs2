@@ -25,7 +25,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	//define the comboBoxes and their respective options
 	static ArrayList<String> orderOptions = new ArrayList<>();
 	private final JComboBox<String> orderList = new JComboBox();
-	private final String[] tspOptions = {"Brute-force", "Branch-and-Bound", "Nearest Neighbour"};
+	private final String[] tspOptions = {"Nearest Neighbour", "Brute-force", "Branch-and-Bound"};
 	private final JComboBox<String> tspList = new JComboBox<>(tspOptions);
 	private final String[] bppOptions = {"First Fit", "Next Fit", "Best Fit", "Worst Fit", "First-Fit-Decreasing", "Next-Fit-Decreasing", "Worst-Fit-Decreasing"};
 	private final JComboBox<String> bppList = new JComboBox<>(bppOptions);
