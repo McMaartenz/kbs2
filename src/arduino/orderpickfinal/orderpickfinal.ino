@@ -32,22 +32,22 @@
 
 // path distance variables
 #define X_BAAN_TIJD     3500
-#define X_OFFSET        900
+#define X_OFFSET        800
 #define X_OFFSET2       1900
 #define X_OFFSET3       2900
 
 #define Y_BAAN_TIJD     2000
 #define Y_INITIAL_DIST  1000
-#define Y_OFFSET        850
-#define Y_OFFSET2       1800
-#define Y_OFFSET3       2800
-#define Y_OFFSET4       3800
+#define Y_OFFSET        1000
+#define Y_OFFSET2       1900
+#define Y_OFFSET3       3200
+#define Y_OFFSET4       4300
 
-#define Y_OFFSETDOWN        1050
-#define Y_OFFSETDOWN2       1250
+#define Y_OFFSETDOWN        750
+#define Y_OFFSETDOWN2       1350
 #define Y_OFFSETDOWN3       2025
 
-#define Z_BAAN_TIJD    500
+#define Z_BAAN_TIJD    400
 int X_POS, Y_POS;
 
 // packet variables
@@ -74,22 +74,6 @@ void setup()
   Z_reset();
   Y_reset();
   X_reset(LINKS);
-
-  // Y_naar(3);
-  // delay(500);
-  // Y_naar(5);
-  // delay(500);
-  // Y_naar(2);
-  // delay(500);
-  // Y_naar(1);
-  // delay(500);
-  // Y_naar(4);
-  // delay(500);
-  // Y_naar(1);
-  // delay(500);
-  // Y_naar(5);
-  // delay(500);
-
 
   Serial.begin(9600);
   while (!Serial);
@@ -202,10 +186,10 @@ void handlePacket()
         ////// MOVEMENT ///////////////
 
         X_naar(requested_x);
-        delay(250);
+        delay(400);
         Y_naar(requested_y);
-        delay(250);
-        // Z_duw();
+        delay(300);
+        Z_duw();
 
         // zodra klaar
         Serial.println("utg");
