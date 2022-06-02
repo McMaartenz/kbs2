@@ -1,9 +1,14 @@
 package com.kbs.warehousemanager.paneel;
 
+import com.kbs.warehousemanager.algoritmes.NearestNeighbour;
+import com.kbs.warehousemanager.algoritmes.Order;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
+
+import static com.kbs.warehousemanager.Main.serialManager;
 
 public class ControlePaneel extends JPanel implements ActionListener {
 	/**
@@ -291,6 +296,33 @@ public class ControlePaneel extends JPanel implements ActionListener {
 										}
 				}*/
 
+				ArrayList<Point> points = new ArrayList<>();
+				for (Integer : )
+				{
+
+				}(DatabaseConnection.orderLineArray.get(extractNumber.extract(selectedOrder)));
+
+				ArrayList<Point> gesorteerd = null;
+				if (tspSelected.equals("Nearest Neighbour"))
+				{
+					NearestNeighbour nb = new NearestNeighbour();
+					gesorteerd = nb.generatePath(points);
+				}
+
+				if (gesorteerd == null)
+				{
+					System.err.println("No such algorithm");
+					return;
+				}
+				Point[] pointsToSend = gesorteerd.toArray(Point[]::new);
+
+				System.out.print("Going to ");
+				for (Point point : pointsToSend)
+				{
+					System.out.format("(%d, %d) ", point.x, point.y);
+				}
+				boolean ok = serialManager.performPath(pointsToSend);
+				System.out.println("Success of path is: "+ ok);
 			}
 		}
 
