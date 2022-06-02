@@ -6,11 +6,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class NearestNeighbour {
 
-    public int currentSolutionLength;
-    public int x;
-    public int y;
-    public ArrayList<Point> currentIteration = new ArrayList<>(25);
-    public ArrayList<Point> solution = new ArrayList<>(25);
+    private int currentSolutionLength;
+    private int x;
+    private int y;
+    private ArrayList<Point> currentIteration = new ArrayList<>(25);
+    private ArrayList<Point> solution = new ArrayList<>(25);
 
     // generate path using orderlist
     public ArrayList<Point> generatePath(ArrayList<Point> orderList) {

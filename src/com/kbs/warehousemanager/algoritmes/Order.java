@@ -16,6 +16,8 @@ public class Order
 		orderList = new ArrayList<>();
 	}
 
+	ThreadLocalRandom lclRnd = ThreadLocalRandom.current();
+	int pointCount = lclRnd.nextInt(3, 26);
 	/**
 	 * Clear order list and populate with random values (Testing purposes)
 	 */
