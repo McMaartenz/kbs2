@@ -45,7 +45,7 @@
 
 #define Y_OFFSETDOWN        750
 #define Y_OFFSETDOWN2       1350
-#define Y_OFFSETDOWN3       2025
+#define Y_OFFSETDOWN3       2150
 
 #define Z_BAAN_TIJD    400
 int X_POS, Y_POS;
