@@ -124,16 +124,16 @@ public class ControlePaneel extends JPanel implements ActionListener {
 		if (src instanceof JButton srcBtn) {
 			if (srcBtn == StartButton) {
 				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
-				DozenTabel.voegToe(5);
+				DozenTabel.voegToeNextFit();
 //				MagazijnPaneel.resetPanel();
 				ProcesBalk.veranderPickProcesBalk();
 				ProcesBalk.veranderInpakProcesBalk();
-				ItemList.clearList();
 				System.out.println(Arrays.deepToString(MagazijnPaneel.buttonArray));
 				//get the correct bpp agorithm
 				if(bppList.getSelectedItem().toString().equals("First Fit")) {
 
 				}
+				ItemList.clearList();
 			}
 		}
 

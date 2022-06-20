@@ -1,6 +1,8 @@
 package com.kbs.warehousemanager.paneel;
 
 
+import com.kbs.warehousemanager.algoritmes.NextFitAlgoritme;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -9,7 +11,7 @@ public class DozenTabel extends JPanel {
 
     //Definieer variabelen
     static int header_height = 75;
-    static String[][] dozen = new String[4][];
+    static int[][] dozen = new int[4][];
     static DefaultTableModel[] tabelModellen = new DefaultTableModel[4];
     static JTable[] tabellen = new JTable[4];
     static JScrollPane[] dozenTabellen = new JScrollPane[4];
@@ -29,26 +31,14 @@ public class DozenTabel extends JPanel {
         }
     }
 
-    //Dingen toevoegen aan de DozenTabel
-    public static void voegToe(int maxDoosItems){
-        for (int doosnr = 1; doosnr <= 4; doosnr++) {
-            dozen[doosnr - 1] = new String[maxDoosItems];
-            for (int i = (doosnr - 1) * maxDoosItems, j = 0; i < Math.min(maxDoosItems * doosnr, ItemList.items.size()); i++, j++) {
-                dozen[doosnr - 1][j] = ItemList.items.get(i);
-            }
-            if(dozen[doosnr - 1] == null) {
-                assert dozen[doosnr - 1] != null;
-                for (String item : dozen[doosnr - 1]) {
-                    tabelModellen[doosnr - 1].addRow(new String[]{item});
-                }
-            } else {
-                tabelModellen[doosnr - 1].setRowCount(0);
-                for (String item : dozen[doosnr - 1]) {
-                    tabelModellen[doosnr - 1].addRow(new String[]{item});
-                }
-            }
+    //Dingen toevoegen aan de DozenTabel met het next fit algoritme
+    public static void voegToeNextFit() {
+        for(int i = 0; i < ItemList.items.size(); i++) {
+            String huidigeItem = ItemList.items.get(i);
+            tabelModellen[NextFitAlgoritme.bepaalDoos() - 1].addRow(new String[]{huidigeItem});
         }
     }
+
 }
 
 

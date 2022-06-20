@@ -23,7 +23,7 @@ public class Main
 		new Thread(() ->
 		{
 			Thread.currentThread().setName("Serial Initialiser Thread");
-			serialManager = new SerialManager(Robot.ORDERPICK_ROBOT);
+//			serialManager = new SerialManager(Robot.ORDERPICK_ROBOT);
 
 			// Example
 //			Order order1 = new Order();
