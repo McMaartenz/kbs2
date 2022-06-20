@@ -3,12 +3,12 @@ package com.kbs.warehousemanager.algoritmes;
 
 import java.util.*;
 
-public class BppAlgoritmes {
+public class BppAlgoritmesJarno {
         static public int[] product;
         static public int inhoudContainer;
         static public int alleContainers;
 
-        public BppAlgoritmes(int[] product, int inhoudContainer, int alleContainers) {
+        public BppAlgoritmesJarno(int[] product, int inhoudContainer, int alleContainers) {
             this.product = product;
             this.inhoudContainer = inhoudContainer;
             this.alleContainers = alleContainers;

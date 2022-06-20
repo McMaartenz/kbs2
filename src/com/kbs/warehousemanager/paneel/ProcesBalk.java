@@ -4,42 +4,40 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ProcesBalk extends JPanel {
-    private static double pickProgress;
-    private static double packingProgress;
-    private static int pickedItems = 2;
-    private static int packedItems = 3;
-    private static JProgressBar pickProgressBar = new JProgressBar();
-    private static JProgressBar packingProgressBar = new JProgressBar();
+    private static int pickVooruitgang;
+    private static int inpakVooruitgang;
+    private static int gepickteItems = 2;
+    private static int ingepakteItems = 3;
+    private static JProgressBar pickProcesBalk = new JProgressBar();
+    private static JProgressBar packingProcesBalk = new JProgressBar();
     public ProcesBalk() {
         setLayout(new GridLayout(2, 1));
-        pickProgressBar.setString("Pickproces: " + pickProgress + "%");
-        packingProgressBar.setString("Inpakproces: " + packingProgress + "%");
+        pickProcesBalk.setString("Pickproces: " + pickVooruitgang + "%");
+        packingProcesBalk.setString("Inpakproces: " + inpakVooruitgang + "%");
 
-        pickProgressBar.setStringPainted(true);
-        packingProgressBar.setStringPainted(true);
+        pickProcesBalk.setStringPainted(true);
+        packingProcesBalk.setStringPainted(true);
 
-        pickProgressBar.setForeground(Color.GREEN);
-        packingProgressBar.setForeground(Color.GREEN);
+        pickProcesBalk.setForeground(Color.GREEN);
+        packingProcesBalk.setForeground(Color.GREEN);
 
-        add(pickProgressBar);
-        add(packingProgressBar);
+        add(pickProcesBalk);
+        add(packingProcesBalk);
 
-        pickProgressBar.setVisible(true);
-        packingProgressBar.setVisible(true);
+        pickProcesBalk.setVisible(true);
+        packingProcesBalk.setVisible(true);
     }
 
-    public static void updatePickProgressBar() {
-        pickProgress = (pickedItems * 100 / ItemList.items.size());
-        pickProgressBar.setValue((int) round(pickProgress, 1));
+    public static void veranderPickProcesBalk() {
+        pickVooruitgang = (gepickteItems * 100 / ItemList.items.size());
+        pickProcesBalk.setValue(pickVooruitgang);
+        pickProcesBalk.setString("Pickproces: " + pickVooruitgang + "%");
     }
 
-    public static void updatePackingProgressBar() {
-        packingProgress = (packedItems * 100 / ItemList.items.size());
-        packingProgressBar.setValue((int) round(packingProgress, 1));
+    public static void veranderInpakProcesBalk() {
+        inpakVooruitgang = (ingepakteItems * 100 / ItemList.items.size());
+        packingProcesBalk.setValue(inpakVooruitgang);
+        packingProcesBalk.setString("Inpakproces: " + inpakVooruitgang + "%");
     }
 
-    private static double round (double value, int precision) {
-        int scale = (int) Math.pow(10, precision);
-        return (double) Math.round(value * scale) / scale;
-    }
 }
