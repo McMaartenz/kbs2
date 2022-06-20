@@ -7,12 +7,14 @@ import java.awt.*;
 
 public class DozenTabel extends JPanel {
 
+    //Definieer variabelen
     static int header_height = 75;
     static String[][] dozen = new String[4][];
     static DefaultTableModel[] tabelModellen = new DefaultTableModel[4];
     static JTable[] tabellen = new JTable[4];
     static JScrollPane[] dozenTabellen = new JScrollPane[4];
 
+    //Constructor DozenTabel
     public DozenTabel() {
         setLayout(new GridLayout(1, 4));
         for(int i = 0; i < 4; i++){
@@ -26,7 +28,8 @@ public class DozenTabel extends JPanel {
             setVisible(true);
         }
     }
-        
+
+    //Dingen toevoegen aan de DozenTabel
     public static void voegToe(int maxDoosItems){
         for (int doosnr = 1; doosnr <= 4; doosnr++) {
             dozen[doosnr - 1] = new String[maxDoosItems];

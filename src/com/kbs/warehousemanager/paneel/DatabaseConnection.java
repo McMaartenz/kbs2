@@ -6,14 +6,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class DatabaseConnection{
+class DatabaseConnection {
+
+    //Resultaten definiëren
     static ResultSet orderlines;
     static ResultSet producten;
 
+    //Gegevens opslaan in variabelen
     static HashMap<Integer, ArrayList<Integer>> orderLineArray = new HashMap<>();
     static ArrayList<Integer> gewichten = new ArrayList<>();
     static HashMap<Integer, Point> coordinates = new HashMap<>();
 
+    //Verbinding-functie
     public static void Connect(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -21,8 +25,12 @@ class DatabaseConnection{
                     "jdbc:mysql://localhost:3306/nerdytest","root","");
             Statement stmt1 = con.createStatement();
             Statement stmt2 = con.createStatement();
+
+            //Queries
             orderlines = stmt1.executeQuery("SELECT * FROM orderlines ORDER BY orderID ASC");
             producten = stmt2.executeQuery("SELECT * FROM product ORDER BY ProductID ASC");
+
+            //Data ophalen uit de Queries en de opgehaalde data opslaan in variabelen
             while(producten.next()) {
                 int ProductID = producten.getInt(1);
                 int weight = producten.getInt(2);
@@ -43,6 +51,8 @@ class DatabaseConnection{
                 orderLineArray.get(OrderID).add(ProductID);
             }
             con.close();
-        }catch(Exception e){ System.out.println(e);}
+        } catch(Exception e) {
+            System.out.println(e);
+        }
     }
 }

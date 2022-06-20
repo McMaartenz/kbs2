@@ -21,11 +21,14 @@ public class SerialManager
 	public final Object orderpickRobotBufferLock = new Object();
 	public final Object inpakRobotBufferLock = new Object();
 
+	private Point[] lastPickRound;
+
 	private Serial orderpickRobot;
 	private Serial inpakRobot;
 
 	public volatile boolean uitgetikt;
 	public volatile boolean resetDone;
+	public boolean shouldPause;
 
 	public Serial getRobot(Robot robot)
 	{
@@ -284,12 +287,57 @@ public class SerialManager
 	}
 
 	/**
+	 * Reset robot to their origin coordinates (1, 1)
+	 * @param robot robot to reset
+	 */
+	public void resetRobot(Robot robot)
+	{
+		if (good(robot))
+		{
+			resetDone = false;
+			String response = sendPacket("reset\n", robot, true);
+			if (!response.startsWith("resetOK"))
+			{
+				System.err.println("Cannot reset "+ robot);
+				return;
+			}
+
+			long time = System.currentTimeMillis() + timeoutTime;
+			while (!resetDone)
+			{
+				Thread.onSpinWait();
+				if (time < System.currentTimeMillis())
+				{
+					System.err.println("Timeout reached for waiting on reset package");
+					return;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Repeat last order pick round
+	 * @return on success
+	 */
+	public boolean repeatLast()
+	{
+		if (lastPickRound == null)
+		{
+			return false;
+		}
+
+		return performPath(lastPickRound);
+	}
+
+	/**
 	 * Perform the path on the order pick robot
 	 * @param points points to visit, sorted
 	 * @return true on success, or false on fail
 	 */
 	public boolean performPath(Point[] points)
 	{
+		shouldPause = false;
+		lastPickRound = points;
 		if (good(Robot.ORDERPICK_ROBOT))
 		{
 			String response;
@@ -330,6 +378,10 @@ public class SerialManager
 				Point currentPointObj = points[currentPoint];
 				System.out.format("Robot going to point id %d, at (%d, %d)\n", currentPoint, currentPointObj.x, currentPointObj.y);
 
+				while (shouldPause)
+				{
+					Thread.onSpinWait();
+				}
 				do
 				{
 					uitgetikt = false;
