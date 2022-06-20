@@ -18,7 +18,7 @@ public class Order
 	}
 
 	ThreadLocalRandom lclRnd = ThreadLocalRandom.current();
-	int pointCount = lclRnd.nextInt(3, 26);
+	int pointCount = lclRnd.nextInt(3, 5);
 	/**
 	 * Clear order list and populate with random values (Testing purposes)
 	 */
