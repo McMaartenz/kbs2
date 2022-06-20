@@ -50,5 +50,9 @@ public class ItemList extends JPanel {
         items.add(name);
         itemList.addElement(name);
     }
+    public static void removeItem(String name) {
+        items.remove(name);
+        itemList.removeElement(name);
+    }
 }
 
