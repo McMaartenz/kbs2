@@ -1,8 +1,6 @@
 package com.kbs.warehousemanager.algoritmes;
 
 import java.awt.*;
-import java.lang.annotation.Repeatable;
-import java.util.ArrayList;
 
 public class BruteForce
 {
@@ -24,19 +22,42 @@ public class BruteForce
 		order.printOrderList();
 
 		BruteForce bruteForce = new BruteForce();
-		bruteForce.generateTreeFrom(order);
+		try
+		{
+			bruteForce.generateTreeFrom(order);
+		}
+		catch (TooDeepException te)
+		{
+			System.out.println("Max iteration depth exceeded for brute-force algorithm");
+			return;
+		}
+
 		Point[] bestPath = bruteForce.findBestPath();
+
+		System.out.println("Distance: " + bruteForce.bestPathLength);
+		System.out.println("Best path:\n[");
+		for (int i = 0; i < bestPath.length; i++)
+		{
+			Point p = bestPath[i];
+			System.out.format("\t%d = (%d, %d)\n", i, p.x, p.y);
+		}
+		System.out.println("]");
 	}
 
 	/**
 	 * Generate the binary tree from an order, <b>REQUIRED</b> to run before using this algorithm
 	 * @param order order object
 	 */
-	public void generateTreeFrom(Order order)
+	public void generateTreeFrom(Order order) throws TooDeepException
 	{
 		orderList = order.getOrderList().toArray(Point[]::new);
 
 		int pointCount = orderList.length;
+
+		if (pointCount >= 11)
+		{
+			throw new TooDeepException();
+		}
 
 		possibleBranches = new Node[pointCount];
 		depth = pointCount;
@@ -118,21 +139,25 @@ public class BruteForce
 	 */
 	public void pathIterator(int[] indices, int depth, Node tree)
 	{
-		for(indices[depth] = 0; indices[depth] < tree.getNode(indices[depth]).getNodeCount(); indices[depth]++)
+		int nodeCount = tree.getNode(indices[depth]).getNodeCount();
+
+		if (nodeCount == 0)
 		{
-			if (depth == (indices.length - 1)) // Last node
+			int length = getPathLengthFor(indices);
+			if (length < bestPathLength)
 			{
-				int length = getPathLengthFor(indices);
-				if (length < bestPathLength)
-				{
-					bestPathLength = length;
-					bestPathFoundIndices = indices;
-				}
+				bestPathLength = length;
+
+				// Do not copy pointer
+				System.arraycopy(indices, 0, bestPathFoundIndices, 0, depth);
 			}
-			else
-			{
-				pathIterator(indices, depth + 1, tree.getNode(indices[depth]));
-			}
+
+			return;
+		}
+
+		for(indices[depth] = 0; indices[depth] < nodeCount; indices[depth]++)
+		{
+			pathIterator(indices, depth + 1, tree.getNode(indices[depth]));
 		}
 	}
 
@@ -143,11 +168,19 @@ public class BruteForce
 	 */
 	public int getPathLengthFor(int[] indices)
 	{
+		Node tree = new Node();
+		for (Node node : possibleBranches)
+		{
+			tree.addNode(node);
+		}
+
 		int distance = 0;
 		Point previousPoint = null;
-		for(int i = 0; i < indices.length; i++)
+		for (int j : indices)
 		{
-			int index = indices[i];
+			tree = tree.getNode(j);
+			int index = tree.getValue();
+
 			Point currentPoint = orderList[index];
 
 			if (previousPoint == null)
@@ -156,6 +189,7 @@ public class BruteForce
 			}
 			distance += Math.abs(previousPoint.getX() - currentPoint.getX());
 			distance += Math.abs(previousPoint.getY() - currentPoint.getY());
+			previousPoint = currentPoint;
 		}
 
 		return distance;
@@ -170,9 +204,16 @@ public class BruteForce
 	{
 		Point[] result = new Point[indices.length];
 
-		for(int i = 0; i < result.length; i++)
+		Node tree = new Node();
+		for (Node node : possibleBranches)
 		{
-			result[i] = orderList[i];
+			tree.addNode(node);
+		}
+
+		for (int i = 0; i < result.length; i++)
+		{
+			tree = tree.getNode(indices[i]);
+			result[i] = orderList[tree.getValue()];
 		}
 
 		return result;
@@ -184,21 +225,19 @@ public class BruteForce
 	 */
 	public Point[] findBestPath()
 	{
-		bestPathLength = 0;
-		bestPathFoundIndices = new int[] {};
+		bestPathLength = Integer.MAX_VALUE;
+		bestPathFoundIndices = new int[depth];
 
 		int[] indices = new int[depth];
 
 		Node base = new Node();
-		for(int i = 0; i < possibleBranches.length; i++)
+		for (Node possibleBranch : possibleBranches)
 		{
-			base.addNode(possibleBranches[i]);
+			base.addNode(possibleBranch);
 		}
 
 		pathIterator(indices, 0, base);
 
-		Point[] result = toPointArray(indices);
-
-		return result;
+		return toPointArray(bestPathFoundIndices);
 	}
 }
