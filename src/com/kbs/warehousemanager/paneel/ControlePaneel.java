@@ -100,8 +100,6 @@ public class ControlePaneel extends JPanel implements ActionListener {
 			bppSelected = bppList.getSelectedItem().toString();
 			tspSelected = tspList.getSelectedItem().toString();
 
-			MagazijnPaneel.resetPanel();
-			ItemList.clearList();
 			if(orderList.getSelectedItem() != null) {
 				selectedOrder = orderList.getSelectedItem().toString();
 			}
@@ -120,7 +118,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 			if (srcBtn == StartButton) {
 				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
 				DozenTabel.voegToeFirstFit();
-//				MagazijnPaneel.resetPanel();
+				MagazijnPaneel.resetPanel();
 				ProcesBalk.veranderPickProcesBalk();
 				ProcesBalk.veranderInpakProcesBalk();
 				System.out.println(Arrays.deepToString(MagazijnPaneel.buttonArray));

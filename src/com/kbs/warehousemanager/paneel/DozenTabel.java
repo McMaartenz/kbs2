@@ -35,13 +35,11 @@ public class DozenTabel extends JPanel {
     //Dingen toevoegen aan de DozenTabel met het first fit algoritme
     public static void voegToeFirstFit(){
         for(int i = 0; i < ItemList.items.size(); i++) {
+            //HuidigeItem haalt het huidige item op, en itemNummer haalt alleen het nummer op van de huidigeItem string
             String huidigeItem = ItemList.items.get(i);
-            int gewicht = 0;
-            try {
-                gewicht = DatabaseConnection.producten.getInt(2);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            String itemNummer = huidigeItem.replaceAll("[^0-9]", "");
+            //Haalt het gewicht van het product uit de database
+            int gewicht = DatabaseConnection.gewichten.get(Integer.parseInt(itemNummer) - 1);
             tabelModellen[FirstFitAlgoritme.bepaalDoos(gewicht) - 1].addRow(new String[]{huidigeItem});
         }
     }
