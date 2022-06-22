@@ -1,11 +1,12 @@
 package com.kbs.warehousemanager.paneel;
 
 
-import com.kbs.warehousemanager.algoritmes.NextFitAlgoritme;
+import com.kbs.warehousemanager.algoritmes.FirstFitAlgoritme;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class DozenTabel extends JPanel {
 
@@ -31,11 +32,17 @@ public class DozenTabel extends JPanel {
         }
     }
 
-    //Dingen toevoegen aan de DozenTabel met het next fit algoritme
-    public static void voegToeNextFit() {
+    //Dingen toevoegen aan de DozenTabel met het first fit algoritme
+    public static void voegToeFirstFit(){
         for(int i = 0; i < ItemList.items.size(); i++) {
             String huidigeItem = ItemList.items.get(i);
-            tabelModellen[NextFitAlgoritme.bepaalDoos() - 1].addRow(new String[]{huidigeItem});
+            int gewicht = 0;
+            try {
+                gewicht = DatabaseConnection.producten.getInt(2);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            tabelModellen[FirstFitAlgoritme.bepaalDoos(gewicht) - 1].addRow(new String[]{huidigeItem});
         }
     }
 

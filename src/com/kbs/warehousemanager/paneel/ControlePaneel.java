@@ -114,17 +114,12 @@ public class ControlePaneel extends JPanel implements ActionListener {
 				}
 			}
 
-
-
-
-
-
 			bppLabel.setText("BPP-algoritme: " + bppSelected);
 			tspLabel.setText("TSP-algoritme: " + tspSelected);
 		if (src instanceof JButton srcBtn) {
 			if (srcBtn == StartButton) {
 				//code voor de startbutton, buttons resetten en geselecteerde producten ophalen moeten gedaan worden
-				DozenTabel.voegToeNextFit();
+				DozenTabel.voegToeFirstFit();
 //				MagazijnPaneel.resetPanel();
 				ProcesBalk.veranderPickProcesBalk();
 				ProcesBalk.veranderInpakProcesBalk();
