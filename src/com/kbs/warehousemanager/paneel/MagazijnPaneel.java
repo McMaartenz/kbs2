@@ -12,7 +12,7 @@ public class MagazijnPaneel extends JPanel {
     static Boolean[] btnPressed = new Boolean[25];
     static JButton[] buttonArray = new JButton[25];
     private final ItemList itemList;
-    static int productIDArray[] = new int[25];
+    static int[] productIDArray = new int[25];
 
     public static void resetPanel() {
         for (int i = 0; i < 25; i++) {
