@@ -30,7 +30,6 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	private final JComboBox<String> tspList = new JComboBox<>(tspOptions);
 	private final String[] bppOptions = {"First Fit", "Next Fit"};
 	private final JComboBox<String> bppList = new JComboBox<>(bppOptions);
-
 	//define the labels for the currently selected algorithms, as well as the estimated boxes for the order
 	private String bppSelected = bppList.getSelectedItem().toString();
 	private String tspSelected = tspList.getSelectedItem().toString();
@@ -50,6 +49,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 		} else {
 			System.out.println("PROBLEEEEM!");
 		}
+		return null;
 	}
 
 
@@ -129,7 +129,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 
 			ArrayList<Integer> items = (DatabaseConnection.orderLineArray.get(extractNumber.extract(selectedOrder)));
 			for(int i : items){
-				ItemList.addItem(DatabaseConnection.namen.get(i));
+				ItemList.addItem(DatabaseConnection.namen.get(i -1));
 				MagazijnPaneel.buttonArray[(i-1)].setBackground(Color.GREEN);
 				}
 			}
@@ -138,7 +138,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 			tspLabel.setText("TSP-algoritme: " + tspSelected);
 		if (src instanceof JButton srcBtn) {
 			if (srcBtn == StartButton) {
-				COM_INPAK();
+				//COM_INPAK();
 				if(bppList.getSelectedItem().toString().equals("First Fit")) {
 					DozenTabel.voegToeFirstFit();
 				}

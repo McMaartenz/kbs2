@@ -55,7 +55,7 @@ public class Main
 //			boolean ok = serialManager.performPath(points);
 //			System.out.println("Perform path successful? " + ok);
 
-			COM_INPAK();
+			//COM_INPAK();
 
 		}).start();
 

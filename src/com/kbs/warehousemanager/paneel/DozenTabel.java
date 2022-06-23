@@ -58,12 +58,11 @@ public class DozenTabel extends JPanel {
       for(int i = 0; i < ItemList.items.size(); i++) {
           String huidigeItem = ItemList.items.get(i);
           int gewicht = DatabaseConnection.gewichten.get(productIDArray[i]);
-          tabelModellen[NextFitAlgoritme.bepaalDoos(gewicht) - 1].addRow(new String[]{huidigeItem});
+          int j = NextFitAlgoritme.bepaalDoos(gewicht);
+          tabelModellen[j - 1].addRow(new String[]{huidigeItem});
+          dozenArray.add(j - 1);
         }
-        System.out.println(dozenArray);
-
     }
-
 }
 
 
