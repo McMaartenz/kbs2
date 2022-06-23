@@ -16,6 +16,7 @@ class DatabaseConnection {
     static HashMap<Integer, ArrayList<Integer>> orderLineArray = new HashMap<>();
     static ArrayList<Integer> gewichten = new ArrayList<>();
     static HashMap<Integer, Point> coordinates = new HashMap<>();
+    static ArrayList<String> namen = new ArrayList<>();
 
     //Verbinding-functie
     public static void Connect(){
@@ -30,13 +31,16 @@ class DatabaseConnection {
             orderlines = stmt1.executeQuery("SELECT * FROM orderlines ORDER BY orderID ASC");
             producten = stmt2.executeQuery("SELECT * FROM product ORDER BY ProductID ASC");
 
+
             //Data ophalen uit de Queries en de opgehaalde data opslaan in variabelen
             while(producten.next()) {
                 int ProductID = producten.getInt(1);
                 int weight = producten.getInt(2);
                 int x_coordinate = producten.getInt(3);
                 int y_coordinate = producten.getInt(4);
+                String naam = producten.getString(5);
                 gewichten.add(weight);
+                namen.add(naam);
                 coordinates.put(ProductID, new Point(x_coordinate, y_coordinate));
             }
             while(orderlines.next()) {

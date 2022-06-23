@@ -12,6 +12,7 @@ public class MagazijnPaneel extends JPanel {
     static Boolean[] btnPressed = new Boolean[25];
     static JButton[] buttonArray = new JButton[25];
     private final ItemList itemList;
+    static int productIDArray[] = new int[25];
 
     public static void resetPanel() {
         for (int i = 0; i < 25; i++) {
@@ -29,10 +30,11 @@ public class MagazijnPaneel extends JPanel {
         setLayout(new GridLayout(5, 5, 2, 2));
         //"for"-loop voor alle knoppen toevoegen
         for (int i = 0; i < 25; i++) {
-                JButton button = new JButton("Product " + (i+1));
+                JButton button = new JButton(DatabaseConnection.namen.get(i));
                 boolean BtnPressed = false;
                 btnPressed[i] = BtnPressed;
                 buttonArray[i] = button;
+                productIDArray[i] = i;
                 button.setFont(new Font("Rockwell", Font.PLAIN, 10));
                 add(button);
                 button.addActionListener(this::actionPerformed);
