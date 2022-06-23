@@ -43,8 +43,8 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	JLabel tspLabel = new JLabel("TSP-algoritme: " + tspSelected);
 
 
-	public static String COM_INPAK(){
-		String string = serialManager.sendPacket(tostring(dozenArray), Robot.INPAK_ROBOT, true) ;
+	public static void COM_INPAK(){
+		String string = serialManager.sendPacket("Doos" + tostring(dozenArray) + "\n", Robot.INPAK_ROBOT, true);
 		if (string.equals("done")){
 
 		} else {

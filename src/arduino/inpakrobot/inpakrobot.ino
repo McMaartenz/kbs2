@@ -2,6 +2,7 @@
 int producten[] = {4, 7, 2, 6, 5, 2, 6, 3, 2};
 int aantalProducten = 9;
 int maxinhoud = 10;
+int Dozen[] = new int[12];
 boolean volgendePak = false;
 
 int powerMotorR = 12;
@@ -140,3 +141,54 @@ void loop() {
   buttonCheck();
   binPacker();
 }
+
+void handlePacket()
+{
+    if (!Serial.available())
+    {
+        return;
+    }
+
+    char buffer[12]; // Pakket max-lengte 12
+    for (int i = 0; i < 12; i++)
+    {
+        while (!Serial.available());
+        char currentChar = Serial.read();
+        if (currentChar == '\n')
+        {
+            buffer[i] = 0;
+            break;
+        }
+
+        buffer[i] = currentChar;
+    }
+
+    if (hasPrefix(buffer, "status"))
+    {
+        Serial.println("OK");
+    }
+    else if (hasPrefix(buffer, "ping"))
+    {
+        Serial.println("Pong!");
+    }
+    else if (hasPrefix(buffer, "Doos"))
+    {
+        for (i = 4; i < 12; i++){
+            Dozen[i] = buffer[4 + i] - '0';
+        }
+        Serial.println("done");
+    }
+    else
+    {
+        Serial.println("InaudibleGarbage");
+    }
+}
+
+void SI_log(String s)
+{
+  #ifdef DEBUG_LOG
+  Serial.println(s);
+  #endif
+}
+
+
