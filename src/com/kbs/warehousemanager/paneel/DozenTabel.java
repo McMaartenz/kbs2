@@ -16,7 +16,7 @@ public class DozenTabel extends JPanel {
     static JScrollPane[] dozenTabellen = new JScrollPane[4];
 
     public static void resetDozen() {
-        for(int i = 0; i < tabelModellen[i].getRowCount(); i++) {
+        for(int i = 0; i < 4; i++) {
             tabelModellen[i].setRowCount(0);
         }
     }
