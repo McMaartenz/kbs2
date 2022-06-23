@@ -23,7 +23,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	private final JComboBox<String> orderList = new JComboBox();
 	private final String[] tspOptions = {"Brute-force", "Branch-and-Bound", "Nearest Neighbour"};
 	private final JComboBox<String> tspList = new JComboBox<>(tspOptions);
-	private final String[] bppOptions = {"First Fit", "Next Fit", "Best Fit", "Worst Fit", "First-Fit-Decreasing", "Next-Fit-Decreasing", "Worst-Fit-Decreasing"};
+	private final String[] bppOptions = {"First Fit", "Next Fit"};
 	private final JComboBox<String> bppList = new JComboBox<>(bppOptions);
 
 	//define the labels for the currently selected algorithms, as well as the estimated boxes for the order
@@ -114,7 +114,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 
 			ArrayList<Integer> items = (DatabaseConnection.orderLineArray.get(extractNumber.extract(selectedOrder)));
 			for(int i : items){
-				ItemList.addItem("Item " + i);
+				ItemList.addItem(DatabaseConnection.namen.get(i));
 				MagazijnPaneel.buttonArray[(i-1)].setBackground(Color.GREEN);
 				}
 			}
