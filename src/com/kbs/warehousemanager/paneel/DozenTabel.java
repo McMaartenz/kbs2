@@ -2,10 +2,13 @@ package com.kbs.warehousemanager.paneel;
 
 
 import com.kbs.warehousemanager.algoritmes.FirstFitAlgoritme;
+import com.kbs.warehousemanager.algoritmes.NextFitAlgoritme;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+
+import static com.kbs.warehousemanager.paneel.MagazijnPaneel.productIDArray;
 
 public class DozenTabel extends JPanel {
 
@@ -37,14 +40,22 @@ public class DozenTabel extends JPanel {
     }
 
     //Dingen toevoegen aan de DozenTabel met het first fit algoritme
-    public static void voegToeFirstFit(){
-        for(int i = 0; i < ItemList.items.size(); i++) {
+    public static void voegToeFirstFit() {
+        for (int i = 0; i < ItemList.items.size(); i++) {
             //HuidigeItem haalt het huidige item op, en itemNummer haalt alleen het nummer op van de huidigeItem string
             String huidigeItem = ItemList.items.get(i);
             String itemNummer = huidigeItem.replaceAll("[^0-9]", "");
             //Haalt het gewicht van het product uit de database
-            int gewicht = DatabaseConnection.gewichten.get(Integer.parseInt(itemNummer) - 1);
+            int gewicht = DatabaseConnection.gewichten.get(productIDArray[i]);
             tabelModellen[FirstFitAlgoritme.bepaalDoos(gewicht) - 1].addRow(new String[]{huidigeItem});
+        }
+    }
+    public static void voegToeNextFit() {
+      for(int i = 0; i < ItemList.items.size(); i++) {
+          String huidigeItem = ItemList.items.get(i);
+          String itemNummer = huidigeItem.replaceAll("[^0-9]", "");
+          int gewicht = DatabaseConnection.gewichten.get(productIDArray[i]);
+          tabelModellen[NextFitAlgoritme.bepaalDoos(gewicht) - 1].addRow(new String[]{huidigeItem});
         }
     }
 

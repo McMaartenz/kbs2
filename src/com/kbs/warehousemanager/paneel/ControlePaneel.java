@@ -126,6 +126,9 @@ public class ControlePaneel extends JPanel implements ActionListener {
 				if(bppList.getSelectedItem().toString().equals("First Fit")) {
 					DozenTabel.voegToeFirstFit();
 				}
+				if(bppList.getSelectedItem().toString().equals("Next Fit")) {
+					DozenTabel.voegToeFirstFit();
+				}
 
 				ProcesBalk.veranderPickProcesBalk();
 				ProcesBalk.veranderInpakProcesBalk();
