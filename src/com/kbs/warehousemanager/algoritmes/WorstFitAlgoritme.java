@@ -8,26 +8,26 @@ public abstract class WorstFitAlgoritme {
         int doos2 = ruimteInDoos[1];
         int doos3 = ruimteInDoos[2];
         int doos4 = ruimteInDoos[3];
-        int grootsteRuimte = Math.max(doos1, doos2);
-        grootsteRuimte = Math.max(grootsteRuimte, doos3);
-        grootsteRuimte = Math.max(grootsteRuimte, doos4);
 
-        return grootsteRuimte;
+        if(doos1 > doos2 && doos1 > doos3 && doos1 > doos4 ) {
+            return 0;
+        }
+        if(doos2 > doos1 && doos2 > doos3 && doos2 > doos4 ) {
+            return 1;
+        }
+        if(doos3 > doos1 && doos3 > doos2 && doos3 > doos4 ) {
+            return 2;
+        } else {
+            return 3;
+        }
     }
     public static int bepaalDoos(int gewichtProduct) {
-        int doosnummer;
-        if (gewichtProduct <= ruimteInDoos[0]) {
-            doosnummer = 1;
-            ruimteInDoos[0] -= gewichtProduct;
-        } else if (gewichtProduct <= ruimteInDoos[1]) {
-            doosnummer = 2;
-            ruimteInDoos[1] -= gewichtProduct;
-        } else if (gewichtProduct <= ruimteInDoos[2]) {
-            doosnummer = 3;
-            ruimteInDoos[2] -= gewichtProduct;
-        } else {
-            doosnummer = 4;
-            ruimteInDoos[3] -= gewichtProduct;
+        //grootsteDoos is de doos waar nog de meeste ruimte in zit
+        int grootsteDoos = zoekGrootsteRuimte();
+        int doosnummer = 4;
+        if (gewichtProduct <= grootsteDoos) {
+            doosnummer = grootsteDoos;
+            grootsteDoos -= gewichtProduct;
         }
         return doosnummer;
     }

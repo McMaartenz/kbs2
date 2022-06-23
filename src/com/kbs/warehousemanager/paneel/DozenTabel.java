@@ -1,8 +1,8 @@
 package com.kbs.warehousemanager.paneel;
 
 
-import com.kbs.warehousemanager.algoritmes.FirstFitAlgoritme;
-import com.kbs.warehousemanager.algoritmes.NextFitAlgoritme;
+
+import com.kbs.warehousemanager.algoritmes.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -54,13 +54,28 @@ public class DozenTabel extends JPanel {
         }
 
     }
+    //Dingen toevoegen aan de DozenTabel met het Next fit algoritme
     public static void voegToeNextFit() {
       for(int i = 0; i < ItemList.items.size(); i++) {
+          //HuidigeItem haalt het huidige item op
           String huidigeItem = ItemList.items.get(i);
+          //Haalt het gewicht van het product uit de database
           int gewicht = DatabaseConnection.gewichten.get(productIDArray[i]);
           int j = NextFitAlgoritme.bepaalDoos(gewicht);
           tabelModellen[j - 1].addRow(new String[]{huidigeItem});
           dozenArray.add(j - 1);
+        }
+    }
+    //Dingen toevoegen aan de DozenTabel met het Worst fit algoritme
+    public static void voegToeWorstFit() {
+        for (int i = 0; i < ItemList.items.size(); i++) {
+            //HuidigeItem haalt het huidige item op
+            String huidigeItem = ItemList.items.get(i);
+            //Haalt het gewicht van het product uit de database
+            int gewicht = DatabaseConnection.gewichten.get(productIDArray[i]);
+            int j = WorstFitAlgoritme.bepaalDoos(gewicht);
+            tabelModellen[j - 1].addRow(new String[]{huidigeItem});
+            dozenArray.add(j - 1);
         }
     }
 }

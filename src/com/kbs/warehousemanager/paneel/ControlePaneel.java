@@ -28,7 +28,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	private final JComboBox<String> orderList = new JComboBox();
 	private final String[] tspOptions = {"Brute-force", "Branch-and-Bound", "Nearest Neighbour"};
 	private final JComboBox<String> tspList = new JComboBox<>(tspOptions);
-	private final String[] bppOptions = {"First Fit", "Next Fit"};
+	private final String[] bppOptions = {"First Fit", "Next Fit", "Worst Fit"};
 	private final JComboBox<String> bppList = new JComboBox<>(bppOptions);
 	//define the labels for the currently selected algorithms, as well as the estimated boxes for the order
 	private String bppSelected = bppList.getSelectedItem().toString();
@@ -144,6 +144,9 @@ public class ControlePaneel extends JPanel implements ActionListener {
 				}
 				if(bppList.getSelectedItem().toString().equals("Next Fit")) {
 					DozenTabel.voegToeNextFit();
+				}
+				if(bppList.getSelectedItem().toString().equals("Worst Fit")) {
+					DozenTabel.voegToeWorstFit();
 				}
 
 				ProcesBalk.veranderPickProcesBalk();
