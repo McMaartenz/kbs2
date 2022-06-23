@@ -1,5 +1,7 @@
 package com.kbs.warehousemanager.paneel;
 
+import com.kbs.warehousemanager.algoritmes.FirstFitAlgoritme;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -102,6 +104,8 @@ public class ControlePaneel extends JPanel implements ActionListener {
 
 			MagazijnPaneel.resetPanel();
 			ItemList.clearList();
+			DozenTabel.resetDozen();
+			FirstFitAlgoritme.ruimteVrijmakenInDozen();
 
 			if(orderList.getSelectedItem() != null) {
 				selectedOrder = orderList.getSelectedItem().toString();
@@ -126,7 +130,6 @@ public class ControlePaneel extends JPanel implements ActionListener {
 				ProcesBalk.veranderPickProcesBalk();
 				ProcesBalk.veranderInpakProcesBalk();
 				System.out.println(Arrays.deepToString(MagazijnPaneel.buttonArray));
-
 				ItemList.clearList();
 			}
 		}

@@ -6,16 +6,20 @@ import com.kbs.warehousemanager.algoritmes.FirstFitAlgoritme;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.SQLException;
 
 public class DozenTabel extends JPanel {
 
     //Definieer variabelen
     static int header_height = 75;
-    static int[][] dozen = new int[4][];
     static DefaultTableModel[] tabelModellen = new DefaultTableModel[4];
     static JTable[] tabellen = new JTable[4];
     static JScrollPane[] dozenTabellen = new JScrollPane[4];
+
+    public static void resetDozen() {
+        for(int i = 0; i < tabelModellen[i].getRowCount(); i++) {
+            tabelModellen[i].setRowCount(0);
+        }
+    }
 
     //Constructor DozenTabel
     public DozenTabel() {

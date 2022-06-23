@@ -1,9 +1,12 @@
 package com.kbs.warehousemanager.algoritmes;
 
-import java.util.Arrays;
 
 public abstract class FirstFitAlgoritme {
     static int[] ruimteInDoos = new int[] {10, 10, 10 ,10};
+
+    public static void ruimteVrijmakenInDozen() {
+        ruimteInDoos = new int[]{10, 10, 10, 10};
+    }
 
     public static int bepaalDoos(int gewichtProduct) {
 
