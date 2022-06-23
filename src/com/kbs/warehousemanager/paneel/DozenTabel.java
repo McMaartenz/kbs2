@@ -61,10 +61,9 @@ public class DozenTabel extends JPanel {
           String huidigeItem = ItemList.items.get(i);
           //Haalt het gewicht van het product uit de database
           int gewicht = DatabaseConnection.gewichten.get(productIDArray[i]);
-          int j = NextFitAlgoritme.bepaalDoos(gewicht);
-          tabelModellen[j - 1].addRow(new String[]{huidigeItem});
-          dozenArray.add(j - 1);
+          tabelModellen[FirstFitAlgoritme.bepaalDoos(gewicht) - 1].addRow(new String[]{huidigeItem});
         }
+
     }
     //Dingen toevoegen aan de DozenTabel met het Worst fit algoritme
     public static void voegToeWorstFit() {

@@ -1,6 +1,7 @@
 package com.kbs.warehousemanager.paneel;
 
 import com.kbs.warehousemanager.algoritmes.FirstFitAlgoritme;
+import com.kbs.warehousemanager.algoritmes.NextFitAlgoritme;
 import com.kbs.warehousemanager.serial.Robot;
 
 import java.awt.*;
@@ -49,7 +50,6 @@ public class ControlePaneel extends JPanel implements ActionListener {
 		} else {
 			System.out.println("PROBLEEEEM!");
 		}
-		return null;
 	}
 
 
@@ -121,6 +121,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 			ItemList.clearList();
 			DozenTabel.resetDozen();
 			FirstFitAlgoritme.ruimteVrijmakenInDozen();
+			NextFitAlgoritme.ruimteVrijmakenInDozen();
 
 			if(orderList.getSelectedItem() != null) {
 				selectedOrder = orderList.getSelectedItem().toString();
