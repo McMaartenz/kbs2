@@ -1,11 +1,16 @@
 package com.kbs.warehousemanager.paneel;
 
 import com.kbs.warehousemanager.algoritmes.FirstFitAlgoritme;
+import com.kbs.warehousemanager.serial.Robot;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
+
+import static com.kbs.warehousemanager.Main.serialManager;
+import static com.kbs.warehousemanager.Main.tostring;
+import static com.kbs.warehousemanager.paneel.DozenTabel.dozenArray;
 
 public class ControlePaneel extends JPanel implements ActionListener {
 	/**
@@ -36,6 +41,16 @@ public class ControlePaneel extends JPanel implements ActionListener {
 	JLabel bppLabel = new JLabel("BPP-algoritme: " + bppSelected);
 	JLabel boxesLabel = new JLabel("Aantal dozen: " + aantalDozen);
 	JLabel tspLabel = new JLabel("TSP-algoritme: " + tspSelected);
+
+
+	public static String COM_INPAK(){
+		String string = serialManager.sendPacket(tostring(dozenArray), Robot.INPAK_ROBOT, true) ;
+		if (string.equals("done")){
+
+		} else {
+			System.out.println("PROBLEEEEM!");
+		}
+	}
 
 
 
@@ -123,6 +138,7 @@ public class ControlePaneel extends JPanel implements ActionListener {
 			tspLabel.setText("TSP-algoritme: " + tspSelected);
 		if (src instanceof JButton srcBtn) {
 			if (srcBtn == StartButton) {
+				COM_INPAK();
 				if(bppList.getSelectedItem().toString().equals("First Fit")) {
 					DozenTabel.voegToeFirstFit();
 				}

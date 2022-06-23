@@ -18,7 +18,7 @@ public class DozenTabel extends JPanel {
     static DefaultTableModel[] tabelModellen = new DefaultTableModel[4];
     static JTable[] tabellen = new JTable[4];
     static JScrollPane[] dozenTabellen = new JScrollPane[4];
-    static ArrayList<Integer> dozenArray = new ArrayList<>();
+    static public ArrayList<Integer> dozenArray = new ArrayList<>();
 
     public static void resetDozen() {
         for(int i = 0; i < 4; i++) {

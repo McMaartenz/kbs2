@@ -5,13 +5,27 @@ import com.kbs.warehousemanager.algoritmes.Order;
 import com.kbs.warehousemanager.paneel.HoofdPaneel;
 import com.kbs.warehousemanager.serial.*;
 import com.kbs.warehousemanager.serial.Robot;
+import com.kbs.warehousemanager.paneel.DozenTabel;
 
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static com.kbs.warehousemanager.paneel.ControlePaneel.COM_INPAK;
+import static com.kbs.warehousemanager.paneel.DozenTabel.dozenArray;
 
 public class Main
 {
 	public static SerialManager serialManager;
+
+	public static String tostring(ArrayList<Integer> dozenArray){
+		StringBuilder sb = new StringBuilder();
+		for(Integer i: dozenArray){
+			sb.append(i);
+		}
+
+		return sb.toString();
+	}
 
 	/**
 	 * Start programma
@@ -19,6 +33,7 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
+
 		// Do not block AWT GUI thread
 		new Thread(() ->
 		{
@@ -39,6 +54,9 @@ public class Main
 //
 //			boolean ok = serialManager.performPath(points);
 //			System.out.println("Perform path successful? " + ok);
+
+			COM_INPAK();
+
 		}).start();
 
 		HoofdPaneel hoofdPaneel = new HoofdPaneel();
