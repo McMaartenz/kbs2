@@ -7,6 +7,7 @@ import com.kbs.warehousemanager.algoritmes.NextFitAlgoritme;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.ArrayList;
 
 import static com.kbs.warehousemanager.paneel.MagazijnPaneel.productIDArray;
 
@@ -17,6 +18,7 @@ public class DozenTabel extends JPanel {
     static DefaultTableModel[] tabelModellen = new DefaultTableModel[4];
     static JTable[] tabellen = new JTable[4];
     static JScrollPane[] dozenTabellen = new JScrollPane[4];
+    static ArrayList<Integer> dozenArray = new ArrayList<>();
 
     public static void resetDozen() {
         for(int i = 0; i < 4; i++) {
@@ -42,21 +44,24 @@ public class DozenTabel extends JPanel {
     //Dingen toevoegen aan de DozenTabel met het first fit algoritme
     public static void voegToeFirstFit() {
         for (int i = 0; i < ItemList.items.size(); i++) {
-            //HuidigeItem haalt het huidige item op, en itemNummer haalt alleen het nummer op van de huidigeItem string
+            //HuidigeItem haalt het huidige item op
             String huidigeItem = ItemList.items.get(i);
-            String itemNummer = huidigeItem.replaceAll("[^0-9]", "");
             //Haalt het gewicht van het product uit de database
             int gewicht = DatabaseConnection.gewichten.get(productIDArray[i]);
-            tabelModellen[FirstFitAlgoritme.bepaalDoos(gewicht) - 1].addRow(new String[]{huidigeItem});
+            int j = FirstFitAlgoritme.bepaalDoos(gewicht);
+            tabelModellen[j - 1].addRow(new String[]{huidigeItem});
+            dozenArray.add(j - 1);
         }
+
     }
     public static void voegToeNextFit() {
       for(int i = 0; i < ItemList.items.size(); i++) {
           String huidigeItem = ItemList.items.get(i);
-          String itemNummer = huidigeItem.replaceAll("[^0-9]", "");
           int gewicht = DatabaseConnection.gewichten.get(productIDArray[i]);
           tabelModellen[NextFitAlgoritme.bepaalDoos(gewicht) - 1].addRow(new String[]{huidigeItem});
         }
+        System.out.println(dozenArray);
+
     }
 
 }
